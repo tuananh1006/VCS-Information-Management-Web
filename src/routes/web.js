@@ -1,11 +1,12 @@
 import express from 'express'
-
+import { handHelloWorld, handleTeam } from '../controller/homeController'
 const router = express.Router()
 
 const initWebRoute = (app) => {
-    router.get('/', (req, res) => {
-        return res.send('hello world')
-    })
+    router.get('/', handHelloWorld),
+
+    router.get('/team', handleTeam)
+
 
     return app.use('/', router)
 }
