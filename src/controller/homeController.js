@@ -1,8 +1,11 @@
 import userService from '../service/userService'
 
-const handHelloWorld=(req, res) => {
-    const name='Eric';
-    return res.render('home.ejs',{name})
+const handleHomePage=(req,res)=>{
+    return res.render('homepage.ejs')
+}
+
+const handleScheduler=(req,res)=>{
+    return res.render('scheduler.ejs')
 }
 
 const handleTeam=(req,res)=>{
@@ -24,6 +27,7 @@ const handleAddUser=(req,res)=>{
     return res.render('user-add.ejs',{userList})
 }
 
+
 const handleCreateUser=(req,res)=>{
     let email=req.body.email
     let password=req.body.password
@@ -32,5 +36,5 @@ const handleCreateUser=(req,res)=>{
     return res.redirect('/users/')
 }
 module.exports={
-    handHelloWorld,handleTeam,handleAddUser,handleCreateUser
+    handleHomePage,handleScheduler,handleTeam,handleAddUser,handleCreateUser
 }
