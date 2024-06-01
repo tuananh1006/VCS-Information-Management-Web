@@ -1,11 +1,15 @@
 import userService from '../service/userService'
+import {selectDatabase,performModify} from '../config/connectDB'
 
 const handleHomePage=(req,res)=>{
     return res.render('homepage.ejs')
 }
 
-const handleScheduler=(req,res)=>{
-    return res.render('scheduler.ejs')
+const handleScheduler=async (req,res)=>{
+        var query='select * from LICHTHIDAU'
+        var result=await selectDatabase(query)
+        console.log(result[0]['ĐỘI 1'])
+        return res.render('scheduler.ejs',{result})
 }
 
 const handleRanking=(req,res)=>{

@@ -123,18 +123,27 @@
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>TT</th>
-                                        <th>CLB</th>
-                                        <th>Số trận</th>
-                                        <th>Thắng</th>
-                                        <th>Hòa</th>
-                                        <th>Thua</th>
-                                        <th>Bàn thắng</th>
-                                        <th>Bàn thua</th>
-                                        <th>Hệ số</th>
-                                        <th>Điểm</th>
+                                        <th>Ngày thi đấu</th>
+                                        <th>Đội 1</th>
+                                        <th>Điểm đội 1</th>
+                                        <th>Đội 2</th>
+                                        <th>Điểm đội 2</th>
+                                        <th>Sân vận động</th>
                                     </tr>
                                 </thead>
- 
+                                <tbody>
+                                    <% for(var i = 0; i < result.length; i++) { %>
+                                        <tr>
+                                            <td><%= i+1 %></td>
+                                            <td><%= result[i]['NGÀY THI ĐẤU'] %></td>
+                                            <td><%= result[i]['ĐỘI 1'] %></td>
+                                            <td><%= result[i]['ĐIỂM ĐỘI 1'] %></td>
+                                            <td><%= result[i]['ĐỘI 2'] %></td>
+                                            <td><%= result[i]['ĐIỂM ĐỘI 2'] %></td>
+                                            <td><%= result[i]['SÂN VẬN ĐỘNG'] %></td>
+                                        </tr>
+                                    <% } %>
+                                </tbody>
                             </table>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-const config=require('./config.json')[start];
+const config=require('./config.json')['start'];
 const sql = require('msnodesqlv8');
 
 var server = config.server;
@@ -43,7 +43,6 @@ const performModify = async (query) => {
     }
 };
 
-performModify("insert into coach values('hoang',18)")
 
 
 
