@@ -15,7 +15,7 @@
 
 **Yêu cầu hệ thống:**
 
-* Hệ điều hành: Windows, macOS, Linux
+* Hệ điều hành: Windows, macOS
 * Node.js
 * npm 
 
@@ -33,10 +33,9 @@
 
 **Tính năng chính:**
 
-* [Xem lịch thi đấu]
-* [Xem thông tin tuyển thủ]
-* [Xem thông tin phân tích]
+* Xem lịch thi đấu
+* Xem thông tin tuyển thủ
+* Xem thông tin phân tích
 ...
 
 
-<im
