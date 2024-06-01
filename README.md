@@ -22,7 +22,7 @@
 **Hướng dẫn cài đặt:**
 
 1. Cài đặt Node.js và npm/yarn nếu chưa có.
-2. Clone dự án: `git clone https://github.com/[Tên người dùng]/[Tên dự án].git`
+2. Clone dự án: `git clone https://github.com/tuananh1006/QLTT_APP.git`
 3. Di chuyển vào thư mục dự án: `cd [Tên dự án]`
 4. Cài đặt các phụ thuộc: `npm install`
 5. Mở file bestquery.sql trong sql_file và thực thi file bestquery.sql 
