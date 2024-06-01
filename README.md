@@ -5,7 +5,7 @@
 **Giới thiệu:**
 
 Đây là đồ án báo cáo môn học IE103,mục tiêu tạo ra web để người dùng có thể xem thông tin về giải đấu,người quản lý giải có thể quản lý thông tin tốt hơn.
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Vietnam_Championship_Series.png" style="width:50px;height:50px"/>
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Vietnam_Championship_Series.png" style="width:100px;height:auto"/>
 **Cài đặt:**
 
 **Yêu cầu hệ thống:**
