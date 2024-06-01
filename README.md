@@ -29,8 +29,6 @@
 6. Ghi lại thông số về server,driver,database (user,password nếu có), sau đó điều chỉnh config.json trong folder config
 7. Khởi động ứng dụng: `npm start` 
 
-**Cách sử dụng:**
-
 **Tính năng chính:**
 
 * Xem lịch thi đấu
