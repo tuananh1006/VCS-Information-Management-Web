@@ -1,4 +1,4 @@
-
+import userService from '../service/userService'
 
 const handHelloWorld=(req, res) => {
     const name='Eric';
@@ -19,8 +19,9 @@ const handleTeam=(req,res)=>{
     return res.render('team.ejs',{clubs})
 }
 
-const handleLogin=(req,res)=>{
-    return res.render('login.ejs')
+const handleAddUser=(req,res)=>{
+    let userList=userService.getUserList()
+    return res.render('user-add.ejs',{userList})
 }
 
 const handleCreateUser=(req,res)=>{
@@ -28,8 +29,8 @@ const handleCreateUser=(req,res)=>{
     let password=req.body.password
     let username=req.body.username
 
-    return res.send('cac')
+    return res.redirect('/users/')
 }
 module.exports={
-    handHelloWorld,handleTeam,handleLogin,handleCreateUser
+    handHelloWorld,handleTeam,handleAddUser,handleCreateUser
 }
