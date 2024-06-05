@@ -7,7 +7,7 @@ CREATE TABLE PLAYER (
     playerName NVARCHAR(100),
     playerBirthDate DATETIME,
     playerHomeTown NVARCHAR(100),
-    playStatus INT
+    playStatus BIT,
 );
 GO
 
@@ -391,8 +391,6 @@ AS
 	WHERE TE.TEAMID = PTE.TEAMID AND PTE.PLAYERID = P.PLAYERID
 GO
 
-SELECT * FROM PLAYERINFO
-
 CREATE VIEW TMP1 AS
 (SELECT 
         teamID,
@@ -417,7 +415,9 @@ CREATE VIEW TMP1 AS
     ) AS results
     GROUP BY teamID)
 
+go
 
+create view BXH1 AS
 SELECT 
     ROW_NUMBER() OVER (ORDER BY TES.TEAMTOTALSCORE DESC) AS RANKING,
     T.teamLogo,
@@ -438,8 +438,40 @@ GROUP BY
     TES.TEAMTOTALSCORE,
 	s.seasonName;
 
+go
+
+CREATE VIEW LICHTHIDAU
+AS
+	SELECT TOP 100000 -- Replace with a large enough number
+		M.matchDate AS 'NGÀY THI ĐẤU',
+		T1.teamName AS 'ĐỘI 1',
+		M.teamoneScore AS 'ĐIỂM ĐỘI 1',
+		T2.teamName AS 'ĐỘI 2',
+		M.teamtwoScore AS 'ĐIỂM ĐỘI 2',
+		ST.stadiumName AS 'SÂN VẬN ĐỘNG'
+	FROM 
+      MATCH M
+    INNER JOIN 
+      TEAM_ESPORT T1 ON M.teamoneID = T1.teamID
+    INNER JOIN 
+      TEAM_ESPORT T2 ON M.teamtwoID = T2.teamID
+    INNER JOIN 
+      SEASON S ON M.seasonID = S.seasonID
+    INNER JOIN 
+      STADIUM ST ON M.stadiumID = ST.stadiumID
+	ORDER BY M.matchDate;
+go
+
+CREATE VIEW THONGTINTEAMSPORT
+AS
+	SELECT teamID, teamName, teamYearEstablished, teamSponsor, teamLogo
+    FROM TEAM_ESPORT
+go
+SELECT * FROM THONGTINTEAMSPORT
+
+go
+
 --CREATE DATA FOR DATABASE--
-USE DO_AN_QLTT;
 
 -- Insert data into PLAYER table
 INSERT INTO PLAYER (playerID, playerName, playerBirthDate, playerHomeTown, playStatus) VALUES
@@ -450,7 +482,7 @@ INSERT INTO PLAYER (playerID, playerName, playerBirthDate, playerHomeTown, playS
 (5, N'Do Van E', '1999-05-05', N'Can Tho', 1);
 SELECT * FROM PLAYER;
 -- Insert data into TEAM_ESPORT table
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamOwner, teamLogo) VALUES
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES
 (1, N'Team Alpha', 2015, N'Nguyen Van Owner1', 'logo1.png'),
 (2, N'Team Beta', 2016, N'Tran Thi Owner2', 'logo2.png'),
 (3, N'Team Gamma', 2017, N'Le Van Owner3', 'logo3.png'),
@@ -501,8 +533,6 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName, Lane, DateStart, Dat
 (4, 4, N'Nick4', N'ADC', '2021-04-01', '2023-04-01'),
 (5, 5, N'Nick5', N'Support', '2021-05-01', '2023-05-01');
 SELECT * FROM PLAYER_TEAM_ESPORT;
-
-
 -- Insert data into COACH table
 INSERT INTO COACH (coachID, coachName, coachBirthDate, coachHomeTown) VALUES
 (1, N'Coach A', '1980-01-01', N'Hà Nội'),
@@ -558,49 +588,3 @@ INSERT INTO BET (ID_BET, ID_CUSTOMER, matchID, T1Score_predict, T2Score_predict,
 
 SELECT * FROM BET;
 -- Kiểm tra dữ liệu trong bảng MATC
-
-
-
-CREATE VIEW LICHTHIDAU
-AS
-	SELECT 
-	M.matchDate AS 'NGÀY THI ĐẤU',
-	T1.teamName AS 'ĐỘI 1',
-	M.teamoneScore AS 'ĐIỂM ĐỘI 1',
-	T2.teamName AS 'ĐỘI 2',
-	M.teamtwoScore AS 'ĐIỂM ĐỘI 2',
-	ST.stadiumName AS 'SÂN VẬN ĐỘNG'
-	FROM 
-            MATCH M
-        INNER JOIN 
-            TEAM_ESPORT T1 ON M.teamoneID = T1.teamID
-        INNER JOIN 
-            TEAM_ESPORT T2 ON M.teamtwoID = T2.teamID
-        INNER JOIN 
-            SEASON S ON M.seasonID = S.seasonID
-        INNER JOIN 
-            STADIUM ST ON M.stadiumID = ST.stadiumID
-        ORDER BY M.matchDate;
-
-CREATE VIEW LICHTHIDAU
-AS
-	SELECT TOP 100000 -- Replace with a large enough number
-		M.matchDate AS 'NGÀY THI ĐẤU',
-		T1.teamName AS 'ĐỘI 1',
-		M.teamoneScore AS 'ĐIỂM ĐỘI 1',
-		T2.teamName AS 'ĐỘI 2',
-		M.teamtwoScore AS 'ĐIỂM ĐỘI 2',
-		ST.stadiumName AS 'SÂN VẬN ĐỘNG'
-	FROM 
-      MATCH M
-    INNER JOIN 
-      TEAM_ESPORT T1 ON M.teamoneID = T1.teamID
-    INNER JOIN 
-      TEAM_ESPORT T2 ON M.teamtwoID = T2.teamID
-    INNER JOIN 
-      SEASON S ON M.seasonID = S.seasonID
-    INNER JOIN 
-      STADIUM ST ON M.stadiumID = ST.stadiumID
-	ORDER BY M.matchDate;
-
-SELECT * FROM LICHTHIDAU;
