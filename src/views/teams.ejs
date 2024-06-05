@@ -124,17 +124,24 @@
                                     <tr>
                                         <th>TT</th>
                                         <th>CLB</th>
-                                        <th>Số trận</th>
-                                        <th>Thắng</th>
-                                        <th>Hòa</th>
-                                        <th>Thua</th>
-                                        <th>Bàn thắng</th>
-                                        <th>Bàn thua</th>
-                                        <th>Hệ số</th>
-                                        <th>Điểm</th>
+                                        <th>Established</th>
+                                        <th>Owner</th>
+                                        <th>Logo</th>
                                     </tr>
                                 </thead>
- 
+                                <tbody>
+                                  <% for(var i=0 ; i < result.length; i++) { %>
+                                    <tr>
+                                      <td><%= result[i]['teamID']%></td>
+                                      <td><%= result[i]['teamName']%></td>
+                                      <td><%= result[i]['teamYearEstablished']%></td>
+                                      <td><%= result[i]['teamSponsor']%></td>
+                                      <td>
+                                        <img src="<%= result[i]['teamLogo'].split('/revision')[0] %>" alt="">
+                                      </td>
+                                    </tr>
+                                    <%} %>
+                                </tbody>
                             </table>
                         </div>
                     </div>

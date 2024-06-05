@@ -7,7 +7,7 @@ CREATE TABLE PLAYER (
     playerName NVARCHAR(100),
     playerBirthDate DATETIME,
     playerHomeTown NVARCHAR(100),
-    playStatus INT
+    playStatus INT,
 );
 GO
 
@@ -384,7 +384,8 @@ GO
 
 --CREATE DATA FOR DATABASE--
 USE DO_AN_QLTT;
-
+ALTER TABLE PLAYER
+ADD playStatus int
 -- Insert data into PLAYER table
 INSERT INTO PLAYER (playerID, playerName, playerBirthDate, playerHomeTown, playStatus) VALUES
 (1, N'Nguyen Van A', '1995-01-01', N'Hà Nội', 1),
@@ -548,3 +549,9 @@ AS
 	ORDER BY M.matchDate;
 
 SELECT * FROM LICHTHIDAU;
+
+CREATE VIEW THONGTINTEAMSPORT
+AS
+	SELECT teamID, teamName, teamYearEstablished, teamOwner, teamLogo
+    FROM TEAM_ESPORT
+SELECT * FROM THONGTINTEAMSPORT2

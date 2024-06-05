@@ -16,8 +16,10 @@ const handleRanking=(req,res)=>{
     return res.render('ranking.ejs')
 }
 
-const handleTeams=(req,res)=>{
-    return res.render('teams.ejs')
+const handleTeams=async(req,res)=>{
+    var query='select * from TEAM_ESPORT2'
+    var result=await selectDatabase(query)
+    return res.render('teams.ejs',{result})
 }
 
 const handlePlayers=(req,res)=>{
