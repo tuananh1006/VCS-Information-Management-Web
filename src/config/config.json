@@ -1,7 +1,7 @@
 {
   "start": {
-    "server": "DESKTOP-JPVMF7F",
+    "server": "DESKTOP-41UIO5D\\SQLEXPRESS",
     "database": "DO_AN_QLTT",
-    "driver":"ODBC Driver 17 for SQL Server"
+    "driver": "ODBC Driver 17 for SQL Server"
   }
 }
