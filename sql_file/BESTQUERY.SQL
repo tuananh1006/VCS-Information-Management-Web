@@ -15,7 +15,7 @@ CREATE TABLE TEAM_ESPORT (
     teamID INT PRIMARY KEY,
     teamName NVARCHAR(100),
     teamYearEstablished INT,
-    teamOwner NVARCHAR(100),
+    teamSponsor NVARCHAR(255),
     teamLogo NVARCHAR(255)
 );
 GO
@@ -32,7 +32,8 @@ CREATE TABLE SEASON (
     seasonID INT PRIMARY KEY,
     seasonName NVARCHAR(100),
     seasonSponsor NVARCHAR(100),
-    seasonDateStart DATETIME
+    seasonDateStart DATETIME,
+    seasonDateEnd DATETIME
 );
 GO
 
@@ -111,6 +112,7 @@ CREATE TABLE TEAM_ESPORT_SEASON (
     teamID INT,
     seasonID INT,
     teamTotalScore INT,
+	teamShortName varchar(40),
     FOREIGN KEY (teamID) REFERENCES TEAM_ESPORT(teamID),
     FOREIGN KEY (seasonID) REFERENCES SEASON(seasonID),
     PRIMARY KEY (teamID, seasonID)
@@ -388,6 +390,53 @@ AS
 	FROM TEAM_ESPORT TE, PLAYER_TEAM_ESPORT PTE, PLAYER P
 	WHERE TE.TEAMID = PTE.TEAMID AND PTE.PLAYERID = P.PLAYERID
 GO
+
+SELECT * FROM PLAYERINFO
+
+CREATE VIEW TMP1 AS
+(SELECT 
+        teamID,
+        SUM(CASE WHEN result = 'win' THEN 1 ELSE 0 END) AS wins,
+        SUM(CASE WHEN result = 'lose' THEN 1 ELSE 0 END) AS losses
+    FROM (
+        SELECT
+            teamoneID AS teamID,
+            CASE 
+                WHEN teamoneScore > teamtwoScore THEN 'win'
+                ELSE 'lose'
+            END AS result
+        FROM MATCH
+        UNION ALL
+        SELECT
+            teamtwoID AS teamID,
+            CASE 
+                WHEN teamtwoScore > teamoneScore THEN 'win'
+                ELSE 'lose'
+            END AS result
+        FROM MATCH
+    ) AS results
+    GROUP BY teamID)
+
+
+SELECT 
+    ROW_NUMBER() OVER (ORDER BY TES.TEAMTOTALSCORE DESC) AS RANKING,
+    T.teamLogo,
+    T.TEAMNAME,
+    CONCAT(TMP1.wins, '-', TMP1.losses) AS [T/B],
+    TES.TEAMTOTALSCORE,
+	s.seasonName
+FROM 
+    TEAM_ESPORT_SEASON TES
+    JOIN TEAM_ESPORT T ON TES.TEAMID = T.TEAMID
+    JOIN SEASON S ON TES.SEASONID = S.SEASONID
+    JOIN TMP1 ON TES.TEAMID = TMP1.teamID
+GROUP BY 
+    T.teamLogo,
+    T.TEAMNAME,
+    TMP1.wins,
+    TMP1.losses,
+    TES.TEAMTOTALSCORE,
+	s.seasonName;
 
 --CREATE DATA FOR DATABASE--
 USE DO_AN_QLTT;
