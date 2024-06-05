@@ -1,5 +1,6 @@
 import userService from '../service/userService'
 import {selectDatabase,performModify} from '../config/connectDB'
+const moment = require('moment')
 
 const handleHomePage=(req,res)=>{
     return res.render('homepage.ejs')
@@ -20,8 +21,18 @@ const handleTeams=(req,res)=>{
     return res.render('teams.ejs')
 }
 
-const handlePlayers=(req,res)=>{
-    return res.render('players.ejs')
+const handlePlayers= async (req,res)=>{
+    var query='select * from PLAYERINFO'
+    var result =await selectDatabase(query)
+    result.forEach(row => {
+        if (row.DATESTART){
+        row.DATESTART = moment(row.DATESTART).format('DD-MM-YYYY');
+        }
+        if (row.DATEEND)
+        row.DATEEND = moment(row.DATEEND).format('DD-MM-YYYY');
+    });
+    //console.log(result[0]['NICKNAME'])
+    return res.render('players.ejs', {result})
 }
 
 const handleInformation=(req,res)=>{
