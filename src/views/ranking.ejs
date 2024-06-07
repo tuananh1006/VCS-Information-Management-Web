@@ -15,7 +15,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
-  <title>Danh sách đội tuyển</title>
+  <title>Bảng xếp hạng</title>
 </head>
 
 <body>
@@ -216,7 +216,7 @@
         </div>
         <div
           class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Danh sách tuyển thủ</h1>
+          <h1 class="h2">Bảng xếp hạng</h1>
           <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
               <button type="button" class="btn btn-sm btn-outline-secondary">
@@ -246,10 +246,21 @@
               <div class="col-md-12">
                 <div class="card">
                   <div class="card-header">
-                    <strong class="card-title">Mùa giải</strong>
+                    <div style="display: inline;">
+                      <strong class="card-title">Chọn mùa giải</strong>
+                    </div>
+                    <div  class="mt-1" >
+                      <select name="season" id="seasonSelect">
+                        <% result2.sort((a, b) => (a.seasonName > b.seasonName) ? 1 : ((b.seasonName > a.seasonName) ? -1 : 0)) %>
+                        <option value="None">None</option>
+                        <% for (var i = 0; i < result2.length; i++){ %>
+                            <option value="<%= result2[i].seasonName %>"><%= result2[i].seasonName %></option>
+                        <% } %>
+                    </select>
+                        </select>
+                    </div>
                   </div>
-                  <input class="form-control form-control-dark w-100" type="text" placeholder="Search"
-                    aria-label="Search" />
+ 
                   <div class="card-body">
                     <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                       <thead class="thead-dark">
@@ -261,15 +272,18 @@
                           <th>Total</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="rankingTable">
                         <% for (let i=0; i < result.length; i++) { %>
-                          <tr>
+                          <tr style="display: none;">
                             <!-- <td><%= i+1 %></td> -->
+                            <td hidden>
+                              <%= result[i]['seasonName'] %>
+                            </td>
                             <td>
                               <%= result[i]['RANKING'] %>
                             </td>
                             <td>
-                              <%= result[i]['teamLogo'] %>
+                              <img src="<%= result[i]['teamLogo'].split('/revision')[0] %>" alt="" style="width: 50px;">
                             </td>
                             <td>
                               <%= result[i]['TEAMNAME'] %>
@@ -310,6 +324,24 @@
   <script src="dashboard.js"></script>
 
   <div id="eJOY__extension_root" class="eJOY__extension_root_class" style="all: unset"></div>
+ 
+  <script>
+    document.getElementById('seasonSelect').addEventListener('change', function() {
+        const selectedSeason = this.value;
+        const form = document.getElementById('seasonForm');
+        var rows = document.querySelector("#rankingTable").rows;
+
+        for (var i = 0; i < rows.length; i++) {
+  
+            var firstCell = rows[i].cells[0].innerText; // Lấy nội dung của ô
+            if (firstCell.indexOf(selectedSeason) > -1) { // Kiểm tra nếu nội dung của ô chứa giá trị đã chọn
+                rows[i].style.display = ""; // Hiển thị hàng
+            } else {
+                rows[i].style.display = "none"; // Ẩn đi hàng không phù hợp
+            }
+        }
+    });
+  </script>
 </body>
 
 </html>
