@@ -8,7 +8,8 @@ CREATE TABLE PLAYER (
     playerName NVARCHAR(100),
     playerBirthDate DATETIME,
     playerHomeTown NVARCHAR(100),
-    playStatus BIT,
+	playerImage NVARCHAR(255),
+    playerStatus BIT,
 );
 GO
 
@@ -67,34 +68,16 @@ CREATE TABLE PLAYER_TEAM_ESPORT (
     playerID INT,
     teamID INT,
     NickName NVARCHAR(100),
-    Lane NVARCHAR(50),
+	playerRole NVARCHAR(50),
     DateStart DATETIME,
     DateEnd DATETIME,
     FOREIGN KEY (playerID) REFERENCES PLAYER(playerID),
     FOREIGN KEY (teamID) REFERENCES TEAM_ESPORT(teamID),
-    PRIMARY KEY (playerID, teamID)
+    PRIMARY KEY (playerID, teamID,DateStart)
 );
 GO
 
-CREATE TABLE COACH (
-    coachID INT PRIMARY KEY,
-    coachName NVARCHAR(100),
-    coachBirthDate DATETIME,
-    coachHomeTown NVARCHAR(100)
-);
-GO
 
-CREATE TABLE COACH_TEAM_ESPORT (
-    coachID INT,
-    teamID INT,
-    NickName NVARCHAR(100),
-    DateStart DATETIME,
-    DateEnd DATETIME,
-    FOREIGN KEY (coachID) REFERENCES COACH(coachID),
-    FOREIGN KEY (teamID) REFERENCES TEAM_ESPORT(teamID),
-    PRIMARY KEY (coachID, teamID)
-);
-GO
 
 CREATE TABLE PLAYER_MATCH (
     playerID INT,
@@ -184,7 +167,6 @@ BEGIN
     SELECT @ID_TEAM = TEAMID FROM DELETED;
 
     DELETE FROM PLAYER_TEAM_ESPORT WHERE TEAMID = @ID_TEAM;
-    DELETE FROM COACH_TEAM_ESPORT WHERE TEAMID = @ID_TEAM;
     DELETE FROM TEAM_ESPORT_SEASON WHERE TEAMID = @ID_TEAM;
     DELETE FROM TEAM_ESPORT WHERE TEAMID = @ID_TEAM;
 END;
@@ -203,17 +185,6 @@ BEGIN
 END;
 GO
 
-CREATE TRIGGER DELETE_COACH ON COACH
-INSTEAD OF DELETE
-AS
-BEGIN
-    DECLARE @DELETE_ID_COACH INT;
-    SELECT @DELETE_ID_COACH = COACHID FROM DELETED;
-
-    DELETE FROM COACH_TEAM_ESPORT WHERE COACHID = @DELETE_ID_COACH;
-    DELETE FROM COACH WHERE COACHID = @DELETE_ID_COACH;
-END;
-GO
 
 CREATE TRIGGER UPDATE_DIEM ON MATCH
 FOR UPDATE, INSERT
@@ -243,21 +214,6 @@ BEGIN
 END;
 GO
 
-CREATE TRIGGER CHECK_hlv_NGTL ON TEAM_ESPORT
-FOR INSERT
-AS
-BEGIN
-    IF EXISTS (SELECT 1 FROM COACH_TEAM_ESPORT CTE, INSERTED I WHERE CTE.TEAMID = I.TEAMID AND CTE.DateStart < I.teamYearEstablished)
-    BEGIN
-        PRINT N'NGÀY THÀNH LẬP TEAM PHẢI NHỎ HƠN NGÀY HLV GIA NHẬP TEAM NÀY';
-        ROLLBACK TRANSACTION;
-    END
-    ELSE
-    BEGIN
-        PRINT N'THÊM THÀNH CÔNG';
-    END
-END;
-GO
 
 CREATE TRIGGER CHECK_ID_MATCH ON BET
 FOR INSERT, UPDATE
@@ -301,7 +257,7 @@ BEGIN
                P.playerBirthDate AS 'NGÀY SINH',
                P.playerHomeTown AS 'QUÊ QUÁN',
                T.teamName AS 'TÊN TEAM',
-               PT.Lane AS 'ĐƯỜNG THI ĐẤU',
+               PT.playerRole AS 'ĐƯỜNG THI ĐẤU',
                PT.DateStart AS 'NGÀY BẮT ĐẦU THI ĐẤU',
                PT.DateEnd AS 'NGÀY KẾT THÚC THI ĐẤU'
         FROM PLAYER P
@@ -363,44 +319,27 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE PRINT_TT_HLV (@nick_name NVARCHAR(100))
-AS
-BEGIN
-    IF EXISTS (SELECT 1 FROM COACH_TEAM_ESPORT WHERE NickName = @nick_name)
-    BEGIN
-        SELECT C.coachName AS 'TÊN HUẤN LUYỆN VIÊN',
-               C.coachBirthDate AS 'NGÀY SINH',
-               C.coachHomeTown AS 'QUÊ QUÁN',
-               T.teamName AS 'TÊN TEAM',
-               CTE.DateStart AS 'NGÀY BẮT ĐẦU HUẤN LUYỆN',
-               CTE.DateEnd AS 'NGÀY KẾT THÚC HUẤN LUYỆN'
-        FROM COACH C
-        JOIN COACH_TEAM_ESPORT CTE ON C.coachID = CTE.coachID
-        JOIN TEAM_ESPORT T ON CTE.teamID = T.teamID
-        WHERE CTE.NickName = @nick_name;
-    END
-    ELSE
-    BEGIN
-        PRINT N'KHÔNG TÌM THẤY HUẤN LUYỆN VIÊN';
-    END
-END;
-GO
 
 CREATE VIEW PLAYERINFO
 AS
-	SELECT TEAMNAME, NICKNAME, PLAYERNAME, LANE, DATESTART, DATEEND
+	SELECT TEAMNAME, NICKNAME, PLAYERNAME, playerRole, DATESTART, DATEEND
 	FROM TEAM_ESPORT TE, PLAYER_TEAM_ESPORT PTE, PLAYER P
 	WHERE TE.TEAMID = PTE.TEAMID AND PTE.PLAYERID = P.PLAYERID
 GO
 
-CREATE VIEW TMP1 AS
-(SELECT 
+CREATE VIEW RankingsBySeason AS
+WITH TMP1 AS
+(
+    SELECT 
         teamID,
+        seasonID,
         SUM(CASE WHEN result = 'win' THEN 1 ELSE 0 END) AS wins,
-        SUM(CASE WHEN result = 'lose' THEN 1 ELSE 0 END) AS losses
+        SUM(CASE WHEN result = 'lose' THEN 1 ELSE 0 END) AS losses,
+		SUM(CASE WHEN result = 'win' THEN 1 ELSE 0 END) + SUM(CASE WHEN result = 'lose' THEN -1 ELSE 0 END) AS NUMBER
     FROM (
         SELECT
             teamoneID AS teamID,
+            seasonID,
             CASE 
                 WHEN teamoneScore > teamtwoScore THEN 'win'
                 ELSE 'lose'
@@ -409,36 +348,35 @@ CREATE VIEW TMP1 AS
         UNION ALL
         SELECT
             teamtwoID AS teamID,
+            seasonID,
             CASE 
                 WHEN teamtwoScore > teamoneScore THEN 'win'
                 ELSE 'lose'
             END AS result
         FROM MATCH
     ) AS results
-    GROUP BY teamID)
-
-go
-
-create view BXH1 AS
+    GROUP BY teamID, seasonID
+)
 SELECT 
-    ROW_NUMBER() OVER (ORDER BY TES.TEAMTOTALSCORE DESC) AS RANKING,
+    ROW_NUMBER() OVER (PARTITION BY S.seasonName ORDER BY TMP1.NUMBER DESC) AS RANKING,
     T.teamLogo,
     T.TEAMNAME,
     CONCAT(TMP1.wins, '-', TMP1.losses) AS [T/B],
     TES.TEAMTOTALSCORE,
-	s.seasonName
-FROM 
+    S.seasonName
+FROM
     TEAM_ESPORT_SEASON TES
     JOIN TEAM_ESPORT T ON TES.TEAMID = T.TEAMID
     JOIN SEASON S ON TES.SEASONID = S.SEASONID
-    JOIN TMP1 ON TES.TEAMID = TMP1.teamID
+    JOIN TMP1 ON TES.TEAMID = TMP1.teamID AND TES.SEASONID = TMP1.seasonID
 GROUP BY 
     T.teamLogo,
     T.TEAMNAME,
+	TMP1.NUMBER,
     TMP1.wins,
     TMP1.losses,
     TES.TEAMTOTALSCORE,
-	s.seasonName;
+    S.seasonName;
 
 go
 
@@ -472,6 +410,5 @@ go
 SELECT * FROM THONGTINTEAMSPORT
 
 go
-
 
 
