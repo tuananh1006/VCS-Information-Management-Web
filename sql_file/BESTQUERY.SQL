@@ -550,8 +550,10 @@ AS
 
 SELECT * FROM LICHTHIDAU;
 
-CREATE VIEW THONGTINTEAMSPORT
+CREATE VIEW THONGTINTEAMSPORT2
 AS
-	SELECT teamID, teamName, teamYearEstablished, teamOwner, teamLogo
-    FROM TEAM_ESPORT
+	SELECT teamID, teamName, teamYearEstablished, teamSponsor, teamLogo
+    FROM TEAM_ESPORT2
 SELECT * FROM THONGTINTEAMSPORT2
+
+
