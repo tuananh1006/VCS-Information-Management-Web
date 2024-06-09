@@ -10,6 +10,11 @@ const handleScheduler=async (req,res)=>{
         var query='select * from LICHTHIDAU'
         var result=await selectDatabase(query)
         console.log(result[0]['ĐỘI 1'])
+        result.forEach(row => {
+            if (row['NGÀY THI ĐẤU']){
+            row['NGÀY THI ĐẤU'] = moment(row['NGÀY THI ĐẤU']).format('DD-MM-YYYY');
+            }
+        })
         return res.render('scheduler.ejs',{result})
 }
 
