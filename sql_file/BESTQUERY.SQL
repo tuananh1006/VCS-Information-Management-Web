@@ -1,6 +1,6 @@
-﻿CREATE DATABASE DO_AN_QLTT;
+﻿CREATE DATABASE DO_AN_QLTT15;
 GO
-USE DO_AN_QLTT;
+USE DO_AN_QLTT15;
 
 -- Creating Tables
 CREATE TABLE PLAYER (
@@ -13,12 +13,20 @@ CREATE TABLE PLAYER (
 );
 GO
 
+
 CREATE TABLE TEAM_ESPORT (
     teamID INT PRIMARY KEY,
-    teamName NVARCHAR(100),
+    teamName NVARCHAR(100) NOT NULL,
     teamYearEstablished INT,
-    teamSponsor NVARCHAR(255),
     teamLogo NVARCHAR(255)
+);
+GO
+
+CREATE TABLE TEAM_ESPORT_SPONSOR(
+	teamID INT,
+	teamSponsor NVARCHAR(255),
+	PRIMARY KEY (teamID,teamSponsor),
+	FOREIGN KEY (teamID) REFERENCES TEAM_ESPORT(teamID),
 );
 GO
 
@@ -32,7 +40,7 @@ GO
 
 CREATE TABLE SEASON (
     seasonID INT PRIMARY KEY,
-    seasonName NVARCHAR(100),
+    seasonName NVARCHAR(100) NOT NULL,
     seasonSponsor NVARCHAR(100),
     seasonDateStart DATETIME,
     seasonDateEnd DATETIME
@@ -68,7 +76,7 @@ CREATE TABLE PLAYER_TEAM_ESPORT (
     playerID INT,
     teamID INT,
     NickName NVARCHAR(100),
-	playerRole NVARCHAR(50),
+	playerRole NVARCHAR(50) NOT NULL,
     DateStart DATETIME,
     DateEnd DATETIME,
     FOREIGN KEY (playerID) REFERENCES PLAYER(playerID),
@@ -77,26 +85,34 @@ CREATE TABLE PLAYER_TEAM_ESPORT (
 );
 GO
 
+CREATE TABLE CHAMPION (
+    championID INT PRIMARY KEY,
+    championName NVARCHAR(100) NOT NULL,
+	ChampionImage NVARCHAR(255),
+);
+GO
 
-
-CREATE TABLE PLAYER_MATCH (
+CREATE TABLE CHITIETTRANDAU (
     playerID INT,
     matchID INT,
-    Champion NVARCHAR(100),
-    NUMKill INT,
-    Die INT,
-    Support INT,
+    numberOfMatch INT,
+    championID INT,
+    playerKill INT,
+    playerDie INT,
+    playerSupport INT,
+    PRIMARY KEY (playerID, matchID, numberOfMatch),
     FOREIGN KEY (playerID) REFERENCES PLAYER(playerID),
     FOREIGN KEY (matchID) REFERENCES MATCH(matchID),
-    PRIMARY KEY (playerID, matchID)
+    FOREIGN KEY (championID) REFERENCES CHAMPION(championID)  -- Assuming there is a CHAMPION table
 );
+
 GO
 
 CREATE TABLE TEAM_ESPORT_SEASON (
     teamID INT,
     seasonID INT,
     teamTotalScore INT,
-	teamShortName varchar(40),
+	teamShortName varchar(40) NOT NULL,
     FOREIGN KEY (teamID) REFERENCES TEAM_ESPORT(teamID),
     FOREIGN KEY (seasonID) REFERENCES SEASON(seasonID),
     PRIMARY KEY (teamID, seasonID)
@@ -105,31 +121,214 @@ GO
 
 CREATE TABLE CUSTOMER (
     ID_CUSTOMER INT PRIMARY KEY,
-    NAME_CUSTOMER VARCHAR(50) NOT NULL,
-    date_of_birth SMALLDATETIME,
-    EMAIL NVARCHAR(255),
-    SEX CHAR(10) NOT NULL,
-    NICKNAME NVARCHAR(100),
-    PASSWORD NVARCHAR(255),
-    USERNAME_LOGIN VARCHAR(30),
+    NAME_CUSTOMER NVARCHAR(50) NOT NULL,
+    date_of_birth SMALLDATETIME NOT NULL,
+    EMAIL NVARCHAR NOT NULL,
+    SEX CHAR(4) NOT NULL,
+    NICKNAME NVARCHAR NOT NULL,
+    PASSWORD NVARCHAR NOT NULL,
+    USERNAME_LOGIN VARCHAR(30) NOT NULL,
     COIN INT
 );
 GO
 
 CREATE TABLE BET (
-    ID_BET INT PRIMARY KEY,
     ID_CUSTOMER INT,
     matchID INT,
-    T1Score_predict INT,
-    T2Score_predict INT,
+    T1Score_predict INT not null,
+    T2Score_predict INT not null,
     COIN_BET INT,
     DAY_BET SMALLDATETIME,
+	PRIMARY KEY(ID_CUSTOMER,matchID),
     FOREIGN KEY (ID_CUSTOMER) REFERENCES CUSTOMER(ID_CUSTOMER),
     FOREIGN KEY (matchID) REFERENCES MATCH(matchID)
 );
 GO
 
+alter table PLAYER add CONSTRAINT CHK_Age CHECK (DATEDIFF(YEAR, playerBirthDate, GETDATE()) >= 18)
+alter table PLAYER add CONSTRAINT CHK_Status CHECK (playerStatus in(0,1))
+alter table TEAM_ESPORT add constraint CHK_year CHECK (teamYearEstablished<=YEAR(GETDATE()))
+alter table PLAYER_TEAM_ESPORT add constraint CHK_START CHECK(DateStart<=DateEnd)
+alter table stadium add constraint CHK_CAP CHECK (stadiumCapacity>0)
+alter table MATCHTYPE add constraint CHK_name CHECK(matchtypeName in ('BO3','BO5'))
+alter table matchtype add constraint CHK_quantity check(matchtypeQuantity>0)
+alter table CHITIETTRANDAU add constraint CHK_KDA CHECK(playerKill>=0 AND playerDie>=0 AND playerSupport>=0)
+GO
+
 -- Creating Triggers
+
+CREATE TRIGGER trgCheckBetScores
+ON BET
+FOR INSERT, UPDATE
+AS
+BEGIN
+    -- Kiểm tra nếu điểm dự đoán của đội 1 hoặc đội 2 không thỏa mãn điều kiện
+    IF EXISTS (
+        SELECT 1
+        FROM INSERTED i
+        JOIN MATCH m ON i.matchID = m.matchID
+        JOIN MATCHTYPE mt ON m.matchtypeID = mt.matchtypeID
+        WHERE i.T1Score_predict > (mt.matchtypeQuantity / 2) + 1
+           OR i.T2Score_predict > (mt.matchtypeQuantity / 2) + 1
+    )
+    BEGIN
+        RAISERROR ('T1Score_predict and T2Score_predict must be less equal than (matchtypeQuantity / 2) + 1.', 16, 1);
+        ROLLBACK TRANSACTION;
+    END
+END;
+GO
+
+CREATE TRIGGER trgCheckAndDeductCoin
+ON BET
+FOR INSERT, UPDATE
+AS
+BEGIN
+    -- Kiểm tra nếu COIN_BET lớn hơn COIN của user
+    IF EXISTS (
+        SELECT 1
+        FROM INSERTED i
+        JOIN CUSTOMER c ON i.ID_CUSTOMER = c.ID_CUSTOMER
+        WHERE i.COIN_BET > c.COIN
+    )
+    BEGIN
+        RAISERROR ('COIN_BET must be less than or equal to COIN of the user.', 16, 1);
+        ROLLBACK TRANSACTION;
+        RETURN;
+    END
+
+    -- Trừ số COIN_BET từ COIN của user
+    UPDATE c
+    SET c.COIN = c.COIN - i.COIN_BET
+    FROM CUSTOMER c
+    JOIN INSERTED i ON c.ID_CUSTOMER = i.ID_CUSTOMER;
+END;
+GO
+
+CREATE TRIGGER trgUpdateMatchScore
+ON MATCH
+FOR UPDATE
+AS
+BEGIN
+    -- Kiểm tra nếu tỉ số teamoneScore và teamtwoScore trùng khớp với dự đoán của người dùng
+    IF EXISTS (
+        SELECT 1
+        FROM INSERTED i
+        JOIN BET b ON i.matchID = b.matchID
+        WHERE i.teamoneScore = b.T1Score_predict AND i.teamtwoScore = b.T2Score_predict
+    )
+    BEGIN
+        -- Cộng số COIN_BET * 2 vào COIN của người dùng
+        UPDATE c
+        SET c.COIN = c.COIN + (2 * b.COIN_BET)
+        FROM CUSTOMER c
+        JOIN BET b ON c.ID_CUSTOMER = b.ID_CUSTOMER
+        JOIN INSERTED i ON b.matchID = i.matchID
+        WHERE i.teamoneScore = b.T1Score_predict AND i.teamtwoScore = b.T2Score_predict;
+    END
+END;
+GO
+
+CREATE TRIGGER trgCheckAndSetCoin
+ON CUSTOMER
+FOR INSERT, UPDATE
+AS
+BEGIN
+    -- Kiểm tra nếu có bản ghi có COIN nhỏ hơn 0
+    IF EXISTS (
+        SELECT 1
+        FROM INSERTED
+        WHERE COIN < 0
+    )
+    BEGIN
+        RAISERROR ('COIN must be greater than or equal to 0.', 16, 1);
+        ROLLBACK TRANSACTION;
+        RETURN;
+    END
+    
+    -- Cập nhật COIN thành 0 nếu COIN là NULL
+    UPDATE CUSTOMER
+    SET COIN = 0
+    FROM CUSTOMER c
+    JOIN INSERTED i ON c.ID_CUSTOMER = i.ID_CUSTOMER
+    WHERE i.COIN IS NULL;
+END;
+GO
+
+CREATE TRIGGER CheckNumberOfMatch
+ON CHITIETTRANDAU
+FOR INSERT, UPDATE
+AS
+BEGIN
+    -- Kiểm tra nếu numberOfMatch lớn hơn tổng teamoneScore và teamtwoScore
+    IF EXISTS (
+        SELECT 1
+        FROM INSERTED i
+        JOIN MATCH m ON i.matchID = m.matchID
+        WHERE i.numberOfMatch > (m.teamoneScore + m.teamtwoScore)
+    )
+    BEGIN
+        RAISERROR ('numberOfMatch must be less equal than the total of teamoneScore and teamtwoScore in the MATCH table.', 16, 1);
+        ROLLBACK TRANSACTION;
+    END
+END;
+GO
+
+CREATE TRIGGER CheckMatchScore 
+ON MATCH
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    -- Kiểm tra ràng buộc cho mỗi hàng được chèn hoặc cập nhật trong bảng MATCH
+    IF EXISTS (
+        SELECT 1
+        FROM INSERTED i
+        JOIN MATCH m ON i.matchID = m.matchID
+        JOIN MATCHTYPE mt ON m.matchtypeID = mt.matchtypeID
+        WHERE (i.teamoneScore + i.teamtwoScore) > mt.matchtypeQuantity
+    )
+    BEGIN
+        RAISERROR ('Tổng điểm đội 1 và điểm đội 2 phải bé hơn hoặc bằng matchtypeQuantity.', 16, 1)
+        ROLLBACK TRANSACTION
+    END
+END;
+
+go
+
+CREATE TRIGGER CheckTeamIDs
+ON MATCH
+FOR INSERT, UPDATE
+AS
+BEGIN
+    -- Kiểm tra nếu teamoneID không xuất hiện trong bảng TEAM_ESPORT_SEASON
+    IF EXISTS (
+        SELECT 1
+        FROM INSERTED i
+        LEFT JOIN TEAM_ESPORT_SEASON t1 ON i.teamoneID = t1.teamID
+        WHERE t1.teamID IS NULL
+    )
+    BEGIN
+        RAISERROR ('TeamoneID must exist in TEAM_ESPORT_SEASON.', 16, 1);
+        ROLLBACK TRANSACTION;
+        RETURN;
+    END
+
+    -- Kiểm tra nếu teamtwoID không xuất hiện trong bảng TEAM_ESPORT_SEASON
+    IF EXISTS (
+        SELECT 1
+        FROM INSERTED i
+        LEFT JOIN TEAM_ESPORT_SEASON t2 ON i.teamtwoID = t2.teamID
+        WHERE t2.teamID IS NULL
+    )
+    BEGIN
+        RAISERROR ('TeamtwoID must exist in TEAM_ESPORT_SEASON.', 16, 1);
+        ROLLBACK TRANSACTION;
+        RETURN;
+    END
+END;
+GO
+
+
+
 CREATE TRIGGER CHECK_START_SEASON ON SEASON
 FOR INSERT
 AS
@@ -404,11 +603,13 @@ go
 
 CREATE VIEW THONGTINTEAMSPORT
 AS
-	SELECT teamID, teamName, teamYearEstablished, teamSponsor, teamLogo
-    FROM TEAM_ESPORT
+	SELECT TEAM_ESPORT.teamID, teamName, teamYearEstablished,TEAM_ESPORT_SPONSOR.teamSponsor, teamLogo
+    FROM TEAM_ESPORT,TEAM_ESPORT_SPONSOR
+	WHERE TEAM_ESPORT.teamID=TEAM_ESPORT_SPONSOR.teamID
 go
 SELECT * FROM THONGTINTEAMSPORT
 
 go
 
 
+//

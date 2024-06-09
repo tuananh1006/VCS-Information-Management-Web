@@ -1,4 +1,4 @@
-﻿USE DO_AN_QLTT;
+﻿USE DO_AN_QLTT15;
 INSERT INTO season (seasonID, seasonName, seasonSponsor, seasonDateStart, seasonDateEnd) VALUES (1, 'VCS 2020 Summer Season', 'Nonolive', '2020-06-19', '2020-08-16')
 INSERT INTO season (seasonID, seasonName, seasonSponsor, seasonDateStart, seasonDateEnd) VALUES (2, 'VCS 2022 Spring Season', 'Castrol POWER1', '2022-02-11', '2022-04-13')
 INSERT INTO season (seasonID, seasonName, seasonSponsor, seasonDateStart, seasonDateEnd) VALUES (3, 'VCS 2022 Summer Season', '', '2022-07-07', '2022-08-21')
@@ -14,6 +14,7 @@ INSERT INTO season (seasonID, seasonName, seasonSponsor, seasonDateStart, season
 INSERT INTO season (seasonID, seasonName, seasonSponsor, seasonDateStart, seasonDateEnd) VALUES (13, 'VCS 2024 Summer Season', '', '2024-06-01', '2024-08-01')
 INSERT INTO season (seasonID, seasonName, seasonSponsor, seasonDateStart, seasonDateEnd) VALUES (14, 'VCS Summer Season 2018', 'Wake-up 247', '2018-06-21', '2018-08-19')
 
+select * from season;
 INSERT INTO stadium (stadiumID,stadiumName,stadiumAddress, stadiumCapacity) VALUES
 (1, N'GG Stadium',N'Crescent Mall, 101 Tôn Dật Tiên, Tân Phú, District 7, Ho Chi Minh City',120),
 (2, N'VCS Studio',N'5 Phạm Ngũ Lão, Phường 3, Quận Gò Vấp, TPHCM',400);
@@ -24,41 +25,212 @@ INSERT INTO MATCHTYPE (matchtypeID, matchtypeName, matchtypeQuantity) VALUES
 
 select * from season;
 
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (1, 'QTV Gaming ', 2019, N'[''MSI'', ''CubeTV'']', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/5/55/QTV_Gaminglogo_square.png/revision/latest/scale-to-width-down/220?cb=20190321111720')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (2, 'Young Generation ', 2016, '', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/1/17/YGElogo_square.png/revision/latest/scale-to-width-down/220?cb=20170802182621')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (3, 'OverPower Esports ', 2020, N'[''AORUS'']', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/1/1f/OverPower_Esportslogo_square.png/revision/latest/scale-to-width-down/220?cb=20210402003615')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (4, 'Team Flash.Vietnam ', 2018, N'[''FPT Telecom'', ''Vinamilk'', ''Momo'', ''Vietjet Air'', ''Niea Men'', ''Samsung'']', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/5/5d/Team_Flashlogo_profile.png/revision/latest/scale-to-width-down/220?cb=20230521230356')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (5, 'MGN Blue Esports ', 2024, N'[''MGN Esports'', ''SOUSTATE'']', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/6/6d/MGN_Blue_Esportslogo_profile.png/revision/latest/scale-to-width-down/220?cb=20240108192011')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (6, 'Vikings Esports (2023 Vietnamese Team) ', 2023, '[''Vikings Gaming'', ''Vikings Cyber'', ''be'', ''Menitems'']', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/8/84/Vikings_Esports_%282023_Vietnamese_Team%29logo_profile.png/revision/latest/scale-to-width-down/220?cb=20240108193644')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (7, 'Luxury Esports ', 2020, '', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/8/8e/Luxury_Esportslogo_square.png/revision/latest/scale-to-width-down/220?cb=20210721213447')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (8, 'Saigon Buffalo ', 2019, '[''Vikings Gaming'']', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/4/44/Saigon_Buffalologo_square.png/revision/latest/scale-to-width-down/220?cb=20230210063638')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (9, 'Sky Gaming ', 2018, N'[''Huỳnh Lâm Mobile'']', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/8/8e/Sky_Gaminglogo_square.png/revision/latest/scale-to-width-down/220?cb=20181127173058')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (10, N'Phong Vũ Buffalo ', 2018, '[''PhongVu'', ''NIMO TV'']', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/f/f8/Phong_V%C5%A9_Buffalologo_square.png/revision/latest/scale-to-width-down/220?cb=20180923171103')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (11, 'MGN Box Esports', 2019, '', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/6/6d/MGN_Blue_Esportslogo_profile.png/revision/latest/scale-to-width-down/220?cb=20240108192011')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (12, 'AS Esports ', 2021, '', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/2/25/AS_Esportslogo_profile.png/revision/latest/scale-to-width-down/220?cb=20221024191316')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (13, 'Cube Adonis ', 2018, '[''Cube TV'']', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/8/89/Cube_Adonislogo_square.png/revision/latest/scale-to-width-down/220?cb=20190428160151')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (14, 'Burst The Sky Esports ', 2020, '[''VICTORIA Fitness & Yoga'', ''POPS Esports'']', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/d/da/Burst_The_Sky_Esportslogo_square.png/revision/latest/scale-to-width-down/220?cb=20210315170606')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (15, 'UTM Esports ', 2020, '[''Maximal Gym Center'']', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/e/ef/UTM_Esportslogo_square.png/revision/latest/scale-to-width-down/220?cb=20200601045218')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (16, '⁠GMedia Luxury', 2020, '', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/8/8e/Luxury_Esportslogo_square.png/revision/latest/scale-to-width-down/220?cb=20210721213447')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (17, 'Cherry Esports ', 2016, '', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/6/6b/Cherry_Esportslogo_square.png/revision/latest/scale-to-width-down/220?cb=20230511133747')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (18, 'Vikings Gaming ', 2014, '[''Vikings Gaming'']', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/f/fe/Vikings_Gaminglogo_profile.png/revision/latest/scale-to-width-down/220?cb=20210417152717')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (19, 'Genius Esports ', 2021, '[''G-Media'', ''Tin Há» c Mario'', ''Apple Pen'']', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/1/15/Genius_Esportslogo_profile.png/revision/latest/scale-to-width-down/220?cb=20230920114145')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (20, 'Hall of Fame ', 2017, '', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/a/a4/Hall_of_Famelogo_square.png/revision/latest/scale-to-width-down/220?cb=20180522073348')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (21, 'Team Whales ', 2022, '[''Saigon Futures'', ''The Hunter Group'', ''SteelSeries'', ''HG Media'']', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/9/90/Team_Whaleslogo_profile.png/revision/latest/scale-to-width-down/220?cb=20230228060935')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (22, 'GAM Esports ', 2016, '[''CMG Asia'', ''Logitech'', ''Upfit'', ''Monster Energy'', ''Skylight Nha Trang'', ''M.O.I Cosnetics'', ''Burger King'', "Domino''s Pizza", ''Budweiser'', ''Popeyes'']', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/8/8a/GAM_Esportslogo_square.png/revision/latest/scale-to-width-down/220?cb=20210808114459')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (23, 'Dashing Buffalo', 2019, '', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/4/44/Saigon_Buffalologo_square.png/revision/latest/scale-to-width-down/220?cb=20230210063638')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (24, 'EVOS Esports ', 2017, '[''Whim'']', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/9/92/EVOS_Esportslogo_square.png/revision/latest/scale-to-width-down/220?cb=20180527225451')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (25, 'FTV Esports ', 2017, '[''FAPTV media'']', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/2/23/FTV_Esportslogo_profile.png/revision/latest/scale-to-width-down/220?cb=20230511142140')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (26, 'Rainbow Warriors ', 2023, '[''Xlabit'']', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/f/f7/Rainbow_Warriorslogo_square.png/revision/latest/scale-to-width-down/220?cb=20231025142423')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (27, 'Lowkey Esports.Vietnam ', 2019, '[''Dell'', ''Cooler Master'', ''Auxx.Me'', ''Alliance Airlines'']', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/3/30/Lowkey_Esportslogo_square.png/revision/latest/scale-to-width-down/220?cb=20201124070620')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (28, 'SBTC Esports ', 2018, N'[''Ampverse'', ''Phong Vũ'']', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/e/e3/SBTC_Esportslogo_profile.png/revision/latest/scale-to-width-down/220?cb=20220618073814')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (29, 'Team Secret (Vietnamese Team) ', 2020, '[''Stake'', ''Kick'', ''SecretLab'', ''Palsar'', ''Predator'', ''XAI'', ''Tumi'', ''LCB'', ''Secret Gemini'']', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/8/83/Team_Secret_%28Vietnamese_Team%29logo_profile.png/revision/latest/scale-to-width-down/220?cb=20221028041521')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (30, '⁠GIGABYTE Marines', 2016, '', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/8/8a/GAM_Esportslogo_square.png/revision/latest/scale-to-width-down/220?cb=20210808114459')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (31, 'Friends Forever Gaming ', 2016, '[''QTV Gaming Center'', ''Mountain Dew'', ''Navy Shop'', ''StreamCraft'']', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/2/20/Friends_Forever_Gaminglogo_profile.png/revision/latest/scale-to-width-down/220?cb=20210418144310')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (32, 'V Gaming Adonis ', 2019, '', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/a/ad/V_Gaminglogo_profile.png/revision/latest/scale-to-width-down/220?cb=20221028042138')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (33, 'CERBERUS Esports (Vietnamese Team) ', 2018, '[''Vikings Gaming'', ''DeepLOL'', ''Trade 4 You'', ''BOO'', ''Puma'', ''Oppo'', ''OFD'']', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/b/bb/CERBERUS_Esports_%28Vietnamese_Team%29logo_square.png/revision/latest/scale-to-width-down/220?cb=20230526151502')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (34, 'Percent Esports ', 2018, '[''Fruit Land'', ''POPS'']', 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/e/e1/Percent_Esportslogo_square.png/revision/latest/scale-to-width-down/220?cb=20200502225224')
-INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamSponsor, teamLogo) VALUES (35, 'Sky Gaming Daklak', 2018, '', '')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (1, 'QTV Gaming ', 2019, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/5/55/QTV_Gaminglogo_square.png/revision/latest/scale-to-width-down/220?cb=20190321111720')
+
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (2, 'Young Generation ', 2016, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/1/17/YGElogo_square.png/revision/latest/scale-to-width-down/220?cb=20170802182621')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (3, 'OverPower Esports ', 2020, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/1/1f/OverPower_Esportslogo_square.png/revision/latest/scale-to-width-down/220?cb=20210402003615')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (4, 'Team Flash.Vietnam ', 2018, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/5/5d/Team_Flashlogo_profile.png/revision/latest/scale-to-width-down/220?cb=20230521230356')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (5, 'MGN Blue Esports ', 2024, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/6/6d/MGN_Blue_Esportslogo_profile.png/revision/latest/scale-to-width-down/220?cb=20240108192011')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (6, 'Vikings Esports (2023 Vietnamese Team) ', 2023, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/8/84/Vikings_Esports_%282023_Vietnamese_Team%29logo_profile.png/revision/latest/scale-to-width-down/220?cb=20240108193644')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (7, 'Luxury Esports ', 2020, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/8/8e/Luxury_Esportslogo_square.png/revision/latest/scale-to-width-down/220?cb=20210721213447')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (8, 'Saigon Buffalo ', 2019, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/4/44/Saigon_Buffalologo_square.png/revision/latest/scale-to-width-down/220?cb=20230210063638')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (9, 'Sky Gaming ', 2018, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/8/8e/Sky_Gaminglogo_square.png/revision/latest/scale-to-width-down/220?cb=20181127173058')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (10, N'Phong Vũ Buffalo ', 2018, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/f/f8/Phong_V%C5%A9_Buffalologo_square.png/revision/latest/scale-to-width-down/220?cb=20180923171103')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (11, 'MGN Box Esports', 2019, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/6/6d/MGN_Blue_Esportslogo_profile.png/revision/latest/scale-to-width-down/220?cb=20240108192011')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (12, 'AS Esports ', 2021, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/2/25/AS_Esportslogo_profile.png/revision/latest/scale-to-width-down/220?cb=20221024191316')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (13, 'Cube Adonis ', 2018, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/8/89/Cube_Adonislogo_square.png/revision/latest/scale-to-width-down/220?cb=20190428160151')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (14, 'Burst The Sky Esports ', 2020, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/d/da/Burst_The_Sky_Esportslogo_square.png/revision/latest/scale-to-width-down/220?cb=20210315170606')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (15, 'UTM Esports ', 2020, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/e/ef/UTM_Esportslogo_square.png/revision/latest/scale-to-width-down/220?cb=20200601045218')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (16, '⁠GMedia Luxury', 2020,  'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/8/8e/Luxury_Esportslogo_square.png/revision/latest/scale-to-width-down/220?cb=20210721213447')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (17, 'Cherry Esports ', 2016, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/6/6b/Cherry_Esportslogo_square.png/revision/latest/scale-to-width-down/220?cb=20230511133747')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (18, 'Vikings Gaming ', 2014,  'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/f/fe/Vikings_Gaminglogo_profile.png/revision/latest/scale-to-width-down/220?cb=20210417152717')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (19, 'Genius Esports ', 2021, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/1/15/Genius_Esportslogo_profile.png/revision/latest/scale-to-width-down/220?cb=20230920114145')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (20, 'Hall of Fame ', 2017, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/a/a4/Hall_of_Famelogo_square.png/revision/latest/scale-to-width-down/220?cb=20180522073348')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (21, 'Team Whales ', 2022,  'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/9/90/Team_Whaleslogo_profile.png/revision/latest/scale-to-width-down/220?cb=20230228060935')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (22, 'GAM Esports ', 2016, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/8/8a/GAM_Esportslogo_square.png/revision/latest/scale-to-width-down/220?cb=20210808114459')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (23, 'Dashing Buffalo', 2019, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/4/44/Saigon_Buffalologo_square.png/revision/latest/scale-to-width-down/220?cb=20230210063638')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (24, 'EVOS Esports ', 2017, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/9/92/EVOS_Esportslogo_square.png/revision/latest/scale-to-width-down/220?cb=20180527225451')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (25, 'FTV Esports ', 2017, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/2/23/FTV_Esportslogo_profile.png/revision/latest/scale-to-width-down/220?cb=20230511142140')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (26, 'Rainbow Warriors ', 2023, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/f/f7/Rainbow_Warriorslogo_square.png/revision/latest/scale-to-width-down/220?cb=20231025142423')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (27, 'Lowkey Esports.Vietnam ', 2019,  'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/3/30/Lowkey_Esportslogo_square.png/revision/latest/scale-to-width-down/220?cb=20201124070620')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (28, 'SBTC Esports ', 2018,  'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/e/e3/SBTC_Esportslogo_profile.png/revision/latest/scale-to-width-down/220?cb=20220618073814')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (29, 'Team Secret (Vietnamese Team) ', 2020, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/8/83/Team_Secret_%28Vietnamese_Team%29logo_profile.png/revision/latest/scale-to-width-down/220?cb=20221028041521')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (30, '⁠GIGABYTE Marines', 2016,  'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/8/8a/GAM_Esportslogo_square.png/revision/latest/scale-to-width-down/220?cb=20210808114459')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (31, 'Friends Forever Gaming ', 2016, 'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/2/20/Friends_Forever_Gaminglogo_profile.png/revision/latest/scale-to-width-down/220?cb=20210418144310')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (32, 'V Gaming Adonis ', 2019,  'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/a/ad/V_Gaminglogo_profile.png/revision/latest/scale-to-width-down/220?cb=20221028042138')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (33, 'CERBERUS Esports (Vietnamese Team) ', 2018,  'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/b/bb/CERBERUS_Esports_%28Vietnamese_Team%29logo_square.png/revision/latest/scale-to-width-down/220?cb=20230526151502')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (34, 'Percent Esports ', 2018,  'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/e/e1/Percent_Esportslogo_square.png/revision/latest/scale-to-width-down/220?cb=20200502225224')
+INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (35, 'Sky Gaming Daklak', 2018,'')
+
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(1,'MSI')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(1,'CubeTV')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(3,'AORUS')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(4,'FPT Telecom')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(4,'Vinamilk')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(4,'Momo')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(4,'Vietjet Air')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(4,'Niea Men')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(4,'Samsung')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(5,'MGN Esports')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(5,'SOUSTATE')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(6,'Vikings Gaming')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(6,'Vikings Cyber')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(6,'be')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(6,'Menitems')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(8,'Vikings Gaming')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(9,N'Huỳnh Lâm Mobile')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(10,'PhongVu')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(10,'NIMO TV')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(13,'Cube TV')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(14,'VICTORIA Fitness & Yoga')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(14,'POPS Esports')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(15,'Maximal Gym Center')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(18,'Vikings Gaming')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(19,'G-Media')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(19,N'Tin Học Mario')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(19,'Apple pen')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(21,'The Hunter Group')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(21,'Saigon Futures')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(21,'SteelSeries')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(21,'HG Media')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(22,'CMG Asia')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(22,'Upfit')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(22,'Monster Energy')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(22,'Skylight Nha Trang')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(22,'M.O.I Cosnetics')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(22,'Burger King')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(22,'Dominos Pizza')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(22,'Budweiser')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(22,'Popeyes')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(24,'Whim')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(25,'FAPTV media')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(26,'Xlabit')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(27,'Dell')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(27,'Cooler Master')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(27,'Auxx.Me')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(27,'Alliance Airlines')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(29,'Stake')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(29,'Kick')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(29,'SecretLab')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(29,'Palsar')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(29,'Predator')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(29,'XAI')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(29,'Tumi')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(29,'LCB')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(29,'Secret Gemini')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(31,'QTV Gaming Center')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(31,'Mountain Dew')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(31,'Navy Shop')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(31,'StreamCraft')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(33,'Vikings Gaming')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(33,'DeepLOL')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(33,'Trade 4 You')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(33,'BOO')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(33,'Puma')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(33,'Oppo')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(33,'OFD')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(34,'Fruit Land')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(34,'POPS')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(28,'Ampverse')
+INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(28,N'Phong Vũ')
+
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (12, 22, 'GAM');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (8, 22, 'GAM');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (1, 8, 'SGB');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (1, 4, 'TF');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (1, 29, 'TS');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (1, 22, 'GAM');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (1, 33, 'CES');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (1, 24, 'EVS');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (1, 3, 'OPG');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (1, 34, 'PER');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (2, 9, 'SKY');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (2, 28, 'SE');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (2, 8, 'SGB');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (2, 22, 'GAM');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (2, 33, 'CES');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (2, 4, 'TF');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (2, 7, 'LX');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (2, 29, 'TS');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (3, 21, 'TW');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (3, 22, 'GAM');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (3, 8, 'SGB');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (3, 29, 'TS');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (3, 28, 'SE');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (3, 33, 'CES');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (3, 12, 'ASE');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (3, 19, 'GE');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (4, 29, 'TS');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (4, 8, 'SGB');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (4, 4, 'TF');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (4, 5, 'MBE');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (4, 22, 'GAM');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (4, 21, 'TW');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (4, 28, 'SE');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (4, 33, 'CES');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (5, 24, 'EVS');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (5, 1, 'QG');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (5, 4, 'TF');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (5, 27, 'LK');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (5, 33, 'CES');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (5, 22, 'GAM');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (5, 25, 'FTV');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (5, 23, 'DBL');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (6, 25, 'FTV');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (6, 35, 'SGD');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (6, 10, 'PVB');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (6, 31, 'FFQ');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (6, 33, 'CES');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (6, 22, 'GAM');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (6, 24, 'EVS');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (6, 17, 'CR');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (8, 8, 'SGB');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (8, 5, 'MBE');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (8, 4, 'TF');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (8, 28, 'SE');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (8, 21, 'TW');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (8, 33, 'CES');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (8, 29, 'TS');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (9, 4, 'TF');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (9, 22, 'GAM');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (9, 32, 'VGA');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (9, 27, 'LK');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (9, 23, 'DBL');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (9, 25, 'FTV');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (9, 33, 'CES');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (9, 24, 'EVS');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (9, 29, 'TS');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (10, 16, 'GLX');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (10, 28, 'SE');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (10, 8, 'SGB');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (10, 22, 'GAM');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (10, 9, 'SKY');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (10, 33, 'CES');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (10, 4, 'TF');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (10, 29, 'TS');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (11, 20, 'HOF');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (11, 2, 'YGE');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (11, 15, 'UTM');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (11, 22, 'GAM');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (11, 24, 'EVS');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (11, 25, 'FTV');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (11, 31, 'FFQ');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (11, 17, 'CR');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (12, 6, 'VKE');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (12, 5, 'MBE');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (12, 4, 'TF');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (12, 21, 'TW');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (12, 33, 'CES');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (12, 26, 'RW');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (12, 29, 'TS');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (14, 25, 'FTV');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (14, 31, 'FFQ');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (14, 22, 'GAM');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (14, 10, 'PVB');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (14, 17, 'CR');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (14, 18, 'HNV');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (14, 13, 'ADN');
+INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (14, 24, 'EVS');
 
 
 INSERT INTO MATCH (matchID, seasonID, matchDate, teamoneID, teamtwoID, teamoneScore, teamtwoScore, stadiumID, matchtypeID) VALUES (1,1,'2020-06-19',8,3,1,2,1,1);
@@ -1047,9 +1219,9 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('135', '24', 'Hiro02', 'Top Laner', '12/29/2019', '10/15/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('135', '14', 'Hiro02', 'Top Laner', '10/20/2020', '05/22/2021');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('135', '28', 'Hiro02', 'Top Laner', '05/31/2021', '01/04/2022');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('135', '29', 'Hiro02', 'Jungler', '01/09/2022', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('135', '29', 'Hiro02', 'Jungler', '01/09/2022', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('212', '29', 'Eddie', 'Bot Laner', '10/01/2018', '05/31/2019');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('237', '10', 'Hasmed', 'Bot Laner', '01/01/2018', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('237', '10', 'Hasmed', 'Bot Laner', '01/01/2018', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('237', '8', 'Hasmed', 'Top Laner', '05/31/2019', '11/30/2022');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('237', '8', 'Hasmed', 'Top Laner', '02/09/2023', '05/21/2023');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('237', '29', 'Hasmed', 'Top Laner', '05/24/2023', '05/02/2024');
@@ -1081,7 +1253,7 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('77', '33', 'Hieu3', 'Support', '05/17/2020', '05/25/2023');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('77', '4', 'Hieu3', 'Support', '06/08/2023', '11/27/2023');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('77', '33', 'Hieu3', 'Support', '01/03/2024', '05/15/2024');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('77', '21', 'Hieu3', 'Support', '05/18/2024', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('77', '21', 'Hieu3', 'Support', '05/18/2024', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('235', '33', 'Joyboy', 'Jungler', '03/15/2014', '11/22/2014');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('262', '31', 'Sofs', 'Jungler', '02/28/2018', '06/04/2018');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('262', '9', 'Sofs', 'Jungler', '06/11/2018', '09/18/2018');
@@ -1096,7 +1268,7 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('143', '21', 'BeanJ', 'Jungler', '05/20/2023', '03/27/2024');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('191', '29', 'Aress', 'Mid Laner', '07/16/2023', '08/31/2023');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('191', '29', 'Aress', 'Jungler', '12/19/2016', '12/26/2017');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('19', '22', 'Levi', 'Jungler', '05/14/2019', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('19', '22', 'Levi', 'Jungler', '05/14/2019', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('174', '17', 'Artifact', 'Mid Laner', '12/28/2017', '04/03/2018');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('174', '31', 'Artifact', 'Mid Laner', '04/16/2018', '06/01/2019');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('174', '27', 'Artifact', 'Mid Laner', '06/01/2019', '02/13/2020');
@@ -1128,7 +1300,7 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('86', '18', 'Whis', 'Mid Laner', '12/19/2015', '05/01/2016');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('98', '7', 'Killerqueen', 'Jungler', '01/01/2020', '05/12/2022');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('98', '21', 'Killerqueen', 'Jungler', '05/12/2022', '05/17/2023');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('98', '21', 'Killerqueen', 'Jungler', '04/01/2024', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('98', '21', 'Killerqueen', 'Jungler', '04/01/2024', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('15', '24', 'Coyote', 'Support', '03/01/2019', '04/24/2019');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('252', '32', 'Hype', 'Support', '03/01/2020', '04/01/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('252', '1', 'Hype', 'Support', '04/28/2020', '05/01/2020');
@@ -1143,14 +1315,14 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('222', '9', 'Hinn', 'Support', '05/31/2019', '01/18/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('222', '4', 'Hinn', 'Support', '02/29/2020', '09/02/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('222', '8', 'Hinn', 'Support', '04/02/2021', '05/29/2022');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('222', '19', 'Hinn', 'Referee', '11/01/2023', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('222', '19', 'Hinn', 'Referee', '11/01/2023', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('133', '25', 'Taki', 'Support', '11/15/2019', '01/07/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('133', '8', 'Taki', 'Support', '11/26/2020', '11/30/2022');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('133', '8', 'Taki', 'Support', '02/09/2023', '05/25/2023');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('133', '29', 'Taki', 'Top Laner', '02/20/2023', '05/22/2023');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('197', '29', 'Jarvis', 'Top Laner', '01/06/2021', '05/27/2021');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('197', '4', 'Jarvis', 'Mid Laner', '11/11/2021', '01/09/2022');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('197', '29', 'Jarvis', 'Jungler', '11/01/2014', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('197', '29', 'Jarvis', 'Jungler', '11/01/2014', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('259', '17', 'Kit', 'Support', '05/06/2017', '04/03/2018');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('259', '31', 'Kit', 'Support', '04/16/2018', '05/26/2018');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('259', '13', 'Kit', 'Support', '06/05/2018', '10/02/2018');
@@ -1162,7 +1334,7 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('225', '8', 'Stead', 'Top Laner', '06/06/2023', '11/25/2023');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('225', '6', 'Stead', 'Top Laner', '04/01/2018', '12/01/2018');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('92', '22', 'Yoshino', 'Top Laner', '02/28/2019', '12/10/2019');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('92', '4', 'Yoshino', 'Top Laner', '12/26/2019', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('92', '4', 'Yoshino', 'Top Laner', '12/26/2019', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('170', '19', 'K1ller', 'Bot Laner', '12/05/2022', '10/01/2023');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('170', '26', 'K1ller', 'Bot Laner', '11/08/2023', '06/03/2024');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('167', '18', 'Aomine', 'Bot Laner', '09/20/2018', '12/01/2018');
@@ -1176,7 +1348,7 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('218', '7', 'Vit', 'Bot Laner', '04/02/2021', '05/12/2022');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('218', '21', 'Vit', 'Bot Laner', '11/01/2021', '06/08/2022');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('218', '21', 'Vit', 'Bot Laner', '05/12/2022', '12/08/2023');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('218', '21', 'Vit', 'Bot Laner', '12/08/2023', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('218', '21', 'Vit', 'Bot Laner', '12/08/2023', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('87', '18', 'Hani', 'Top Laner', '05/26/2018', '12/01/2018');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('87', '31', 'Hani', 'Top Laner', '12/26/2018', '06/01/2019');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('87', '27', 'Hani', 'Top Laner', '06/01/2019', '02/13/2020');
@@ -1234,10 +1406,10 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('261', '4', 'Taurus', 'Top Laner', '01/01/2020', '09/03/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('261', '34', 'Taurus', 'Top Laner', '12/01/2020', '12/01/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('261', '6', 'Taurus', 'Top Laner', '04/01/2024', '04/14/2024');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('96', '34', 'Means', 'Bot Laner', '01/01/2019', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('96', '34', 'Means', 'Bot Laner', '01/01/2019', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('96', '34', 'Means', 'Manager', '01/01/2020', '06/06/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('96', '14', 'Means', 'Coach', '06/17/2021', '01/12/2022');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('96', '21', 'Means', 'Coach', '01/17/2023', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('96', '21', 'Means', 'Coach', '01/17/2023', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('4', '33', 'Success', 'Mid Laner', '02/25/2018', '05/31/2019');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('141', '9', 'Kati', 'Mid Laner', '05/01/2018', '08/01/2018');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('141', '4', 'Kati', 'Mid Laner', '12/01/2019', '12/01/2019');
@@ -1266,7 +1438,7 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('60', '28', 'CBL', 'Support', '06/14/2020', '05/19/2021');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('60', '7', 'CBL', 'Support', '05/31/2021', '01/04/2022');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('60', '21', 'CBL', 'Support', '01/12/2022', '05/12/2022');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('60', '21', 'CBL', 'Jungler', '11/01/2014', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('60', '21', 'CBL', 'Jungler', '11/01/2014', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('259', '28', 'Kit', 'Mid Laner', '06/01/2022', '01/01/2024');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('105', '22', 'Emo', 'Top Laner', '01/01/2017', '12/01/2017');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('91', '20', 'Zeros', 'Top Laner', '12/14/2017', '05/14/2018');
@@ -1293,19 +1465,19 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('189', '7', 'Calm', 'Coach', '06/06/2021', '05/12/2022');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('189', '21', 'Calm', 'Trainee Coach', '05/12/2022', '06/21/2022');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('189', '21', 'Calm', 'Top Laner', '06/21/2022', '02/16/2023');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('150', '33', 'TT789', 'Mid Laner', '06/06/2023', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('150', '33', 'TT789', 'Mid Laner', '06/06/2023', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('183', '28', 'Nper', 'Support', '09/23/2019', '02/13/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('80', '27', 'Bunzz', 'Support', '10/01/2020', '12/01/2020');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('80', '19', 'Bunzz', 'Support', '08/03/2022', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('80', '19', 'Bunzz', 'Support', '08/03/2022', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('123', '32', 'KemKen', 'Top Laner', '11/01/2019', '04/28/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('123', '3', 'KemKen', 'Top Laner', '04/28/2020', '06/17/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('123', '17', 'KemKen', 'Top Laner', '06/29/2020', '07/16/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('123', '7', 'KemKen', 'Top Laner', '07/16/2020', '10/20/2021');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('123', '19', 'KemKen', 'Mid Laner', '04/02/2021', '05/29/2022');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('155', '33', 'Tahahy', 'Support', '01/03/2024', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('155', '33', 'Tahahy', 'Support', '01/03/2024', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('234', '34', 'Forest', 'Top Laner', '12/16/2016', '02/08/2017');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('186', '22', 'Kiaya', 'Support', '01/01/2019', '11/01/2019');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('11', '34', 'Yban', 'Support', '01/01/2020', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('11', '34', 'Yban', 'Support', '01/01/2020', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('217', '20', 'XuHao', 'Jungler', '05/21/2018', '05/31/2019');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('217', '10', 'XuHao', 'Jungler', '05/31/2019', '11/15/2019');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('217', '33', 'XuHao', 'Jungler', '11/15/2019', '09/02/2021');
@@ -1338,10 +1510,10 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('95', '22', 'EasyLove', 'Bot Laner', '01/05/2020', '05/24/2021');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('95', '12', 'EasyLove', 'Bot Laner', '12/05/2021', '02/08/2023');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('95', '26', 'EasyLove', 'Bot Laner', '11/08/2023', '03/31/2024');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('95', '22', 'EasyLove', 'Bot Laner', '03/31/2024', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('95', '22', 'EasyLove', 'Bot Laner', '03/31/2024', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('221', '14', 'Cehin', 'Top Laner', '05/28/2021', '05/12/2022');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('49', '8', 'Ribell', 'Jungler', '01/09/2022', '11/30/2022');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('117', '34', 'Ikigai', 'Jungler', '01/01/2019', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('117', '34', 'Ikigai', 'Jungler', '01/01/2019', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('117', '4', 'Ikigai', 'Jungler', '01/12/2022', '06/05/2023');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('117', '33', 'Ikigai', 'Top Laner', '04/01/2020', '05/01/2021');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('104', '27', 'Coated', 'Top Laner', '01/27/2020', '02/13/2020');
@@ -1365,7 +1537,7 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('115', '28', 'Noway', 'Bot Laner', '12/08/2020', '04/14/2021');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('115', '28', 'Noway', 'Bot Laner', '04/25/2021', '05/31/2021');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('115', '26', 'Noway', 'Bot Laner', '11/04/2023', '06/03/2024');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('122', '29', 'Yusah', 'Jungler', '03/31/2024', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('122', '29', 'Yusah', 'Jungler', '03/31/2024', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('214', '17', 'Celebrity', 'Bot Laner', '02/14/2017', '03/19/2017');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('214', '31', 'Celebrity', 'Bot Laner', '05/18/2017', '06/01/2019');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('214', '27', 'Celebrity', 'Bot Laner', '06/01/2019', '02/13/2020');
@@ -1379,7 +1551,7 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('54', '14', 'Kuroko', 'Bot Laner', '02/01/2013', '04/26/2016');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('71', '21', 'SofM', 'Mentor Coach', '10/10/2023', '10/15/2023');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('71', '6', 'SofM', 'Co-Owner', '12/31/2023', '03/31/2024');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('71', '6', 'SofM', 'Head Coach', '03/31/2024', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('71', '6', 'SofM', 'Head Coach', '03/31/2024', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('229', '22', 'Petland', 'Mid Laner', '02/28/2018', '12/04/2018');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('229', '24', 'Petland', 'Mid Laner', '12/04/2018', '05/15/2019');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('229', '28', 'Petland', 'Streamer', '07/01/2019', '12/06/2020');
@@ -1392,7 +1564,7 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('195', '3', 'Jerry', 'Mid Laner', '04/28/2020', '12/03/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('195', '29', 'Jerry', 'Mid Laner', '05/27/2021', '06/28/2022');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('266', '21', 'Harky', 'Bot Laner', '02/16/2023', '05/30/2023');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('266', '21', 'Harky', 'Top Laner', '01/01/2018', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('266', '21', 'Harky', 'Top Laner', '01/01/2018', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('30', '10', 'Pun', 'Top Laner', '05/31/2019', '05/12/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('30', '33', 'Pun', 'Top Laner', '12/19/2016', '03/06/2017');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('161', '17', 'Ren', 'Top Laner', '07/01/2017', '04/01/2018');
@@ -1400,20 +1572,20 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('161', '10', 'Ren', 'Assistant Coach', '05/31/2019', '09/16/2019');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('161', '8', 'Ren', 'Head Coach', '07/21/2020', '10/13/2022');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('161', '28', 'Ren', 'Head Coach', '11/04/2022', '05/18/2023');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('161', '21', 'Ren', 'Head of Esports', '05/20/2024', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('161', '21', 'Ren', 'Head of Esports', '05/20/2024', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('199', '24', 'Violet', 'Head Coach', '06/01/2017', '05/01/2018');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('199', '24', 'Violet', 'Head Coach', '05/01/2018', '06/01/2018');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('199', '24', 'Violet', 'Head Coach', '06/01/2018', '12/07/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('199', '28', 'Violet', 'Head Coach', '12/08/2020', '04/14/2021');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('199', '28', 'Violet', 'Head Coach', '04/25/2021', '10/04/2021');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('228', '34', 'TT', 'Bot Laner', '01/01/2019', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('228', '34', 'TT', 'Bot Laner', '01/01/2019', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('22', '4', 'TQ', 'Support', '02/20/2023', '06/05/2023');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('107', '17', 'Gloryy', 'Mid Laner', '04/24/2019', '04/28/2019');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('107', '34', 'Gloryy', 'Mid Laner', '01/01/2019', '09/06/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('107', '14', 'Gloryy', 'Mid Laner', '09/06/2020', '05/12/2022');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('107', '21', 'Gloryy', 'Mid Laner', '06/15/2022', '03/27/2024');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('144', '12', 'Rigel', 'Top Laner', '04/01/2022', '02/08/2023');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('144', '5', 'Rigel', 'Top Laner', '02/03/2024', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('144', '5', 'Rigel', 'Top Laner', '02/03/2024', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('157', '17', 'Pake', 'Jungler', '03/01/2017', '03/19/2017');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('157', '20', 'Pake', 'Mid Laner', '12/01/2017', '05/23/2018');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('157', '13', 'Pake', 'Mid Laner', '05/23/2018', '12/17/2018');
@@ -1460,7 +1632,7 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('84', '4', 'Optimus', 'Mid Laner', '05/31/2019', '09/23/2019');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('84', '3', 'Optimus', 'Owner', '03/10/2020', '12/03/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('84', '22', 'Optimus', 'Performance Coach', '08/28/2022', '03/01/2023');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('84', '21', 'Optimus', 'Bot Laner', '01/01/2017', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('84', '21', 'Optimus', 'Bot Laner', '01/01/2017', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('63', '24', 'Jisoo', 'Bot Laner', '04/01/2018', '06/01/2018');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('63', '4', 'Jisoo', 'Bot Laner', '11/01/2018', '04/24/2019');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('63', '1', 'Jisoo', 'Bot Laner', '04/24/2019', '05/01/2020');
@@ -1471,7 +1643,7 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('129', '21', 'Ouzi', 'Bot Laner', '12/25/2022', '05/11/2023');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('254', '19', 'Nogo', 'Mid Laner', '04/02/2021', '08/01/2021');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('254', '4', 'Nogo', 'Mid Laner', '01/12/2022', '06/01/2022');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('254', '5', 'Nogo', 'Mid Laner', '06/01/2022', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('254', '5', 'Nogo', 'Mid Laner', '06/01/2022', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('156', '21', 'Sparda', 'Bot Laner', '06/21/2020', '12/28/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('223', '19', 'Sehun', 'Support', '04/01/2018', '06/01/2018');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('5', '20', 'Bie', 'Support', '01/30/2018', '05/23/2018');
@@ -1506,7 +1678,7 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('75', '27', 'DNK', 'Jungler', '06/01/2019', '02/13/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('75', '29', 'DNK', 'Jungler', '02/13/2020', '01/06/2022');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('75', '28', 'DNK', 'Jungler', '01/07/2022', '08/11/2023');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('117', '33', 'Ikigai', 'Jungler', '01/01/2020', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('117', '33', 'Ikigai', 'Jungler', '01/01/2020', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('216', '22', 'Tomrio', 'Jungler', '02/20/2023', '05/26/2023');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('216', '6', 'Tomrio', 'Jungler', '02/17/2024', '04/01/2024');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('216', '6', 'Tomrio', 'Support', '02/05/2018', '05/11/2018');
@@ -1538,7 +1710,7 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('204', '4', 'Naul', 'Mid Laner', '05/25/2020', '10/05/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('204', '12', 'Naul', 'Coach', '04/01/2022', '09/27/2022');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('204', '28', 'Naul', 'Head Coach', '01/11/2023', '08/11/2023');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('204', '29', 'Naul', 'Head Coach', '11/10/2023', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('204', '29', 'Naul', 'Head Coach', '11/10/2023', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('249', '20', 'Shaoran', 'Support', '12/01/2017', '05/23/2018');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('249', '13', 'Shaoran', 'Support', '05/23/2018', '12/17/2018');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('249', '33', 'Shaoran', 'Support', '12/17/2018', '06/18/2019');
@@ -1559,10 +1731,10 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('240', '18', 'MeoU', 'Jungler', '04/27/2019', '05/27/2019');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('46', '12', 'Playcool', 'Mid Laner', '12/05/2021', '12/06/2022');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('46', '22', 'Playcool', 'Jungler', '05/26/2018', '07/17/2018');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('263', '19', 'Yijin', 'Mid Laner', '01/01/2020', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('263', '19', 'Yijin', 'Mid Laner', '01/01/2020', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('120', '21', 'TLong', 'Mid Laner', '02/27/2023', '05/14/2023');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('120', '21', 'TLong', 'Jungler', '01/01/2020', '12/30/1899');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('216', '6', 'Tomrio', 'Jungler', '04/01/2024', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('120', '21', 'TLong', 'Jungler', '01/01/2020', NULL);
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('216', '6', 'Tomrio', 'Jungler', '04/01/2024', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('163', '25', 'Divkid', 'Bot Laner', '07/01/2018', '04/29/2019');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('163', '24', 'Divkid', 'Bot Laner', '05/29/2019', '11/05/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('163', '4', 'Divkid', 'Bot Laner', '12/04/2020', '10/04/2021');
@@ -1571,7 +1743,7 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('83', '18', 'Light', 'Bot Laner', '03/01/2019', '11/01/2019');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('177', '25', 'Potm', 'Jungler', '07/27/2020', '11/12/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('232', '29', 'Zica', 'Support', '07/01/2020', '05/01/2021');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('247', '4', 'Soraaa', 'Support', '11/01/2021', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('247', '4', 'Soraaa', 'Support', '11/01/2021', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('112', '12', 'Biggi', 'Jungler', '08/03/2022', '02/08/2023');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('190', '22', 'Yin', 'Support', '12/08/2018', '05/29/2019');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('190', '27', 'Yin', 'Support', '09/30/2019', '02/13/2020');
@@ -1581,7 +1753,7 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('215', '4', 'EGO', 'Jungler', '02/29/2020', '10/03/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('215', '33', 'EGO', 'Jungler', '11/04/2020', '05/09/2023');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('215', '8', 'EGO', 'Jungler', '05/25/2023', '08/05/2023');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('192', '22', 'Elio', 'Mid Laner', '01/01/2018', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('192', '22', 'Elio', 'Mid Laner', '01/01/2018', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('165', '17', 'Hankay', 'Support', '05/25/2018', '01/02/2019');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('165', '17', 'Hankay', 'Coach', '01/02/2019', '04/28/2019');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('165', '14', 'Hankay', 'Assistant Coach', '01/13/2021', '05/23/2021');
@@ -1593,7 +1765,7 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('13', '28', '2T', 'Mid Laner', '01/07/2022', '05/26/2022');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('13', '12', '2T', 'Mid Laner', '06/21/2022', '02/08/2023');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('13', '26', '2T', 'Jungler', '05/11/2017', '09/30/2017');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('217', '29', 'XuHao', 'Support', '03/31/2024', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('217', '29', 'XuHao', 'Support', '03/31/2024', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('106', '24', 'Chupper', 'Bot Laner', '06/09/2017', '09/19/2017');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('28', '9', 'Darrys', 'Top Laner', '02/25/2018', '05/31/2019');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('28', '4', 'Darrys', 'Top Laner', '05/31/2019', '07/22/2019');
@@ -1613,7 +1785,7 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('137', '22', 'Pyshiro', 'Mid Laner', '04/01/2018', '06/01/2018');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('187', '8', 'Shogun', 'Bot Laner', '05/28/2021', '11/30/2022');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('187', '8', 'Shogun', 'Bot Laner', '02/09/2023', '11/25/2023');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('187', '6', 'Shogun', 'Bot Laner', '11/25/2023', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('187', '6', 'Shogun', 'Bot Laner', '11/25/2023', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('250', '4', 'PinkA', 'Support', '02/29/2020', '05/16/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('180', '17', 'Milano', 'Support', '04/27/2018', '11/05/2018');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('180', '25', 'Milano', 'Support', '12/27/2018', '02/28/2019');
@@ -1623,7 +1795,7 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('23', '33', 'Jcool', 'Support', '05/29/2019', '01/15/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('201', '3', 'Vince', 'Mid Laner', '01/01/2021', '05/01/2021');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('201', '28', 'Vince', 'Mid Laner', '10/01/2023', '11/01/2023');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('135', '29', 'Hiro02', 'Bot Laner', '01/01/2017', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('135', '29', 'Hiro02', 'Bot Laner', '01/01/2017', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('63', '22', 'Jisoo', 'Bot Laner', '05/25/2020', '11/25/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('40', '18', 'Scary', 'Support', '01/01/2014', '01/05/2015');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('40', '31', 'Scary', 'Support', '12/18/2016', '04/01/2017');
@@ -1633,7 +1805,7 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('205', '32', 'PHT', 'Mid Laner', '11/01/2019', '04/28/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('205', '3', 'PHT', 'Mid Laner', '04/28/2020', '11/26/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('258', '29', 'Qiang', 'Jungler', '02/20/2023', '06/03/2024');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('256', '33', 'Richard I', 'Mid Laner', '06/04/2023', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('256', '33', 'Richard I', 'Mid Laner', '06/04/2023', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('136', '33', 'Zeldris', 'Bot Laner', '05/29/2019', '11/04/2020');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('55', '29', 'Kwhite', 'Bot Laner', '07/16/2023', '08/31/2023');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('167', '14', 'Aomine', 'Mid Laner', '07/01/2020', '05/01/2021');
@@ -1658,7 +1830,7 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('196', '4', 'Stark', 'Mid Laner', '06/14/2014', '10/11/2014');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('257', '31', 'Warzone', 'Mid Laner', '05/06/2017', '12/14/2017');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('257', '17', 'Warzone', 'Mid Laner', '12/14/2017', '09/15/2018');
-INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('257', '24', 'Warzone', 'Streamer', '09/15/2018', '12/30/1899');
+INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('257', '24', 'Warzone', 'Streamer', '09/15/2018', NULL);
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('257', '24', 'Warzone', 'Mid Laner', '03/01/2019', '05/01/2021');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('257', '22', 'Warzone', 'Jungler', '04/01/2018', '05/01/2018');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('24', '9', 'Vormund', 'Bot Laner', '06/01/2022', '02/20/2023');
@@ -1684,101 +1856,4 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('242', '33', 'Yado', 'Mid Laner', '05/10/2019', '05/23/2023');
 
 
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (12, 22, 'GAM');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (8, 22, 'GAM');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (1, 8, 'SGB');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (1, 4, 'TF');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (1, 29, 'TS');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (1, 22, 'GAM');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (1, 33, 'CES');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (1, 24, 'EVS');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (1, 3, 'OPG');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (1, 34, 'PER');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (2, 9, 'SKY');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (2, 28, 'SE');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (2, 8, 'SGB');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (2, 22, 'GAM');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (2, 33, 'CES');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (2, 4, 'TF');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (2, 7, 'LX');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (2, 29, 'TS');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (3, 21, 'TW');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (3, 22, 'GAM');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (3, 8, 'SGB');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (3, 29, 'TS');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (3, 28, 'SE');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (3, 33, 'CES');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (3, 12, 'ASE');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (3, 19, 'GE');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (4, 29, 'TS');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (4, 8, 'SGB');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (4, 4, 'TF');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (4, 5, 'MBE');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (4, 22, 'GAM');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (4, 21, 'TW');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (4, 28, 'SE');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (4, 33, 'CES');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (5, 24, 'EVS');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (5, 1, 'QG');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (5, 4, 'TF');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (5, 27, 'LK');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (5, 33, 'CES');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (5, 22, 'GAM');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (5, 25, 'FTV');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (5, 23, 'DBL');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (6, 25, 'FTV');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (6, 35, 'SGD');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (6, 10, 'PVB');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (6, 31, 'FFQ');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (6, 33, 'CES');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (6, 22, 'GAM');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (6, 24, 'EVS');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (6, 17, 'CR');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (8, 8, 'SGB');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (8, 5, 'MBE');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (8, 4, 'TF');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (8, 28, 'SE');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (8, 21, 'TW');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (8, 33, 'CES');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (8, 29, 'TS');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (9, 4, 'TF');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (9, 22, 'GAM');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (9, 32, 'VGA');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (9, 27, 'LK');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (9, 23, 'DBL');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (9, 25, 'FTV');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (9, 33, 'CES');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (9, 24, 'EVS');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (9, 29, 'TS');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (10, 16, 'GLX');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (10, 28, 'SE');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (10, 8, 'SGB');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (10, 22, 'GAM');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (10, 9, 'SKY');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (10, 33, 'CES');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (10, 4, 'TF');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (10, 29, 'TS');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (11, 20, 'HOF');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (11, 2, 'YGE');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (11, 15, 'UTM');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (11, 22, 'GAM');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (11, 24, 'EVS');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (11, 25, 'FTV');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (11, 31, 'FFQ');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (11, 17, 'CR');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (12, 6, 'VKE');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (12, 5, 'MBE');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (12, 4, 'TF');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (12, 21, 'TW');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (12, 33, 'CES');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (12, 26, 'RW');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (12, 29, 'TS');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (14, 25, 'FTV');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (14, 31, 'FFQ');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (14, 22, 'GAM');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (14, 10, 'PVB');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (14, 17, 'CR');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (14, 18, 'HNV');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (14, 13, 'ADN');
-INSERT INTO TEAM_ESPORT_SEASON (seasonID, teamID, teamShortName) VALUES (14, 24, 'EVS');
-
+//
