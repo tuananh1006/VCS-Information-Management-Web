@@ -169,7 +169,7 @@ BEGIN
         JOIN MATCH m ON i.matchID = m.matchID
         JOIN MATCHTYPE mt ON m.matchtypeID = mt.matchtypeID
         WHERE i.T1Score_predict > (mt.matchtypeQuantity / 2) + 1
-           OR i.T2Score_predict > (mt.matchtypeQuantity / 2) + 1
+           OR i.T2Score_predict > (mt.matchtypeQuantity / 2) + 1 OR  (i.T1Score_predict+i.T2Score_predict)>mt.matchtypeQuantity
     )
     BEGIN
         RAISERROR ('T1Score_predict and T2Score_predict must be less equal than (matchtypeQuantity / 2) + 1.', 16, 1);
@@ -247,7 +247,7 @@ BEGIN
     
     -- Cập nhật COIN thành 0 nếu COIN là NULL
     UPDATE CUSTOMER
-    SET COIN = 0
+    SET COIN = 50
     FROM CUSTOMER c
     JOIN INSERTED i ON c.ID_CUSTOMER = i.ID_CUSTOMER
     WHERE i.COIN IS NULL;
@@ -447,22 +447,22 @@ END;
 GO
 
 -- Stored Procedures
-CREATE PROCEDURE PRINT_TT_PLAYER (@nick_name NVARCHAR(100))
+CREATE PROCEDURE PRINT_TT_PLAYER (@playerID INT)
 AS
 BEGIN
-    IF EXISTS (SELECT 1 FROM PLAYER_TEAM_ESPORT WHERE NickName = @nick_name)
+    IF EXISTS (SELECT 1 FROM PLAYER WHERE playerID = @playerID)
     BEGIN
         SELECT P.playerName AS 'TÊN TUYỂN THỦ',
                P.playerBirthDate AS 'NGÀY SINH',
                P.playerHomeTown AS 'QUÊ QUÁN',
                T.teamName AS 'TÊN TEAM',
-               PT.playerRole AS 'ĐƯỜNG THI ĐẤU',
+               PT.playerRole AS 'VỊ TRÍ THAM GIA',
                PT.DateStart AS 'NGÀY BẮT ĐẦU THI ĐẤU',
                PT.DateEnd AS 'NGÀY KẾT THÚC THI ĐẤU'
         FROM PLAYER P
         JOIN PLAYER_TEAM_ESPORT PT ON P.playerID = PT.playerID
         JOIN TEAM_ESPORT T ON PT.teamID = T.teamID
-        WHERE PT.NickName = @nick_name;
+        WHERE P.playerID=@playerID;
     END
     ELSE
     BEGIN
@@ -471,25 +471,28 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE PRINT_KT_PLAYER (@nick_name NVARCHAR(100))
+CREATE PROCEDURE PRINT_TT_PLAYER_THIDAU (@playerID INT)
 AS
 BEGIN
-    IF EXISTS (SELECT 1 FROM PLAYER_TEAM_ESPORT WHERE NickName = @nick_name)
+    IF EXISTS (SELECT 1 FROM PLAYER WHERE playerID = @playerID)
     BEGIN
         SELECT P.playerName AS 'TÊN TUYỂN THỦ',
-               P.playerBirthDate AS 'NGÀY SINH',
-               P.playerHomeTown AS 'QUÊ QUÁN',
-               M.matchID AS 'ID TRẬN ĐẤU',
+               PT.NickName AS 'Nickname',
                M.matchDate AS 'NGÀY THI ĐẤU',
-               PM.Champion AS 'VỊ TƯỚNG SỬ DỤNG',
-               PM.NUMKill AS 'SỐ LẦN HẠ GỤC ĐỐI PHƯƠNG',
-               PM.Die AS 'SỐ LẦN BỊ HẠ GỤC',
-               PM.Support AS 'SỐ LẦN HỖ TRỢ ĐỒNG ĐỘI'
+			   T.teamName AS 'Tên đội 1',
+			   T2.teamName as 'Tên đội 2',
+               C.championName AS 'VỊ TƯỚNG SỬ DỤNG',
+               PM.playerKill AS 'SỐ LẦN HẠ GỤC ĐỐI PHƯƠNG',
+               PM.playerDie AS 'SỐ LẦN BỊ HẠ GỤC',
+               PM.playerSupport AS 'SỐ LẦN HỖ TRỢ ĐỒNG ĐỘI'
         FROM PLAYER P
-        JOIN PLAYER_MATCH PM ON P.playerID = PM.playerID
+        JOIN CHITIETTRANDAU PM ON P.playerID = PM.playerID
         JOIN MATCH M ON PM.matchID = M.matchID
-        JOIN PLAYER_TEAM_ESPORT PT ON P.playerID = PT.playerID
-        WHERE PT.NickName = @nick_name;
+		JOIN Champion C ON PM.championID=C.championID 
+		JOIN PLAYER_TEAM_ESPORT PT ON P.playerID=PT.playerID
+		JOIN TEAM_ESPORT T ON M.teamoneID=T.teamID
+		JOIN TEAM_ESPORT T2 ON M.teamtwoID=T2.teamID
+        WHERE P.playerID = @playerID;
     END
     ELSE
     BEGIN
@@ -497,7 +500,27 @@ BEGIN
     END
 END;
 GO
+/*In ra thứ hạng của đội có số điểm nằm trong top 10(BXH) TRONG CAC MUA GIAI */
+go
+CREATE PROC BXH_SEASON @season_name NVARCHAR(100)
+AS
+BEGIN
+-- Kiểm tra xem tên mùa giải (@season_name) có tồn tại trong bảng SEASON hay không
+	IF EXISTS (SELECT * FROM SEASON WHERE seasonName = @season_name)
+	BEGIN
+	 -- Nếu tồn tại, lấy thông tin xếp hạng của các đội trong mùa giải đó
+		SELECT ROW_NUMBER() OVER (ORDER BY TES.TEAMTOTALSCORE DESC) AS 'RANKING',
+			   T.TEAMNAME ,
+			   TES.TEAMTOTALSCORE 
+		FROM TEAM_ESPORT_SEASON tes, TEAM_ESPORT t, SEASON S
+		WHERE tes.teamID = t.teamID AND TES.SEASONID = S.SEASONID AND S.seasonName = @season_name
+		GROUP BY T.TEAMNAME ,TES.TEAMTOTALSCORE,S.SEASONNAME
+		ORDER BY TES.TEAMTOTALSCORE DESC
+	END
 
+END
+
+go
 CREATE PROCEDURE PRINT_MV_TEAM (@team_name NVARCHAR(100))
 AS
 BEGIN
@@ -518,6 +541,280 @@ BEGIN
 END;
 GO
 
+CREATE PROCEDURE SP_LICH_THI_DAU (@seasonName NVARCHAR(100))
+AS
+BEGIN
+    -- Kiểm tra xem mùa giải có tồn tại hay không
+    IF EXISTS (SELECT * FROM SEASON WHERE seasonName = @seasonName)
+    BEGIN
+        -- Xuất ra lịch thi đấu
+        SELECT 
+            M.matchDate AS 'NGÀY THI ĐẤU',
+            T1.teamName AS 'ĐỘI 1',
+            M.teamoneScore AS 'ĐIỂM ĐỘI 1',
+            T2.teamName AS 'ĐỘI 2',
+            M.teamtwoScore AS 'ĐIỂM ĐỘI 2',
+            ST.stadiumName AS 'SÂN VẬN ĐỘNG'
+        FROM 
+            MATCH M
+        INNER JOIN 
+            TEAM_ESPORT T1 ON M.teamoneID = T1.teamID
+        INNER JOIN 
+            TEAM_ESPORT T2 ON M.teamtwoID = T2.teamID
+        INNER JOIN 
+            SEASON S ON M.seasonID = S.seasonID
+        INNER JOIN 
+            STADIUM ST ON M.stadiumID = ST.stadiumID
+        WHERE 
+            S.seasonName = @seasonName
+        ORDER BY 
+            M.matchDate;
+    END
+    ELSE
+    BEGIN
+        -- Nếu mùa giải không tồn tại, in ra thông báo lỗi
+        PRINT N'Mùa giải không tồn tại.'
+    END
+END
+/* FUNCTION */
+CREATE FUNCTION FC_IN_THONG_TIN_DOI (@teamName NVARCHAR(100))
+RETURNS TABLE
+AS
+RETURN (
+    SELECT 
+        P.PLAYERNAME, 
+        T.TEAMNAME, 
+        T.teamYearEstablished,
+        T.teamLogo,
+        STRING_AGG(TS.teamSponsor, ', ') AS sponsors -- Nối tất cả các tên nhà tài trợ thành một chuỗi
+    FROM 
+        PLAYER P
+        INNER JOIN PLAYER_TEAM_ESPORT PTE ON P.PLAYERID = PTE.PLAYERID
+        INNER JOIN TEAM_ESPORT T ON PTE.TEAMID = T.TEAMID
+        INNER JOIN TEAM_ESPORT_SPONSOR TS ON T.TEAMID = TS.teamID
+    WHERE 
+        T.teamName = @teamName
+    GROUP BY
+        P.PLAYERNAME, 
+        T.TEAMNAME, 
+        T.teamYearEstablished,
+        T.teamLogo
+);
+
+
+/* ĐƯA VÀO TÊN TUYỂN THỦ VÀ TÊN MÙA GIẢI IN RA SỐ LƯỢNG TƯỚNG MÀ NGƯỜI ĐÓ ĐÃ CHƠI */
+go
+CREATE FUNCTION FC_SL_TUONG (@NICK_NAME NVARCHAR(100), @seasonID INT)
+RETURNS TABLE
+AS
+RETURN
+(
+    -- Kiểm tra và trả về số lượng tướng đã sử dụng bởi cầu thủ trong mùa giải đó
+    SELECT C.championName AS 'TƯỚNG', COUNT(DISTINCT C.championName) AS 'SỐ LƯỢNG SỬ DỤNG'
+    FROM CHITIETTRANDAU PM
+    JOIN PLAYER_TEAM_ESPORT PTE ON PM.playerID = PTE.playerID
+    JOIN TEAM_ESPORT_SEASON TES ON PTE.teamID = TES.teamID
+    JOIN SEASON S ON TES.seasonID = S.seasonID
+	JOIN CHAMPION C ON PM.championID=C.championID 
+    WHERE PTE.NickName = @NICK_NAME AND S.seasonID = @seasonID
+    GROUP BY C.championName
+);
+SELECT * FROM dbo.FC_SL_TUONG('Levi',1)
+go
+-- An toàn thông tin--
+--Tạo role--
+--Create a role for manager--
+CREATE ROLE manager_role;
+--Create a role for employee--
+CREATE ROLE employee_role;
+--Create a role for user--
+CREATE ROLE user_role;
+
+-- Create Manager user and assign Manager role
+CREATE LOGIN manager_user WITH PASSWORD='manager'
+CREATE USER manager_user FOR LOGIN manager_user;
+ALTER ROLE manager_role ADD MEMBER manager_user;
+-- Create Employee user and assign Employee role
+CREATE LOGIN employee_user WITH PASSWORD='employee'
+CREATE USER employee_user FOR LOGIN employee_user;
+ALTER ROLE employee_role ADD MEMBER employee_user;
+-- Create User and assign User role
+CREATE LOGIN user_user WITH PASSWORD='user'
+CREATE USER user_user FOR LOGIN user_user;
+ALTER ROLE user_role ADD MEMBER user_user;
+
+--Phan Quyen--
+--manager role--
+GRANT SELECT, INSERT, UPDATE(playerName,playerBirthDate,playerHomeTown,playerStatus),DELETE ON PLAYER TO manager_role
+GRANT SELECT, INSERT, UPDATE,DELETE ON PLAYER_TEAM_ESPORT TO manager_role
+GRANT SELECT, INSERT, UPDATE(teamName,teamYearEstablished,teamLogo),DELETE ON TEAM_ESPORT TO manager_role
+GRANT SELECT, INSERT, UPDATE,DELETE ON  MATCH  TO manager_role
+GRANT SELECT, INSERT, UPDATE,DELETE ON STADIUM TO manager_role
+GRANT SELECT, INSERT, UPDATE,DELETE ON SEASON TO manager_role
+GRANT SELECT, INSERT, UPDATE,DELETE ON MATCHTYPE TO manager_role
+GRANT SELECT, INSERT, UPDATE,DELETE ON CHITIETTRANDAU TO manager_role
+GRANT SELECT, INSERT, UPDATE,DELETE ON TEAM_ESPORT_SEASON TO manager_role
+GRANT SELECT, INSERT, UPDATE,DELETE ON CUSTOMER TO manager_role
+GRANT SELECT, INSERT, UPDATE,DELETE ON BET TO manager_role
+
+--Store procedures
+GRANT EXECUTE ON PRINT_TT_PLAYER TO manager_role
+GRANT EXECUTE ON BXH_SEASON TO manager_role
+GRANT EXECUTE ON SP_LICH_THI_DAU TO manager_role
+--Function
+GRANT SELECT ON FC_IN_THONG_TIN_DOI TO manager_role
+GRANT SELECT ON FC_SL_TUONG TO manager_role
+
+
+--employee role
+GRANT SELECT, INSERT, UPDATE(playerName,playerBirthDate,playerHomeTown,playerStatus),DELETE ON PLAYER TO employee_role
+GRANT SELECT, INSERT, UPDATE,DELETE ON PLAYER_TEAM_ESPORT TO employee_role
+GRANT SELECT, INSERT, UPDATE(teamName,teamYearEstablished,teamLogo),DELETE ON TEAM_ESPORT TO employee_role
+GRANT SELECT, INSERT, UPDATE,DELETE ON  MATCH  TO employee_role
+GRANT SELECT, INSERT, UPDATE,DELETE ON STADIUM TO employee_role
+GRANT SELECT, INSERT, UPDATE,DELETE ON SEASON TO employee_role
+GRANT SELECT, INSERT, UPDATE,DELETE ON MATCHTYPE TO employee_role
+GRANT SELECT, INSERT, UPDATE,DELETE ON CHITIETTRANDAU TO employee_role
+GRANT SELECT, INSERT, UPDATE,DELETE ON TEAM_ESPORT_SEASON TO employee_role
+--Store procedures
+GRANT EXECUTE ON PRINT_TT_PLAYER TO employee_role
+GRANT EXECUTE ON BXH_SEASON TO employee_role
+GRANT EXECUTE ON SP_LICH_THI_DAU TO employee_role
+--Function
+GRANT SELECT ON FC_IN_THONG_TIN_DOI TO employee_role
+GRANT SELECT ON FC_SL_TUONG TO employee_role
+
+--user role
+GRANT SELECT ON PLAYER to user_role
+GRANT SELECT ON PLAYER_TEAM_ESPORT to user_role
+GRANT SELECT ON TEAM_ESPORT to user_role
+GRANT SELECT ON MATCH to user_role
+GRANT SELECT ON STADIUM to user_role
+GRANT SELECT ON SEASON to user_role
+GRANT SELECT ON MATCHTYPE to user_role
+GRANT SELECT ON CHITIETTRANDAU to user_role
+GRANT SELECT ON TEAM_ESPORT_SEASON to user_role
+--Store procedures
+GRANT EXECUTE ON PRINT_TT_PLAYER TO user_role
+GRANT EXECUTE ON BXH_SEASON TO user_role
+GRANT EXECUTE ON SP_LICH_THI_DAU TO user_role
+--Function
+GRANT SELECT ON FC_IN_THONG_TIN_DOI TO user_role
+GRANT SELECT ON FC_SL_TUONG TO user_role
+
+--view
+
+
+-- Bao mat password
+ALTER TABLE CUSTOMER ADD Salt UNIQUEIDENTIFIER
+GO
+CREATE PROCEDURE customer_add(
+    @ID_CUSTOMTER  INT ,
+    @NAME_CUSTOMER VARCHAR(50) ,
+    @date_of_birth smalldatetime,
+    @EMAIL NVARCHAR,
+    @SEX CHAR(4) ,
+    @NICKNAME NVARCHAR,
+    @PASSWORD NVARCHAR,
+    @USERNAME_LOGIN VARCHAR(30),
+    @COIN INT ,
+	@reponseMessage NVARCHAR(250) OUTPUT)
+AS	
+ BEGIN
+ SET NOCOUNT ON
+ DECLARE @Salt UNIQUEIDENTIFIER =NEWID()
+ BEGIN TRY
+
+ INSERT INTO CUSTOMER(ID_CUSTOMER,NAME_CUSTOMER,date_of_birth,EMAIL,SEX,NICKNAME,PASSWORD,USERNAME_LOGIN,COIN,Salt)
+  VALUES(@ID_CUSTOMTER,@NAME_CUSTOMER,@date_of_birth,@EMAIL,@SEX,@NICKNAME, HASHBYTES('SHA2_512', @PASSWORD+CAST(@Salt AS NVARCHAR(36))),@USERNAME_LOGIN,@COIN,@Salt)
+  SET @reponseMessage='Nhap du lieu thanh cong'
+  END TRY
+   BEGIN CATCH 
+   SET @reponseMessage=ERROR_MESSAGE()
+   END CATCH
+END
+
+--
+-- Thêm phần Procedure và View
+
+--Tìm một trận đấu trong lịch thi đấu
+--Đưa vào ngày thi đấu, xuất ra lịch thi đấu hôm nay Team1 (kq--kq) Team2
+CREATE PROC matchFound 
+    @date smalldatetime, 
+    @teamone NVARCHAR(100) OUT, 
+    @teamtwo NVARCHAR(100) OUT, 
+    @res VARCHAR(7) OUT
+AS
+BEGIN
+    -- Kiểm tra sự tồn tại của trận đấu vào ngày chỉ định
+    IF EXISTS (SELECT * FROM match WHERE matchDate = @date)
+    BEGIN
+        -- Kiểm tra xem teamoneScore hoặc teamtwoScore có phải NULL hay không
+        IF EXISTS (SELECT * FROM match WHERE matchDate = @date AND (teamoneScore IS NOT NULL OR teamtwoScore IS NOT NULL))
+        BEGIN
+            SELECT 
+                @teamone = T1.teamName, 
+                @teamtwo = T2.teamName, 
+                @res = CONCAT(teamoneScore, ':', teamtwoScore)
+            FROM 
+                match M
+                INNER JOIN TEAM_ESPORT T1 ON M.teamoneID = T1.teamID
+                INNER JOIN TEAM_ESPORT T2 ON M.teamtwoID = T2.teamID
+            WHERE 
+                matchDate = @date;
+        END
+        ELSE
+        BEGIN
+            SELECT 
+                @teamone = T1.teamName, 
+                @teamtwo = T2.teamName, 
+                @res = '-:-'
+            FROM 
+                match M
+                INNER JOIN TEAM_ESPORT T1 ON M.teamoneID = T1.teamID
+                INNER JOIN TEAM_ESPORT T2 ON M.teamtwoID = T2.teamID
+            WHERE 
+                matchDate = @date;
+        END
+    END
+    ELSE
+    BEGIN
+        -- Trả về thông báo không tìm thấy lịch thi đấu
+        PRINT 'Khong tim thay lich thi dau';
+        RETURN 0;
+    END
+END;
+
+--Tính KDA của tuyển thủ
+CREATE PROC KDA 
+    @idMatch INT, 
+    @idPlayer INT, 
+    @RES FLOAT OUT
+AS
+BEGIN
+    -- Kiểm tra sự tồn tại của bản ghi trong bảng PLAYER_MATCH
+    IF EXISTS (SELECT * FROM CHITIETTRANDAU WHERE PLAYERID = @idPlayer AND MATCHID = @idMatch)
+    BEGIN
+        -- Thực hiện phép tính KDA và gán giá trị cho biến @RES
+        SELECT @RES = CAST((playerKill + playerSupport) AS FLOAT) / NULLIF(playerDie, 0)
+        FROM CHITIETTRANDAU
+        WHERE PLAYERID = @idPlayer AND MATCHID = @idMatch;
+    END
+    ELSE
+    BEGIN
+        -- Trả về thông báo khi không tìm thấy tuyển thủ
+        PRINT 'KHONG TIM THAY TUYEN THU'
+        RETURN 0;
+    END
+END;
+
+
+DECLARE @RESULT FLOAT
+EXEC KDA '1', '2', @RES = @RESULT OUT
+PRINT @RESULT
+--IN THONG TIN HIEUSO CUA CAC DOI TUYEN
+
+
 
 CREATE VIEW PLAYERINFO
 AS
@@ -526,6 +823,7 @@ AS
 	WHERE TE.TEAMID = PTE.TEAMID AND PTE.PLAYERID = P.PLAYERID
 GO
 
+drop view RankingsBySeason
 CREATE VIEW RankingsBySeason AS
 WITH TMP1 AS
 (
@@ -534,7 +832,8 @@ WITH TMP1 AS
         seasonID,
         SUM(CASE WHEN result = 'win' THEN 1 ELSE 0 END) AS wins,
         SUM(CASE WHEN result = 'lose' THEN 1 ELSE 0 END) AS losses,
-		SUM(CASE WHEN result = 'win' THEN 1 ELSE 0 END) + SUM(CASE WHEN result = 'lose' THEN -1 ELSE 0 END) AS NUMBER
+        SUM(CASE WHEN result = 'win' THEN 1 ELSE 0 END) - SUM(CASE WHEN result = 'lose' THEN 0 ELSE 1 END) AS NUMBER,
+        SUM(teamoneScore) - SUM(teamtwoScore) AS goalDifference
     FROM (
         SELECT
             teamoneID AS teamID,
@@ -542,7 +841,9 @@ WITH TMP1 AS
             CASE 
                 WHEN teamoneScore > teamtwoScore THEN 'win'
                 ELSE 'lose'
-            END AS result
+            END AS result,
+            teamoneScore,
+            teamtwoScore
         FROM MATCH
         UNION ALL
         SELECT
@@ -551,17 +852,19 @@ WITH TMP1 AS
             CASE 
                 WHEN teamtwoScore > teamoneScore THEN 'win'
                 ELSE 'lose'
-            END AS result
+            END AS result,
+            teamtwoScore,
+            teamoneScore
         FROM MATCH
     ) AS results
     GROUP BY teamID, seasonID
 )
 SELECT 
-    ROW_NUMBER() OVER (PARTITION BY S.seasonName ORDER BY TMP1.NUMBER DESC) AS RANKING,
+    ROW_NUMBER() OVER (PARTITION BY S.seasonName ORDER BY TMP1.NUMBER DESC, goalDifference DESC) AS RANKING,
     T.teamLogo,
     T.TEAMNAME,
     CONCAT(TMP1.wins, '-', TMP1.losses) AS [T/B],
-    TES.TEAMTOTALSCORE,
+    goalDifference,
     S.seasonName
 FROM
     TEAM_ESPORT_SEASON TES
@@ -571,13 +874,16 @@ FROM
 GROUP BY 
     T.teamLogo,
     T.TEAMNAME,
-	TMP1.NUMBER,
+    TMP1.NUMBER,
     TMP1.wins,
     TMP1.losses,
     TES.TEAMTOTALSCORE,
-    S.seasonName;
+    S.seasonName,
+    goalDifference;
 
 go
+
+select * from RankingsBySeason
 
 CREATE VIEW LICHTHIDAU
 AS
@@ -601,7 +907,7 @@ AS
 	ORDER BY M.matchDate;
 go
 
-CREATE VIEW THONGTINTEAMSPORT
+CREATE OR REPLACE VIEW THONGTINTEAMSPORT
 AS
 	SELECT TEAM_ESPORT.teamID, teamName, teamYearEstablished,TEAM_ESPORT_SPONSOR.teamSponsor, teamLogo
     FROM TEAM_ESPORT,TEAM_ESPORT_SPONSOR
@@ -610,6 +916,22 @@ go
 SELECT * FROM THONGTINTEAMSPORT
 
 go
+
+CREATE OR REPLACE VIEW USERS 
+AS
+	SELECT  FAVOR, USERBIRTH, EMAIL, USERNAME, COIN
+	FROM USERS
+GO
+
+--LICH SU CA CUOC
+
+CREATE OR REPLACE VIEW BET88
+AS
+	SELECT ID_BET, ID_CUS, ID_MATCH, T1_PREDICT, T2_PREDICT, COIN_NUM, DAY_BET 
+	FROM BET, CUSTOMER
+	WHERE BET.ID_CUS = CUSTOMER.ID_CUS
+GO
+
 
 
 //
