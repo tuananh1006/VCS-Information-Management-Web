@@ -21,8 +21,7 @@
 
     .tableauPlaceholder {
       width: 100%;
-      height: 300px;
-      /* Adjusted height */
+      height: 800px;
     }
   </style>
 </head>
@@ -40,7 +39,6 @@
         <li class="nav-item active">
           <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
-
       </ul>
     </div>
   </nav>
@@ -48,8 +46,14 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <div class="tableauPlaceholder" id="tableauViz"></div>
-
+        <div class="btn-group" role="group" aria-label="Dashboard selection">
+          <button type="button" class="btn btn-primary" onclick="loadDashboard('overview')">Tổng quan</button>
+          <button type="button" class="btn btn-secondary" onclick="loadDashboard('favorite_places')">Vị trí yêu
+            thích</button>
+          <button type="button" class="btn btn-success" onclick="loadDashboard('team_stats')">Thống kê số lần tham
+            gia</button>
+        </div>
+        <div class="tableauPlaceholder mt-3" id="tableauViz"></div>
       </div>
     </div>
   </div>
@@ -59,33 +63,42 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
   <script type="text/javascript">
-    var divElement = document.getElementById('tableauViz');
-    var vizElement = divElement.getElementsByTagName('object')[0];
-    if (divElement.offsetWidth > 800) {
-      vizElement.style.width = '100%';
-      vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';
-    } else if (divElement.offsetWidth > 500) {
-      vizElement.style.width = '100%';
-      vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';
-    } else {
-      vizElement.style.width = '100%';
-      vizElement.style.height = '300px'; /* Adjusted height */
-    }
-    var scriptElement = document.createElement('script');
-    scriptElement.src = 'https://public.tableau.com/javascripts/api/tableau-2.min.js';
-    vizElement.parentNode.insertBefore(scriptElement, vizElement);
-  </script>
+    var viz;
 
-  <!-- Replace 'YOUR_TABLEAU_EMBED_URL' with your Tableau dashboard URL -->
-  <script type="text/javascript">
-    var vizUrl = 'https://public.tableau.com/views/Book1_17180095101740/Dashboard1?:language=en-US&fbclid=IwZXh0bgNhZW0CMTAAAR3e05wGJaHyyy3hQohW6yxGmgRLBlH-Se3he60ZLY5uY2rxs3zvtTWJcPQ_aem_AZC7RX4Cq5sgQ6ipgliKka1z7ILe5mqU6wdk62vwOPG3WCtyvE22Uny6mSgrSLpn8nVEbNvJ2toLCiimMxHFepIq&publish=yes&:sid=&:display_count=n&:origin=viz_share_link';
-    var vizOptions = {
-      width: '100%',
-      height: '800px',
-      hideTabs: true,
-      hideToolbar: true
-    };
-    var viz = new tableau.Viz(document.getElementById('tableauViz'), vizUrl, vizOptions);
+    function loadDashboard(dashboard) {
+      var vizUrl;
+
+      switch (dashboard) {
+        case 'overview':
+          vizUrl = 'https://public.tableau.com/views/Thngktinhhnhthiuhinny/Dashboard1?:language=en-US&:sid=&:display_count=n&:origin=viz_share_link';
+          break;
+        case 'favorite_places':
+          vizUrl = 'https://public.tableau.com/views/Thngktinhhnhthiuhinny/Dashboard2?:language=en-US&:sid=&:display_count=n&:origin=viz_share_link';
+          break;
+        case 'team_stats':
+          vizUrl = 'https://public.tableau.com/views/Thngktinhhnhthiuhinny/Dashboard3?:language=en-US&:sid=&:display_count=n&:origin=viz_share_link';
+          break;
+        default:
+          vizUrl = 'https://public.tableau.com/views/Thngktinhhnhthiuhinny/Dashboard1?:language=en-US&:sid=&:display_count=n&:origin=viz_share_link';
+      }
+
+      var vizContainer = document.getElementById('tableauViz');
+      if (viz) {
+        viz.dispose();
+      }
+
+      var vizOptions = {
+        width: '100%',
+        height: '800px',
+        hideTabs: true,
+        hideToolbar: true
+      };
+      viz = new tableau.Viz(vizContainer, vizUrl, vizOptions);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      loadDashboard('overview');
+    });
   </script>
 
 </body>
