@@ -1,5 +1,9 @@
 import userService from '../service/userService'
 import {selectDatabase,performModify} from '../config/connectDB'
+
+const axios = require('axios');
+
+
 const moment = require('moment')
 
 const handleHomePage=(req,res)=>{
@@ -46,14 +50,109 @@ const handlePlayers= async (req,res)=>{
     return res.render('players.ejs', {result})
 }
 
-const handleInformation=(req,res)=>{
-    return res.render('information.ejs')
+const handlePrintResult = async (req, res) => {
+    const { teamoneID, teamtwoID, day_code, seasonID } = req.body;
+
+    try {
+        const response = await axios.post('http://localhost:5000/predict', {
+            features: [teamoneID, teamtwoID, day_code, seasonID]
+        });
+
+        var query = `EXEC GetTop5MatchResults @TeamOneID =${teamoneID}, @TeamTwoID = ${teamtwoID}`
+        let data = await selectDatabase(query);
+        data.forEach(row => {
+            if (row.matchDate) {
+                row.matchDate = moment(row.matchDate).format('DD-MM-YYYY');
+            }
+        });
+
+        query = 'select teamName from TEAM_ESPORT where teamID=' + teamoneID;
+        var teamonename = (await selectDatabase(query))[0].teamName;
+
+        query = 'select teamName from TEAM_ESPORT where teamID=' + teamtwoID;
+        var teamtwoname = (await selectDatabase(query))[0].teamName;
+
+        query = 'EXEC CalculateWinRateRecentMatches @TeamID = ' + teamoneID;
+        var winningPercentage1 = (await selectDatabase(query))[0].WinRate;
+        if (winningPercentage1==null){
+            winningPercentage1=0
+        }
+        else{
+            winningPercentage1=winningPercentage1*100
+        }
+        query = 'EXEC CalculateWinRateRecentMatches @TeamID = ' + teamtwoID;
+        var winningPercentage2 = (await selectDatabase(query))[0].WinRate;
+        if (winningPercentage2==null){
+            winningPercentage2=0
+        }
+        else{
+            winningPercentage2=winningPercentage2*100
+        }
+        query = 'EXEC CalculateBayesProbability 22, 18'
+        var bayesRate = await selectDatabase(query);
+        console.log(bayesRate)
+        var P1 = bayesRate[0].P1;
+        var P2 = bayesRate[0].P2;
+        if (P1==null){
+            P1=0
+        }
+        else{
+            P1=P1*100
+        }
+        if (P2==null){
+            P2=0
+        }
+        else{
+            P2=P2*100
+        }
+        console.log(P1)
+        console.log(P2)
+        let nameteamwin=teamonename
+        const prediction = response.data.prediction[0];
+        let message = '';
+        let message2 = 'Win';
+        if (prediction == 2) {
+            message = '2-0';
+        } else if (prediction == 1) {
+            message = '2-1';
+        } else if (prediction == -1) {
+            message = '2-1';
+            nameteamwin=teamtwoname
+        } else if (prediction == -2) {
+            message = '2-0';
+            nameteamwin=teamtwoname
+
+        }
+
+        res.render('aipredict.ejs', {
+            message,
+            message2,
+            teamonename,
+            teamtwoname,
+            winningPercentage1,
+            winningPercentage2,
+            P1,
+            P2,
+            nameteamwin,
+            data
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Có lỗi xảy ra!');
+    }
+};
+
+
+const handleAIPredict=(req,res)=>{
+    res.render('form.ejs')
 }
 
-
+const handleInformation=(req,res)=>{
+    res.render('information.ejs')
+}
 // 
 module.exports={
-    handleHomePage,handleScheduler,handleRanking,handleTeams,handlePlayers,handleInformation
+    handleHomePage,handleScheduler,handleRanking,handleTeams,handlePlayers,handlePrintResult,handleAIPredict,handleInformation
 }
 
 

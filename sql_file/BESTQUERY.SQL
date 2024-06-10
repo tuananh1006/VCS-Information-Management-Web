@@ -933,5 +933,157 @@ AS
 GO
 
 
+CREATE PROCEDURE CalculateBayesProbability
+    @TeamOneID INT,
+    @TeamTwoID INT
+AS
+BEGIN
+    -- Declare variables
+    DECLARE @TotalMatches INT;
+    DECLARE @TeamOneWins INT;
+    DECLARE @TeamTwoWins INT;
+    DECLARE @TotalRecentMatches INT;
+    DECLARE @TeamOneRecentWins INT;
+    DECLARE @TeamTwoRecentWins INT;
+    DECLARE @P_A DECIMAL(10, 4);
+    DECLARE @P_B DECIMAL(10, 4);
+    DECLARE @P_B_given_A DECIMAL(10, 4);
+    DECLARE @P_B_given_not_A DECIMAL(10, 4);
+    DECLARE @P_A_given_B DECIMAL(10, 4);
+    DECLARE @P_not_A_given_B DECIMAL(10, 4);
 
-//
+    -- Step 1: Calculate prior probabilities (P(A) and P(not A))
+    SELECT 
+        @TotalMatches = COUNT(*),
+        @TeamOneWins = SUM(CASE WHEN (teamoneID = @TeamOneID AND teamoneScore > teamtwoScore) OR (teamtwoID = @TeamOneID AND teamtwoScore > teamoneScore) THEN 1 ELSE 0 END),
+        @TeamTwoWins = SUM(CASE WHEN (teamoneID = @TeamTwoID AND teamoneScore > teamtwoScore) OR (teamtwoID = @TeamTwoID AND teamtwoScore > teamoneScore) THEN 1 ELSE 0 END)
+    FROM match
+    WHERE (teamoneID = @TeamOneID AND teamtwoID = @TeamTwoID) OR (teamoneID = @TeamTwoID AND teamtwoID = @TeamOneID);
+
+    -- Check for zero denominator for P(A)
+    IF @TotalMatches = 0
+        SET @P_A = 0;
+    ELSE
+        SET @P_A = CAST(@TeamOneWins AS DECIMAL(10, 4)) / @TotalMatches;
+
+    -- Check for zero denominator for P(not A)
+    IF @TotalMatches = 0
+        SET @P_B = 0;
+    ELSE
+        SET @P_B = CAST(@TeamTwoWins AS DECIMAL(10, 4)) / @TotalMatches;
+
+    -- Step 2: Calculate likelihoods (P(B|A) and P(B|not A))
+    SELECT 
+        @TotalRecentMatches = COUNT(*),
+        @TeamOneRecentWins = SUM(CASE WHEN (teamoneID = @TeamOneID AND teamoneScore > teamtwoScore) OR (teamtwoID = @TeamOneID AND teamtwoScore > teamoneScore) THEN 1 ELSE 0 END),
+        @TeamTwoRecentWins = SUM(CASE WHEN (teamoneID = @TeamTwoID AND teamoneScore > teamtwoScore) OR (teamtwoID = @TeamTwoID AND teamtwoScore > teamoneScore) THEN 1 ELSE 0 END)
+    FROM (
+        SELECT TOP 5 * 
+        FROM match 
+        WHERE (teamoneID = @TeamOneID AND teamtwoID = @TeamTwoID) OR (teamoneID = @TeamTwoID AND teamtwoID = @TeamOneID)
+        ORDER BY matchDate DESC
+    ) AS RecentMatches;
+
+    -- Check for zero denominator for P(B|A)
+    IF @TotalRecentMatches = 0
+        SET @P_B_given_A = 0;
+    ELSE
+        SET @P_B_given_A = CAST(@TeamTwoRecentWins AS DECIMAL(10, 4)) / @TotalRecentMatches;
+
+    -- Check for zero denominator for P(B|not A)
+    IF @TotalRecentMatches = 0
+        SET @P_B_given_not_A = 0;
+    ELSE
+        SET @P_B_given_not_A = CAST(@TeamOneRecentWins AS DECIMAL(10, 4)) / @TotalRecentMatches;
+
+    -- Step 3: Calculate the total probability P(B)
+    SET @P_B = (@P_B_given_A * @P_A) + (@P_B_given_not_A * (1 - @P_A)); -- Using the complement of P(A)
+
+    -- Check if total probability is zero (rare case)
+    IF @P_B = 0
+    BEGIN
+        SET @P_A_given_B = 0;
+        SET @P_not_A_given_B = 0;
+    END
+    ELSE
+    BEGIN
+        -- Step 4: Calculate posterior probabilities (P(A|B) and P(not A|B))
+        SET @P_A_given_B = (@P_B_given_A * @P_A) / @P_B;
+        SET @P_not_A_given_B = (@P_B_given_not_A * (1 - @P_A)) / @P_B; -- Using the complement of P(A)
+    END
+
+    -- Return the probabilities
+    SELECT 
+        @P_A_given_B AS P1,
+        @P_not_A_given_B AS P2;
+END;
+
+
+EXEC CalculateBayesProbability 22, 18;
+
+GO
+
+CREATE PROCEDURE CalculateWinRateRecentMatches
+    @TeamID INT
+AS
+BEGIN
+    -- Declare variables
+    DECLARE @TotalMatches INT;
+    DECLARE @TotalWins INT;
+    DECLARE @WinRate DECIMAL(10, 4);
+
+    -- Calculate the total number of matches and wins for the team
+    SELECT 
+        @TotalMatches = COUNT(*),
+        @TotalWins = SUM(CASE WHEN (teamoneID = @TeamID AND teamoneScore > teamtwoScore) OR (teamtwoID = @TeamID AND teamtwoScore > teamoneScore) THEN 1 ELSE 0 END)
+    FROM (
+        SELECT TOP 5 * 
+        FROM match 
+        WHERE teamoneID = @TeamID OR teamtwoID = @TeamID
+        ORDER BY matchDate DESC
+    ) AS RecentMatches;
+
+    -- Calculate the win rate
+    IF @TotalMatches > 0
+    BEGIN
+        SET @WinRate = CAST(@TotalWins AS DECIMAL(10, 4)) / @TotalMatches;
+    END
+    ELSE
+    BEGIN
+        SET @WinRate = 0; -- Set win rate to 0 if there are no matches
+    END;
+
+    -- Return the win rate
+    SELECT @WinRate AS WinRate;
+END;
+
+EXEC CalculateWinRateRecentMatches @TeamID = 21; -- Thay đổi ID của đội cần tính tỉ lệ thắng
+
+CREATE PROCEDURE GetTop5MatchResults
+    @TeamOneID INT,
+    @TeamTwoID INT
+AS
+BEGIN
+    -- Truy vấn để lấy top 5 kết quả trận đấu
+    SELECT TOP 5 
+        T1.teamName AS TeamOneName,
+        T2.teamName AS TeamTwoName,
+        M.matchDate,
+        CONCAT(M.teamoneScore, '-', M.teamtwoScore) AS Score
+    FROM 
+        [match] M
+    INNER JOIN 
+        TEAM_ESPORT T1 ON M.teamoneID = T1.teamID
+    INNER JOIN 
+        TEAM_ESPORT T2 ON M.teamtwoID = T2.teamID
+    WHERE 
+        (M.teamoneID = @TeamOneID AND M.teamtwoID = @TeamTwoID)
+        OR
+        (M.teamoneID = @TeamTwoID AND M.teamtwoID = @TeamOneID)
+    ORDER BY 
+        M.matchDate DESC;
+END;
+
+EXEC GetTop5MatchResults @TeamOneID = 22, @TeamTwoID = 21;
+
+select * from TEAM_ESPORT;
