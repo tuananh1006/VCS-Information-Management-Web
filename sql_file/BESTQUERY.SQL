@@ -642,6 +642,36 @@ ALTER ROLE employee_role ADD MEMBER employee_user;
 CREATE LOGIN user_user WITH PASSWORD='user'
 CREATE USER user_user FOR LOGIN user_user;
 ALTER ROLE user_role ADD MEMBER user_user;
+
+
+--Create  manager_user1 and assign Manager role
+CREATE LOGIN manager_user1 WITH PASSWORD='manager'
+CREATE USER manager_user1 FOR LOGIN manager_user1;
+ALTER ROLE manager_role ADD MEMBER manager_user1
+--Create  manager_user2 and assign Manager role
+CREATE LOGIN manager_user2 WITH PASSWORD='manager'
+CREATE USER manager_user2 FOR LOGIN manager_user2;
+ALTER ROLE manager_role ADD MEMBER manager_user2;
+
+-- Create Employee_user1 and assign Employee role
+CREATE LOGIN employee_user1 WITH PASSWORD='employee'
+CREATE USER employee_user1 FOR LOGIN employee_user1;
+ALTER ROLE employee_role ADD MEMBER employee_user1;
+
+-- Create Employee_user2 and assign Employee role
+CREATE LOGIN employee_user2 WITH PASSWORD='employee'
+CREATE USER employee_user2 FOR LOGIN employee_user2;
+ALTER ROLE employee_role ADD MEMBER employee_user2;
+
+-- Create User1 and assign User role
+CREATE LOGIN user_user1 WITH PASSWORD='user'
+CREATE USER user_user1 FOR LOGIN user_user1;
+ALTER ROLE user_role ADD MEMBER user_user1;
+
+-- Create User2 and assign User role
+CREATE LOGIN user_user2 WITH PASSWORD='user'
+CREATE USER user_user2 FOR LOGIN user_user2;
+ALTER ROLE user_role ADD MEMBER user_user2;
 SELECT * FROM master.sys.sql_logins;
 --Grant--
 --manager role--
@@ -667,13 +697,20 @@ GRANT SELECT ON FC_IN_THONG_TIN_DOI TO manager_role
 GRANT SELECT ON FC_SL_TUONG TO manager_role
 
 --Deny--
-DENY SELECT ON CUSTOMER TO manager_role
-DENY SELECT ON BET TO manager_role
+DENY SELECT ON CUSTOMER TO manager_user
+DENY SELECT ON BET TO manager_user
+DENY SELECT ON CUSTOMER TO manager_user1
+DENY SELECT ON BET TO manager_user2
 --Revoke--
 Revoke DELETE ON CUSTOMER TO manager_role
 Revoke DELETE ON BET TO manager_role
 Revoke UPDATE ON CUSTOMER TO manager_role
 Revoke UPDATE ON BET TO manager_role
+
+revoke DELETE ON CUSTOMER TO manager_user
+revoke DELETE ON BET TO manager_user
+revoke SELECT ON CUSTOMER TO manager_user1
+revoke SELECT ON BET TO manager_user2
 
 --employee role--
 GRANT SELECT, INSERT, UPDATE(playerName,playerBirthDate,playerHomeTown,playerStatus),DELETE ON PLAYER TO employee_role
@@ -698,11 +735,18 @@ GRANT SELECT ON FC_SL_TUONG TO employee_role
 --Deny--
 DENY SELECT ON CUSTOMER TO employee_role
 DENY SELECT ON BET TO employee_role
-
+DENY SELECT ON CUSTOMER TO employee_user
+DENY SELECT ON BET TO employee_user
+DENY SELECT ON CUSTOMER TO employee_user1
+DENY SELECT ON BET TO employee_user2
 --Revoke
 REVOKE DELETE,UPDATE ON CUSTOMER TO employee_role
 REVOKE DELETE,UPDATE ON BET TO employee_role
 
+revoke DELETE,UPDATE ON CUSTOMER TO employee_user
+revoke DELETE,UPDATE ON BET TO employee_user
+revoke SELECT ON CUSTOMER TO employee_user1
+revoke SELECT ON BET TO employee_user2
 
 --user role--
 GRANT SELECT ON PLAYER to user_role
@@ -728,10 +772,19 @@ GRANT SELECT ON FC_SL_TUONG TO user_role
 DENY DELETE ON CUSTOMER TO user_role
 DENY DELETE ON BET TO user_role
 
+DENY SELECT ON CUSTOMER TO user_user
+DENY SELECT ON BET TO user_user
+DENY SELECT ON CUSTOMER TO user_user1
+DENY SELECT ON BET TO user_user2
+
 --REVOKE
 REVOKE DELETE ON CUSTOMER TO user_role
 REVOKE DELETE ON BET TO user_role
 
+revoke DELETE,UPDATE ON CUSTOMER TO user_user
+revoke DELETE,UPDATE ON BET TO user_user
+revoke SELECT ON CUSTOMER TO user_user1
+revoke SELECT ON BET TO user_user2
 
 -- Bao mat password
 ALTER TABLE CUSTOMER ADD Salt UNIQUEIDENTIFIER
