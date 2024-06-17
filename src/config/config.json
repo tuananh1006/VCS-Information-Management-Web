@@ -1,7 +1,7 @@
 {
   "start": {
-    "server": "DESKTOP-JPVMF7F",
-    "database": "DO_AN_QLTT",
+    "server": "LAPTOP-4B4J1D57",
+    "database": "DO_AN_QLTT15",
     "driver": "ODBC Driver 17 for SQL Server"
   }
 }
