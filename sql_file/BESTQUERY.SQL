@@ -643,7 +643,37 @@ CREATE LOGIN user_user WITH PASSWORD='user'
 CREATE USER user_user FOR LOGIN user_user;
 ALTER ROLE user_role ADD MEMBER user_user;
 
---Phan Quyen--
+
+--Create  manager_user1 and assign Manager role
+CREATE LOGIN manager_user1 WITH PASSWORD='manager'
+CREATE USER manager_user1 FOR LOGIN manager_user1;
+ALTER ROLE manager_role ADD MEMBER manager_user1
+--Create  manager_user2 and assign Manager role
+CREATE LOGIN manager_user2 WITH PASSWORD='manager'
+CREATE USER manager_user2 FOR LOGIN manager_user2;
+ALTER ROLE manager_role ADD MEMBER manager_user2;
+
+-- Create Employee_user1 and assign Employee role
+CREATE LOGIN employee_user1 WITH PASSWORD='employee'
+CREATE USER employee_user1 FOR LOGIN employee_user1;
+ALTER ROLE employee_role ADD MEMBER employee_user1;
+
+-- Create Employee_user2 and assign Employee role
+CREATE LOGIN employee_user2 WITH PASSWORD='employee'
+CREATE USER employee_user2 FOR LOGIN employee_user2;
+ALTER ROLE employee_role ADD MEMBER employee_user2;
+
+-- Create User1 and assign User role
+CREATE LOGIN user_user1 WITH PASSWORD='user'
+CREATE USER user_user1 FOR LOGIN user_user1;
+ALTER ROLE user_role ADD MEMBER user_user1;
+
+-- Create User2 and assign User role
+CREATE LOGIN user_user2 WITH PASSWORD='user'
+CREATE USER user_user2 FOR LOGIN user_user2;
+ALTER ROLE user_role ADD MEMBER user_user2;
+SELECT * FROM master.sys.sql_logins;
+--Grant--
 --manager role--
 GRANT SELECT, INSERT, UPDATE(playerName,playerBirthDate,playerHomeTown,playerStatus),DELETE ON PLAYER TO manager_role
 GRANT SELECT, INSERT, UPDATE,DELETE ON PLAYER_TEAM_ESPORT TO manager_role
@@ -657,6 +687,7 @@ GRANT SELECT, INSERT, UPDATE,DELETE ON TEAM_ESPORT_SEASON TO manager_role
 GRANT SELECT, INSERT, UPDATE,DELETE ON CUSTOMER TO manager_role
 GRANT SELECT, INSERT, UPDATE,DELETE ON BET TO manager_role
 
+
 --Store procedures
 GRANT EXECUTE ON PRINT_TT_PLAYER TO manager_role
 GRANT EXECUTE ON BXH_SEASON TO manager_role
@@ -665,8 +696,23 @@ GRANT EXECUTE ON SP_LICH_THI_DAU TO manager_role
 GRANT SELECT ON FC_IN_THONG_TIN_DOI TO manager_role
 GRANT SELECT ON FC_SL_TUONG TO manager_role
 
+--Deny--
+DENY SELECT ON CUSTOMER TO manager_user
+DENY SELECT ON BET TO manager_user
+DENY SELECT ON CUSTOMER TO manager_user1
+DENY SELECT ON BET TO manager_user2
+--Revoke--
+Revoke DELETE ON CUSTOMER TO manager_role
+Revoke DELETE ON BET TO manager_role
+Revoke UPDATE ON CUSTOMER TO manager_role
+Revoke UPDATE ON BET TO manager_role
 
---employee role
+revoke DELETE ON CUSTOMER TO manager_user
+revoke DELETE ON BET TO manager_user
+revoke SELECT ON CUSTOMER TO manager_user1
+revoke SELECT ON BET TO manager_user2
+
+--employee role--
 GRANT SELECT, INSERT, UPDATE(playerName,playerBirthDate,playerHomeTown,playerStatus),DELETE ON PLAYER TO employee_role
 GRANT SELECT, INSERT, UPDATE,DELETE ON PLAYER_TEAM_ESPORT TO employee_role
 GRANT SELECT, INSERT, UPDATE(teamName,teamYearEstablished,teamLogo),DELETE ON TEAM_ESPORT TO employee_role
@@ -676,6 +722,8 @@ GRANT SELECT, INSERT, UPDATE,DELETE ON SEASON TO employee_role
 GRANT SELECT, INSERT, UPDATE,DELETE ON MATCHTYPE TO employee_role
 GRANT SELECT, INSERT, UPDATE,DELETE ON CHITIETTRANDAU TO employee_role
 GRANT SELECT, INSERT, UPDATE,DELETE ON TEAM_ESPORT_SEASON TO employee_role
+GRANT SELECT, INSERT, UPDATE,DELETE ON CUSTOMER TO employee_role
+GRANT SELECT, INSERT, UPDATE,DELETE ON BET TO employee_role
 --Store procedures
 GRANT EXECUTE ON PRINT_TT_PLAYER TO employee_role
 GRANT EXECUTE ON BXH_SEASON TO employee_role
@@ -684,7 +732,23 @@ GRANT EXECUTE ON SP_LICH_THI_DAU TO employee_role
 GRANT SELECT ON FC_IN_THONG_TIN_DOI TO employee_role
 GRANT SELECT ON FC_SL_TUONG TO employee_role
 
---user role
+--Deny--
+DENY SELECT ON CUSTOMER TO employee_role
+DENY SELECT ON BET TO employee_role
+DENY SELECT ON CUSTOMER TO employee_user
+DENY SELECT ON BET TO employee_user
+DENY SELECT ON CUSTOMER TO employee_user1
+DENY SELECT ON BET TO employee_user2
+--Revoke
+REVOKE DELETE,UPDATE ON CUSTOMER TO employee_role
+REVOKE DELETE,UPDATE ON BET TO employee_role
+
+revoke DELETE,UPDATE ON CUSTOMER TO employee_user
+revoke DELETE,UPDATE ON BET TO employee_user
+revoke SELECT ON CUSTOMER TO employee_user1
+revoke SELECT ON BET TO employee_user2
+
+--user role--
 GRANT SELECT ON PLAYER to user_role
 GRANT SELECT ON PLAYER_TEAM_ESPORT to user_role
 GRANT SELECT ON TEAM_ESPORT to user_role
@@ -694,6 +758,8 @@ GRANT SELECT ON SEASON to user_role
 GRANT SELECT ON MATCHTYPE to user_role
 GRANT SELECT ON CHITIETTRANDAU to user_role
 GRANT SELECT ON TEAM_ESPORT_SEASON to user_role
+GRANT SELECT, INSERT, UPDATE,DELETE ON CUSTOMER TO user_role
+GRANT SELECT, INSERT, UPDATE,DELETE ON BET TO user_role
 --Store procedures
 GRANT EXECUTE ON PRINT_TT_PLAYER TO user_role
 GRANT EXECUTE ON BXH_SEASON TO user_role
@@ -702,8 +768,23 @@ GRANT EXECUTE ON SP_LICH_THI_DAU TO user_role
 GRANT SELECT ON FC_IN_THONG_TIN_DOI TO user_role
 GRANT SELECT ON FC_SL_TUONG TO user_role
 
---view
+--Deny--
+DENY DELETE ON CUSTOMER TO user_role
+DENY DELETE ON BET TO user_role
 
+DENY SELECT ON CUSTOMER TO user_user
+DENY SELECT ON BET TO user_user
+DENY SELECT ON CUSTOMER TO user_user1
+DENY SELECT ON BET TO user_user2
+
+--REVOKE
+REVOKE DELETE ON CUSTOMER TO user_role
+REVOKE DELETE ON BET TO user_role
+
+revoke DELETE,UPDATE ON CUSTOMER TO user_user
+revoke DELETE,UPDATE ON BET TO user_user
+revoke SELECT ON CUSTOMER TO user_user1
+revoke SELECT ON BET TO user_user2
 
 -- Bao mat password
 ALTER TABLE CUSTOMER ADD Salt UNIQUEIDENTIFIER
@@ -907,7 +988,7 @@ AS
 	ORDER BY M.matchDate;
 go
 
-CREATE OR REPLACE VIEW THONGTINTEAMSPORT
+CREATE  VIEW THONGTINTEAMSPORT
 AS
 	SELECT TEAM_ESPORT.teamID, teamName, teamYearEstablished,TEAM_ESPORT_SPONSOR.teamSponsor, teamLogo
     FROM TEAM_ESPORT,TEAM_ESPORT_SPONSOR
@@ -917,20 +998,9 @@ SELECT * FROM THONGTINTEAMSPORT
 
 go
 
-CREATE OR REPLACE VIEW USERS 
-AS
-	SELECT  FAVOR, USERBIRTH, EMAIL, USERNAME, COIN
-	FROM USERS
-GO
 
 --LICH SU CA CUOC
 
-CREATE OR REPLACE VIEW BET88
-AS
-	SELECT ID_BET, ID_CUS, ID_MATCH, T1_PREDICT, T2_PREDICT, COIN_NUM, DAY_BET 
-	FROM BET, CUSTOMER
-	WHERE BET.ID_CUS = CUSTOMER.ID_CUS
-GO
 
 
 CREATE PROCEDURE CalculateBayesProbability
@@ -1087,3 +1157,145 @@ END;
 EXEC GetTop5MatchResults @TeamOneID = 22, @TeamTwoID = 21;
 
 select * from TEAM_ESPORT;
+
+
+
+-- XML, XPath, XQuery --
+
+
+
+
+CREATE TABLE PlayerStatsXML (
+    PlayerID INT PRIMARY KEY,
+    PlayerData XML
+);
+GO
+INSERT INTO PlayerStatsXML (PlayerID, PlayerData)
+VALUES
+(1, '<Player>
+        <Name>John Doe</Name>
+        <BirthDate>1990-01-01</BirthDate>
+        <HomeTown>New York</HomeTown>
+        <Stats>
+            <Kills>50</Kills>
+            <Deaths>30</Deaths>
+            <Assists>40</Assists>
+        </Stats>
+    </Player>'),
+(2, '<Player>
+        <Name>Jane Smith</Name>
+        <BirthDate>1992-02-02</BirthDate>
+        <HomeTown>Los Angeles</HomeTown>
+        <Stats>
+            <Kills>70</Kills>
+            <Deaths>20</Deaths>
+            <Assists>60</Assists>
+        </Stats>
+    </Player>');
+GO
+CREATE TABLE TeamStatsXML (
+    TeamID INT PRIMARY KEY,
+    TeamData XML
+);
+GO
+INSERT INTO TeamStatsXML (TeamID, TeamData)
+VALUES
+(1, '<Team>
+        <Name>Team Alpha</Name>
+        <YearEstablished>2010</YearEstablished>
+        <Logo>alpha_logo.png</Logo>
+        <Players>
+            <Player>
+                <ID>1</ID>
+                <Name>John Doe</Name>
+            </Player>
+            <Player>
+                <ID>2</ID>
+                <Name>Jane Smith</Name>
+            </Player>
+        </Players>
+    </Team>'),
+(2, '<Team>
+        <Name>Team Beta</Name>
+        <YearEstablished>2012</YearEstablished>
+        <Logo>beta_logo.png</Logo>
+        <Players>
+            <Player>
+                <ID>3</ID>
+                <Name>James Brown</Name>
+            </Player>
+            <Player>
+                <ID>4</ID>
+                <Name>Emily Davis</Name>
+            </Player>
+        </Players>
+    </Team>');
+GO
+--XPATH
+-- Lấy tên của tất cả các người chơi --
+SELECT PlayerData.value('(/Player/Name)[1]', 'NVARCHAR(100)') AS PlayerName
+FROM PlayerStatsXML;
+
+--Lấy số lượng giết của người chơi có ID là 1
+SELECT PlayerData.value('(/Player/Stats/Kills)[1]', 'INT') AS Kills
+FROM PlayerStatsXML
+WHERE PlayerID = 1;
+
+--Lấy quê quán của người chơi có ID là 2
+SELECT PlayerData.value('(/Player/HomeTown)[1]', 'NVARCHAR(100)') AS HomeTown
+FROM PlayerStatsXML
+WHERE PlayerID = 2;
+
+--XQUERY
+--Lấy tên của tất cả các đội:
+SELECT TeamData.query('data(/Team/Name)') AS TeamName
+FROM TeamStatsXML;
+
+--Lấy năm thành lập của đội có ID là 1:
+SELECT TeamData.query('data(/Team/YearEstablished)') AS YearEstablished
+FROM TeamStatsXML
+WHERE TeamID = 1;
+
+--Lấy tên của tất cả các người chơi trong đội có ID là 2:
+SELECT TeamData.query('data(/Team/Players/Player/Name)') AS PlayerName
+FROM TeamStatsXML
+WHERE TeamID = 2;
+
+-- Sử dụng cả hai XPATH VÀ XQUERY trong cùng 1 câu truy vấn
+
+--Lấy tên của tất cả các đội:--
+--XPATH 1
+SELECT TeamData.value('(/Team/Name)[1]', 'NVARCHAR(100)') AS TeamName
+FROM TeamStatsXML;
+
+--XQUERY 1
+SELECT TeamData.query('data(/Team/Name)') AS TeamName
+FROM TeamStatsXML;
+
+--Lấy số lượng giết của người chơi có ID là 1:
+--XPATH 2
+SELECT PlayerData.value('(/Player/Stats/Kills)[1]', 'INT') AS Kills
+FROM PlayerStatsXML
+WHERE PlayerID = 1;
+
+--XQUERY 2
+SELECT PlayerData.query('data(/Player/Stats/Kills)') AS Kills
+FROM PlayerStatsXML
+WHERE PlayerID = 1;
+
+--Các thao tác thêm/xóa/sửa thuộc tính/giá trị sử dụng XPath hoặc XQuery
+
+--Thêm một trường "Rank" vào XML của người chơi có ID là 1:
+UPDATE PlayerStatsXML
+SET PlayerData.modify('insert <Rank>Silver</Rank> into (/Player)[1]')
+WHERE PlayerID = 1;
+
+--Xóa trường "HomeTown" của người chơi có ID là 2
+UPDATE PlayerStatsXML
+SET PlayerData.modify('delete (/Player/HomeTown)[1]')
+WHERE PlayerID = 2;
+
+--Sửa giá trị "Rank" của người chơi có ID là 1 thành "Gold"
+UPDATE PlayerStatsXML
+SET PlayerData.modify('replace value of (/Player/Rank/text())[1] with "Gold"')
+WHERE PlayerID = 1;

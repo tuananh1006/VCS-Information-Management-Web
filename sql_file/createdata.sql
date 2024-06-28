@@ -61,7 +61,7 @@ INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES
 INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (33, 'CERBERUS Esports (Vietnamese Team) ', 2018,  'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/b/bb/CERBERUS_Esports_%28Vietnamese_Team%29logo_square.png/revision/latest/scale-to-width-down/220?cb=20230526151502')
 INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (34, 'Percent Esports ', 2018,  'https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/e/e1/Percent_Esportslogo_square.png/revision/latest/scale-to-width-down/220?cb=20200502225224')
 INSERT INTO TEAM_ESPORT (teamID, teamName, teamYearEstablished, teamLogo) VALUES (35, 'Sky Gaming Daklak', 2018,'')
-
+select * from TEAM_ESPORT
 INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(1,'MSI')
 INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(1,'CubeTV')
 INSERT INTO TEAM_ESPORT_SPONSOR  VALUES(3,'AORUS')
@@ -1854,6 +1854,5 @@ INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('233', '4', 'Marcus', 'Top Laner', '11/30/2021', '02/20/2023');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('233', '4', 'Marcus', 'Mid Laner', '01/01/2016', '09/01/2016');
 INSERT INTO PLAYER_TEAM_ESPORT (playerID, teamID, NickName,playerRole, DateStart, DateEnd) VALUES ('242', '33', 'Yado', 'Mid Laner', '05/10/2019', '05/23/2023');
+select * FROM PLAYER_TEAM_ESPORT
 
-
-//
