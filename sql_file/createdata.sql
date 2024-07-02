@@ -9,10 +9,10 @@ INSERT INTO season (seasonID, seasonName, seasonSponsor, seasonDateStart, season
 INSERT INTO season (seasonID, seasonName, seasonSponsor, seasonDateStart, seasonDateEnd) VALUES (8, 'VCS 2023 Spring Season', 'Secret Lab', '2023-02-24', '2023-04-10')
 INSERT INTO season (seasonID, seasonName, seasonSponsor, seasonDateStart, seasonDateEnd) VALUES (9, 'VCS 2020 Spring Season', '', '2020-01-31', '2020-04-05')
 INSERT INTO season (seasonID, seasonName, seasonSponsor, seasonDateStart, seasonDateEnd) VALUES (10, 'VCS 2021 Spring Season', '', '2021-01-22', '2021-04-04')
-INSERT INTO season (seasonID, seasonName, seasonSponsor, seasonDateStart, seasonDateEnd) VALUES (11, 'VCS Spring Season 2018', '', '2018-01-18', '2018-03-18')
+INSERT INTO season (seasonID, seasonName, seasonSponsor, seasonDateStart, seasonDateEnd) VALUES (11, 'VCS 2018 Spring Season ', '', '2018-01-18', '2018-03-18')
 INSERT INTO season (seasonID, seasonName, seasonSponsor, seasonDateStart, seasonDateEnd) VALUES (12, 'VCS 2024 Spring Season', '', '2024-01-20', '2024-03-10')
 INSERT INTO season (seasonID, seasonName, seasonSponsor, seasonDateStart, seasonDateEnd) VALUES (13, 'VCS 2024 Summer Season', '', '2024-06-01', '2024-08-01')
-INSERT INTO season (seasonID, seasonName, seasonSponsor, seasonDateStart, seasonDateEnd) VALUES (14, 'VCS Summer Season 2018', 'Wake-up 247', '2018-06-21', '2018-08-19')
+INSERT INTO season (seasonID, seasonName, seasonSponsor, seasonDateStart, seasonDateEnd) VALUES (14, 'VCS 2018 Summer Season ', 'Wake-up 247', '2018-06-21', '2018-08-19')
 
 select * from season;
 INSERT INTO stadium (stadiumID,stadiumName,stadiumAddress, stadiumCapacity) VALUES
