@@ -1,4 +1,4 @@
-﻿CREATE DATABASE QUANLI_VCS;
+CREATE DATABASE QUANLI_VCS;
 GO
 USE QUANLI_VCS;
 
@@ -144,6 +144,12 @@ CREATE TABLE BET (
     FOREIGN KEY (matchID) REFERENCES MATCH(matchID)
 );
 GO
+--DO DATA THU THẬP CÓ TRÙNG NÊN SẼ BÁO LỖI KHI LOAD DATA,TƯƠNG LAI PREPROCESS THÌ ĐOẠN CODE SAU SẼ DÙNG ĐƯỢC.ĐỂ CHẠY ĐƯỢC DEMO TẠM THỜI COMMENT ĐOẠN CODE NÀY 
+--ALTER TABLE PLAYER ADD UNIQUE(playerName,playerImage)
+ALTER TABLE TEAM_ESPORT ADD UNIQUE(teamName,teamLogo)
+ALTER TABLE STADIUM ADD UNIQUE(stadiumName)
+ALTER TABLE SEASON ADD UNIQUE(seasonName)
+ALTER TABLE CHAMPION ADD UNIQUE(championName)
 
 alter table PLAYER add CONSTRAINT CHK_Age CHECK (DATEDIFF(YEAR, playerBirthDate, GETDATE()) >= 18)
 alter table PLAYER add CONSTRAINT CHK_Status CHECK (playerStatus in(0,1))
@@ -511,7 +517,6 @@ BEGIN
 END;
 GO
 /*In ra thứ hạng của đội có số điểm nằm trong top 10(BXH) TRONG CAC MUA GIAI */
-go
 CREATE PROC BXH_SEASON @season_name NVARCHAR(100)
 AS
 BEGIN
@@ -550,7 +555,6 @@ BEGIN
     END
 END;
 GO
-exec print_mv_team 'GAM Esports'
 
 CREATE PROCEDURE SP_LICH_THI_DAU (@seasonName NVARCHAR(100))
 AS
@@ -587,6 +591,7 @@ BEGIN
         PRINT N'Mùa giải không tồn tại.'
     END
 END
+GO
 /* FUNCTION */
 CREATE FUNCTION FC_IN_THONG_TIN_DOI (@teamName NVARCHAR(100))
 RETURNS TABLE
@@ -630,7 +635,6 @@ RETURN
     WHERE PTE.NickName = @NICK_NAME AND S.seasonID = @seasonID
     GROUP BY C.championName
 );
-SELECT * FROM dbo.FC_SL_TUONG('Levi',1)
 go
 -- An toàn thông tin--
 --Tạo role--
@@ -797,6 +801,7 @@ revoke DELETE,UPDATE ON BET TO user_user
 revoke SELECT ON CUSTOMER TO user_user1
 revoke SELECT ON BET TO user_user2
 
+go
 -- Bao mat password
 ALTER TABLE CUSTOMER ADD Salt UNIQUEIDENTIFIER
 GO
@@ -825,7 +830,7 @@ AS
    SET @reponseMessage=ERROR_MESSAGE()
    END CATCH
 END
-
+go
 --
 -- Thêm phần Procedure và View
 
@@ -876,7 +881,7 @@ BEGIN
         RETURN 0;
     END
 END;
-
+go
 --Tính KDA của tuyển thủ
 CREATE PROC KDA 
     @idMatch INT, 
@@ -900,10 +905,8 @@ BEGIN
     END
 END;
 
+go
 
-DECLARE @RESULT FLOAT
-EXEC KDA '1', '2', @RES = @RESULT OUT
-PRINT @RESULT
 --IN THONG TIN HIEUSO CUA CAC DOI TUYEN
 
 
@@ -915,7 +918,6 @@ AS
 	WHERE TE.TEAMID = PTE.TEAMID AND PTE.PLAYERID = P.PLAYERID
 GO
 
-drop view RankingsBySeason
 CREATE VIEW RankingsBySeason AS
 WITH TMP1 AS
 (
@@ -975,7 +977,6 @@ GROUP BY
 
 go
 
-select * from RankingsBySeason
 
 CREATE VIEW LICHTHIDAU
 AS
@@ -1004,9 +1005,7 @@ AS
     FROM TEAM_ESPORT,TEAM_ESPORT_SPONSOR
 	WHERE TEAM_ESPORT.teamID=TEAM_ESPORT_SPONSOR.teamID
 go
-SELECT * FROM THONGTINTEAMSPORT
 
-go
 
 CREATE VIEW USERS 
 AS
@@ -1111,7 +1110,6 @@ BEGIN
 END;
 
 
-EXEC CalculateBayesProbability 22, 18;
 
 GO
 
@@ -1149,8 +1147,7 @@ BEGIN
     SELECT @WinRate AS WinRate;
 END;
 
-EXEC CalculateWinRateRecentMatches @TeamID = 21; -- Thay đổi ID của đội cần tính tỉ lệ thắng
-
+go
 CREATE PROCEDURE GetTop5MatchResults
     @TeamOneID INT,
     @TeamTwoID INT
@@ -1175,18 +1172,10 @@ BEGIN
     ORDER BY 
         M.matchDate DESC;
 END;
-
-EXEC GetTop5MatchResults @TeamOneID = 22, @TeamTwoID = 21;
-
-select * from TEAM_ESPORT;
-
+go
 
 
 -- XML, XPath, XQuery --
-
-
-
-
 CREATE TABLE PlayerStatsXML (
     PlayerID INT PRIMARY KEY,
     PlayerData XML
@@ -1257,17 +1246,17 @@ GO
 -- Lấy tên của tất cả các người chơi --
 SELECT PlayerData.value('(/Player/Name)[1]', 'NVARCHAR(100)') AS PlayerName
 FROM PlayerStatsXML;
-
+go
 --Lấy số lượng giết của người chơi có ID là 1
 SELECT PlayerData.value('(/Player/Stats/Kills)[1]', 'INT') AS Kills
 FROM PlayerStatsXML
 WHERE PlayerID = 1;
-
+go
 --Lấy quê quán của người chơi có ID là 2
 SELECT PlayerData.value('(/Player/HomeTown)[1]', 'NVARCHAR(100)') AS HomeTown
 FROM PlayerStatsXML
 WHERE PlayerID = 2;
-
+go
 --XQUERY
 --Lấy tên của tất cả các đội:
 SELECT TeamData.query('data(/Team/Name)') AS TeamName
@@ -1277,50 +1266,70 @@ FROM TeamStatsXML;
 SELECT TeamData.query('data(/Team/YearEstablished)') AS YearEstablished
 FROM TeamStatsXML
 WHERE TeamID = 1;
-
+go
 --Lấy tên của tất cả các người chơi trong đội có ID là 2:
 SELECT TeamData.query('data(/Team/Players/Player/Name)') AS PlayerName
 FROM TeamStatsXML
 WHERE TeamID = 2;
-
+go
 -- Sử dụng cả hai XPATH VÀ XQUERY trong cùng 1 câu truy vấn
 
 --Lấy tên của tất cả các đội:--
 --XPATH 1
 SELECT TeamData.value('(/Team/Name)[1]', 'NVARCHAR(100)') AS TeamName
 FROM TeamStatsXML;
-
+go
 --XQUERY 1
 SELECT TeamData.query('data(/Team/Name)') AS TeamName
 FROM TeamStatsXML;
-
+go
 --Lấy số lượng giết của người chơi có ID là 1:
 --XPATH 2
 SELECT PlayerData.value('(/Player/Stats/Kills)[1]', 'INT') AS Kills
 FROM PlayerStatsXML
 WHERE PlayerID = 1;
-
+go
 --XQUERY 2
 SELECT PlayerData.query('data(/Player/Stats/Kills)') AS Kills
 FROM PlayerStatsXML
 WHERE PlayerID = 1;
-
+go
 --Các thao tác thêm/xóa/sửa thuộc tính/giá trị sử dụng XPath hoặc XQuery
 
 --Thêm một trường "Rank" vào XML của người chơi có ID là 1:
 UPDATE PlayerStatsXML
 SET PlayerData.modify('insert <Rank>Silver</Rank> into (/Player)[1]')
 WHERE PlayerID = 1;
-
+go
 --Xóa trường "HomeTown" của người chơi có ID là 2
 UPDATE PlayerStatsXML
 SET PlayerData.modify('delete (/Player/HomeTown)[1]')
 WHERE PlayerID = 2;
-
+go
 --Sửa giá trị "Rank" của người chơi có ID là 1 thành "Gold"
 UPDATE PlayerStatsXML
 SET PlayerData.modify('replace value of (/Player/Rank/text())[1] with "Gold"')
 WHERE PlayerID = 1;
+go
+
+----- TEST INDEX
+-- Bắt đầu ghi lại thời gian
+
+DBCC FREEPROCCACHE;
+DBCC DROPCLEANBUFFERS;
+DECLARE @start_time DATETIME;
+SET @start_time = GETDATE();
+EXEC PRINT_MV_TEAM 'GAM Esports'
+-- Ghi lại thời gian kết thúc
+DECLARE @end_time DATETIME;
+SET @end_time = GETDATE();
+
+-- Tính toán và hiển thị thời gian thực thi
+SELECT DATEDIFF(MILLISECOND, @start_time, @end_time) AS execution_time_after_index;
+go
+
+
+
 
 -- Tạo chỉ mục cho bảng PLAYER_TEAM_ESPORT
 CREATE INDEX idx_PlayerTeam_NickName ON PLAYER_TEAM_ESPORT(NickName);
@@ -1349,3 +1358,18 @@ CREATE INDEX idx_TeamEsport_TeamName ON TEAM_ESPORT(teamName);
 
 -- Tạo chỉ mục cho bảng CUSTOMER
 CREATE INDEX idx_Customer_UserNameLogin ON CUSTOMER(USERNAME_LOGIN);
+
+--AFTER INDEX
+-- Bắt đầu ghi lại thời gian
+go
+DBCC FREEPROCCACHE;
+DBCC DROPCLEANBUFFERS;
+DECLARE @start_time DATETIME;
+SET @start_time = GETDATE();
+EXEC CalculateWinRateRecentMatches @TeamID = 21; -- Thay đổi ID của đội cần tính tỉ lệ thắng
+-- Ghi lại thời gian kết thúc
+DECLARE @end_time DATETIME;
+SET @end_time = GETDATE();
+
+-- Tính toán và hiển thị thời gian thực thi
+SELECT DATEDIFF(MILLISECOND, @start_time, @end_time) AS execution_time_after_index;
