@@ -57,8 +57,7 @@
     <div class="img-brand">
         <img src="https://img.abiosgaming.com/events/Vietnam-Championship-series-VSA-2018-small.png" alt="">
     </div>
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Vietnam Championship Series</a>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0 ml-0 pl-0" href="#">Vietnam Championship Series</a>
     <ul class="navbar-nav px-3">
       <li class="nav-item text-nowrap">
         <a class="nav-link" href="#">Sign out</a>
@@ -258,7 +257,6 @@
                           <th>TT</th>
                           <th>CLB</th>
                           <th>Established</th>
-                          <th>Sponsors</th>
                           <th>Logo</th>
                       </thead>
                       <tbody id="teamTable">
@@ -272,9 +270,6 @@
                             </td>
                             <td>
                               <%= result[i]['teamYearEstablished']%>
-                            </td>
-                            <td>
-                              <%= result[i]['teamSponsor']%>
                             </td>
                             <td>
                               <img src="<%= result[i]['teamLogo'].split('/revision')[0] %>" alt="">
