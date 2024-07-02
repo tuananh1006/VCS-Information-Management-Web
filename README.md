@@ -25,9 +25,10 @@
 2. Clone dự án: `git clone https://github.com/tuananh1006/QLTT_APP.git`
 3. Di chuyển vào thư mục dự án: `cd QLTT_app`
 4. Cài đặt các phụ thuộc: `npm install`
-5. Mở file bestquery.sql trong sql_file và thực thi file bestquery.sql 
+5. Mở file /07_22520055_22520125_22520126_22520979.SQL trong sql_file và thực thi file (có thể ctrl a rồi execute),sau đó mở file createdata.sql ctrl a rồi execute để load data
 6. Ghi lại thông số về server,driver,database (user,password nếu có), sau đó điều chỉnh config.json trong folder config
-7. Khởi động ứng dụng: `npm start` 
+7. Khởi động ứng dụng: `npm start`
+8. Tạo terminal mới,python app.py để có thể thực hiện chức năng AI dự đoán(Optional)
 
 **Tính năng chính:**
 
