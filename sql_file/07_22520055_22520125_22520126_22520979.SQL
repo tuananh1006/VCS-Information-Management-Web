@@ -1366,7 +1366,7 @@ DBCC FREEPROCCACHE;
 DBCC DROPCLEANBUFFERS;
 DECLARE @start_time DATETIME;
 SET @start_time = GETDATE();
-EXEC CalculateWinRateRecentMatches @TeamID = 21; -- Thay đổi ID của đội cần tính tỉ lệ thắng
+EXEC PRINT_MV_TEAM 'GAM Esports'
 -- Ghi lại thời gian kết thúc
 DECLARE @end_time DATETIME;
 SET @end_time = GETDATE();
