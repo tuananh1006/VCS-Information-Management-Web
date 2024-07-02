@@ -1,4 +1,4 @@
-﻿USE DO_AN_QLTT15;
+﻿USE QUANLI_VCS;
 INSERT INTO season (seasonID, seasonName, seasonSponsor, seasonDateStart, seasonDateEnd) VALUES (1, 'VCS 2020 Summer Season', 'Nonolive', '2020-06-19', '2020-08-16')
 INSERT INTO season (seasonID, seasonName, seasonSponsor, seasonDateStart, seasonDateEnd) VALUES (2, 'VCS 2022 Spring Season', 'Castrol POWER1', '2022-02-11', '2022-04-13')
 INSERT INTO season (seasonID, seasonName, seasonSponsor, seasonDateStart, seasonDateEnd) VALUES (3, 'VCS 2022 Summer Season', '', '2022-07-07', '2022-08-21')

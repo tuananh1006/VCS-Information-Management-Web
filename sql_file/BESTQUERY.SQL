@@ -1,6 +1,6 @@
-﻿CREATE DATABASE DO_AN_QLTT15;
+﻿CREATE DATABASE QUANLI_VCS;
 GO
-USE DO_AN_QLTT15;
+USE QUANLI_VCS;
 
 -- Creating Tables
 CREATE TABLE PLAYER (
@@ -111,7 +111,7 @@ GO
 CREATE TABLE TEAM_ESPORT_SEASON (
     teamID INT,
     seasonID INT,
-    teamTotalScore INT,
+    teamTotalScore INT default 0,
 	teamShortName varchar(40) NOT NULL,
     FOREIGN KEY (teamID) REFERENCES TEAM_ESPORT(teamID),
     FOREIGN KEY (seasonID) REFERENCES SEASON(seasonID),
@@ -385,16 +385,26 @@ END;
 GO
 
 
-CREATE TRIGGER UPDATE_DIEM ON MATCH
-FOR UPDATE, INSERT
+--Update tong so diem cua mot doi tuyen trong mot giai dau
+CREATE TRIGGER updateScore ON match
+FOR INSERT
 AS
 BEGIN
-    IF EXISTS (SELECT 1 FROM INSERTED I, TEAM_ESPORT_SEASON T WHERE I.TEAMONESCORE = 2 AND I.teamoneID = T.TEAMID)
+    IF EXISTS (SELECT 1 FROM inserted WHERE EXISTS (SELECT 1 FROM team_esport_season WHERE team_esport_season.seasonid = inserted.seasonid))
     BEGIN
-        UPDATE TEAM_ESPORT_SEASON
-        SET TEAMTOTALSCORE = TEAMTOTALSCORE + 1;
+        UPDATE team_esport_season
+        SET teamtotalScore = teamtotalScore + i.teamonescore - i.teamtwoscore
+        FROM inserted i
+        WHERE team_esport_season.teamid = i.teamoneid
+          AND team_esport_season.seasonid = i.seasonid;
+          
+        UPDATE team_esport_season
+        SET teamtotalScore = teamtotalScore - i.teamonescore + i.teamtwoscore
+        FROM inserted i
+        WHERE team_esport_season.teamid = i.teamtwoid
+          AND team_esport_season.seasonid = i.seasonid;
     END
-END;
+END
 GO
 
 CREATE TRIGGER CHECK_NGTL ON TEAM_ESPORT
@@ -899,7 +909,7 @@ PRINT @RESULT
 
 CREATE VIEW PLAYERINFO
 AS
-	SELECT TEAMNAME, NICKNAME, PLAYERNAME, playerRole, DATESTART, DATEEND
+	SELECT TEAMNAME, NICKNAME, PLAYERNAME, playerRole, format(DATESTART,'dd/mm/yyyy') as Contracts, format(DATEEND,'dd/mm/yyyy') as Ends
 	FROM TEAM_ESPORT TE, PLAYER_TEAM_ESPORT PTE, PLAYER P
 	WHERE TE.TEAMID = PTE.TEAMID AND PTE.PLAYERID = P.PLAYERID
 GO
@@ -969,12 +979,11 @@ select * from RankingsBySeason
 CREATE VIEW LICHTHIDAU
 AS
 	SELECT TOP 100000 -- Replace with a large enough number
-		M.matchDate AS 'NGÀY THI ĐẤU',
-		T1.teamName AS 'ĐỘI 1',
-		M.teamoneScore AS 'ĐIỂM ĐỘI 1',
-		T2.teamName AS 'ĐỘI 2',
-		M.teamtwoScore AS 'ĐIỂM ĐỘI 2',
-		ST.stadiumName AS 'SÂN VẬN ĐỘNG'
+		format(M.matchDate,'dd/MM/yyyy') AS N'NGÀY THI ĐẤU',
+		T1.teamName AS N'ĐỘI 1',
+		concat(M.teamonescore,' - ', M.teamtwoscore) as N'TỈ SỐ',
+		T2.teamName AS N'ĐỘI 2',
+		ST.stadiumName AS N'SÂN VẬN ĐỘNG'
 	FROM 
       MATCH M
     INNER JOIN 
@@ -998,8 +1007,20 @@ SELECT * FROM THONGTINTEAMSPORT
 
 go
 
+CREATE VIEW USERS 
+AS
+	SELECT  name_customer, date_of_birth, EMAIL, sex,  nickNAME, COIN
+	FROM customer
+GO
 
 --LICH SU CA CUOC
+
+CREATE VIEW BET88
+AS
+	SELECT matchID, name_customer, T1score_PREDICT, T2score_PREDICT, COIN_bet, DAY_BET 
+	FROM BET, CUSTOMER
+	WHERE BET.ID_CUStomer = CUSTOMER.ID_CUStomer
+GO
 
 
 
