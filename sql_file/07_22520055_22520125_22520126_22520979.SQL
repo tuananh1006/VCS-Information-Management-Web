@@ -550,6 +550,7 @@ BEGIN
     END
 END;
 GO
+exec print_mv_team 'GAM Esports'
 
 CREATE PROCEDURE SP_LICH_THI_DAU (@seasonName NVARCHAR(100))
 AS
@@ -1320,3 +1321,31 @@ WHERE PlayerID = 2;
 UPDATE PlayerStatsXML
 SET PlayerData.modify('replace value of (/Player/Rank/text())[1] with "Gold"')
 WHERE PlayerID = 1;
+
+-- Tạo chỉ mục cho bảng PLAYER_TEAM_ESPORT
+CREATE INDEX idx_PlayerTeam_NickName ON PLAYER_TEAM_ESPORT(NickName);
+
+-- Tạo chỉ mục cho bảng CHITIETTRANDAU
+CREATE INDEX idx_ChiTietTranDau_PlayerID ON CHITIETTRANDAU(playerID);
+CREATE INDEX idx_ChiTietTranDau_MatchID ON CHITIETTRANDAU(matchID);
+
+-- Tạo chỉ mục cho bảng MATCH
+CREATE INDEX idx_Match_TeamOneID ON MATCH(teamoneID);
+CREATE INDEX idx_Match_SeasonID ON MATCH(seasonID);
+CREATE INDEX idx_Match_MatchDate ON MATCH(matchDate);
+
+-- Tạo chỉ mục cho bảng TEAM_ESPORT_SEASON
+CREATE INDEX idx_TeamEsportSeason_TeamID ON TEAM_ESPORT_SEASON(teamID);
+
+-- Tạo chỉ mục cho bảng BET
+CREATE INDEX idx_Bet_CustomerID ON BET(ID_CUSTOMER);
+CREATE INDEX idx_Bet_MatchID ON BET(matchID);
+
+-- Tạo chỉ mục cho bảng PLAYER
+CREATE INDEX idx_Player_PlayerName ON PLAYER(playerName);
+
+-- Tạo chỉ mục cho bảng TEAM_ESPORT
+CREATE INDEX idx_TeamEsport_TeamName ON TEAM_ESPORT(teamName);
+
+-- Tạo chỉ mục cho bảng CUSTOMER
+CREATE INDEX idx_Customer_UserNameLogin ON CUSTOMER(USERNAME_LOGIN);
