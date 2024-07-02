@@ -1,7 +1,7 @@
 {
   "start": {
-    "server": "LAPTOP-4B4J1D57",
-    "database": "DO_AN_QLTT15",
+    "server": "DESKTOP-41UIO5D\\SQLEXPRESS",
+    "database": "QUANLI_VCS",
     "driver": "ODBC Driver 17 for SQL Server"
   }
 }
