@@ -3,9 +3,8 @@ import joblib
 
 app = Flask(__name__)
 
-# Load mô hình đã lưu
-model = joblib.load('model.joblib')
-
+# Load model
+model = joblib.load('./model/model.joblib')
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json(force=True)

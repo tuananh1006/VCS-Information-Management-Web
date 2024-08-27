@@ -1,40 +1,59 @@
-## Hướng Dẫn Sử Dụng
+# Product VCS App - SQL, NODEJS, POWERBI, ML
 
-**Tiêu đề:** VCS MANAGEMENT
+### Team Members
+1. Nguyen Khanh Tuan Anh - 22520055
+2. Trinh Quoc Bao - 22520125
+3. Truong Hoai Bao - 22520126
+4. Nguyen Vu Nguyen - 22520979
 
-**Giới thiệu:**
+### Architecture
 
-Đây là đồ án báo cáo môn học IE103,mục tiêu tạo ra web để người dùng có thể xem thông tin về giải đấu,người quản lý giải có thể quản lý thông tin tốt hơn.
-<div>
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Vietnam_Championship_Series.png" style="width:80%;height:auto"/>
-  
-</div>
+<img src="./assets/images/flowchart.png" alt="flowchart" width="700"/>
 
+### API - Swagger UI
 
-**Cài đặt:**
+<img src="./assets/images/swagger_ui.png" alt="api" width="700"/>
 
-**Yêu cầu hệ thống:**
+### Jenkins
 
-* Hệ điều hành: Windows, macOS
+<img src="./assets/images/jenkins.png" alt="jenkins" width="700"/>
+
+### Metrics Monitoring with Prometheus and Grafana
+
+<img src="./assets/images/grafana.png" alt="grafana" width="700"/>
+
+### Jaeger Tracing
+
+<img src="./assets/images/jaeger-1.png" alt="jaeger-1" width=700/>
+<img src="./assets/images/jaeger-2.png" alt="jaeger-2" width=700/>
+
+### Loggings with Loki and Grafana
+
+<img src="./assets/images/loki.png" alt="loki" width=700/>
+
+**Installation:**
+
+**System Requirements:**
+
+* Operating System: Windows, macOS
 * Node.js
 * npm 
 
-**Hướng dẫn cài đặt:**
+**Installation Guide:**
 
-1. Cài đặt Node.js và npm/yarn nếu chưa có.
-2. Clone dự án: `git clone https://github.com/tuananh1006/QLTT_APP.git`
-3. Di chuyển vào thư mục dự án: `cd QLTT_app`
-4. Cài đặt các phụ thuộc: `npm install`
-5. Mở file `/07_22520055_22520125_22520126_22520979.SQL` trong sql_file và thực thi file (có thể ctrl a rồi execute),sau đó mở file `createdata.sql` ctrl a rồi execute để load data
-6. Ghi lại thông số về server,driver,database (user,password nếu có), sau đó điều chỉnh config.json trong folder config
-7. Khởi động ứng dụng: `npm start`
-8. Tạo terminal mới,`python app.py` để có thể thực hiện chức năng AI dự đoán(Optional)
+1. Install Node.js and npm/yarn if not already installed.
+2. Clone the project: `git clone https://github.com/tuananh1006/QLTT_APP.git`
+3. Navigate to the project directory: `cd QLTT_app`
+4. Install dependencies: `npm install`
+5. Open the `/07_22520055_22520125_22520126_22520979.SQL` file in the `sql_file` directory and execute it (you can use ctrl+a and then execute). Then open the `createdata.sql` file, use ctrl+a and execute to load the data.
+6. Record the server, driver, and database parameters (including user and password if applicable), then adjust the `config.json` file in the `config` folder accordingly.
+7. Start the application: `npm start`
+8. Open a new terminal and run `python app.py` to enable the AI prediction feature (optional).
 
-**Tính năng chính:**
+**Key Features:**
 
-* Xem lịch thi đấu
-* Xem thông tin tuyển thủ
-* Xem thông tin phân tích
+* View tournament schedule
+* View player information
+* View analysis information
 ...
-
 
