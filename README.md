@@ -8,7 +8,7 @@
 
 ### Architecture
 
-<img src="./image_fit/system.jpg" alt="flowchart" width="700"/>
+<img src="./image_git/system.jpg" alt="flowchart" width="700"/>
 
 ### API - Swagger UI
 
