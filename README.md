@@ -1,4 +1,4 @@
-# Product VCS App - SQL, NODEJS, POWERBI, ML
+# Product VCS App - SQL, NODEJS, Tableau, ML
 
 ### Team Members
 1. Nguyen Khanh Tuan Anh - 22520055
@@ -8,7 +8,7 @@
 
 ### Architecture
 
-<img src="./assets/images/flowchart.png" alt="flowchart" width="700"/>
+<img src="./image_fit/system.jpg" alt="flowchart" width="700"/>
 
 ### API - Swagger UI
 
