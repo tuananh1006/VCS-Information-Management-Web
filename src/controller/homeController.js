@@ -14,11 +14,11 @@ const handleScheduler=async (req,res)=>{
         var query='select * from LICHTHIDAU'
         var result=await selectDatabase(query)
         console.log(result[0]['ĐỘI 1'])
-        result.forEach(row => {
-            if (row['NGÀY THI ĐẤU']){
-            row['NGÀY THI ĐẤU'] = moment(row['NGÀY THI ĐẤU']).format('DD-MM-YYYY');
-            }
-        })
+        // result.forEach(row => {
+        //     if (row['NGÀY THI ĐẤU']){
+        //     row['NGÀY THI ĐẤU'] = moment(row['NGÀY THI ĐẤU']).format('DD-MM-YYYY');
+        //     }
+        // })
         return res.render('scheduler.ejs',{result})
 }
 
@@ -39,13 +39,13 @@ const handleTeams=async(req,res)=>{
 const handlePlayers= async (req,res)=>{
     var query='select * from PLAYERINFO'
     var result =await selectDatabase(query)
-    result.forEach(row => {
-        if (row.DATESTART){
-        row.DATESTART = moment(row.DATESTART).format('DD-MM-YYYY');
-        }
-        if (row.DATEEND)
-        row.DATEEND = moment(row.DATEEND).format('DD-MM-YYYY');
-    });
+    // result.forEach(row => {
+    //     if (row.DATESTART){
+    //     row.DATESTART = moment(row.DATESTART).format('DD-MM-YYYY');
+    //     }
+    //     if (row.DATEEND)
+    //     row.DATEEND = moment(row.DATEEND).format('DD-MM-YYYY');
+    // });
     //console.log(result[0]['NICKNAME'])
     return res.render('players.ejs', {result})
 }
