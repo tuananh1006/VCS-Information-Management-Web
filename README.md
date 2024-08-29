@@ -73,9 +73,11 @@ The graph shows the change in score, as well as the number of players and ages.
    
 4. **Setup environment variables**
 
-  Open ```sql_file``` folder:
-  Execute createdatabase.SQL
-  After that,execute createdata.sql
+   Open ```sql_file``` folder:
+  
+   Execute createdatabase.SQL
+   
+   After that,execute createdata.sql
 ## **Usage**
 1. **Run the rest api:**
    `python app.py`
