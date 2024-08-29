@@ -38,7 +38,7 @@ The project aim to practice the knowledge we have learned and implemented our id
    - **Create View**
    - So the schema we design like:  
 
-      <img src="./assests/schema">
+      <img src="./assests/schema.jpg">
 
 5. **Tableau**
    - From negative information about the tournament about match-fixing, I have an idea to build 
