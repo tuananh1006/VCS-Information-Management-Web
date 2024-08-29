@@ -4,6 +4,7 @@
 - [Overview](#overview)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Features](#Features)
 - [Contributing](#contributing)
 ## Overview
 
