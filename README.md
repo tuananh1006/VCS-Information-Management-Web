@@ -7,11 +7,11 @@
 - [Contributing](#contributing)
 ## Overview
 
-This project is a web application designed to allow users to view information about Vietnam Championship Series tournament. The application is built using Node.js and includes an optional Machine Learning prediction feature.
+This project is a web application designed to allow users to view information about the Vietnam Championship Series (VCS) tournament. The application is built using Node.js and includes an optional machine learning prediction feature.
 
-Because we are current 2th student, the data scraping can be unaccurate in some feature like at day join and end,role of player in one team,.. The nick name of player is renamed after many season is hard to detect when scraping from lolfandom,because it's normally showed in news and communication channels.  
+As we are currently 2nd-year students, some data scraping may be inaccurate, particularly in fields like the date a player joined or left, and the role of a player in a team. Player nicknames, which often change after several seasons, can be difficult to track when scraping from Lolfandom as these changes are usually only reflected in news and communication channels.
 
-The project aim to practice the knowledge we have learned and implemented our ideas.
+The primary aim of this project is to practice the knowledge we've acquired and implement our ideas in a real-world scenario.
 
 <p align="center">
   <img src="./assests/flowchart.png">
@@ -20,33 +20,31 @@ The project aim to practice the knowledge we have learned and implemented our id
 ### Components and Workflow
 
 1. **Lolfandom.com**
-   - **Data Sources**: The system begins with data sources from `Lolfandom.com`.
-   - **Scraping**: Data is collected from these sources through scraping.I collect from VCS Spring 2018 to VCS Spring 2024.
+   - **Scraping**: Data is collected from Lolfandom.com, covering the VCS Spring 2018 to VCS Spring 2024 seasons.
 
 2. **Raw Data**
-   - **Raw Data**: After collection, data is stored in its raw form.Many table not structure and many duplicate as well as null value.Some team is renamed because sponsor like MGN Blue Esport to MGN Box Esports.
+   - **Storage**: After collection, data is stored in its raw form. This often includes unstructured tables, duplicates, and null values. Some team names may have changed due to sponsorship (e.g., MGN Blue Esport to MGN Box Esports).
    - 
 3. **Clean Data**
-   - **Preprocess Data**: I use pandas and excel to avoid duplicate in many table.Moreover,as a fan league of legend game, we utilized my knowledge about game and VCS to check that and fix the bug is not matching.
-   - **Excel**: Because import function in SQL sever is hard to debug. We decided to use excel and function template INSERT INTO to easily detect error.The ```createdata.sql``` is make from this step. 
+   - **Preprocess Data**: We used Pandas and Excel to remove duplicates and clean the data. As fans of the League of Legends game, we leveraged our knowledge of the game and the VCS to manually correct errors and ensure data accuracy.
+   - **Excel**: Due to difficulties debugging the import function in SQL Server, we decided to use Excel alongside the INSERT INTO function template for easier error detection. The createdata.sql file was generated during this process.
 
 4. **SQL Server**
-   - **Relation Schema**: My idea is to build a website that, in addition to finding information, must also meet the expected interactive function and have many interesting parameters..
+   - **Relation Schema**: Our idea is to build a website that not only provides information but also includes interactive functions and various interesting parameters.
    - **Grant and hash password**
    - **Create trigger ,function ,procedure**
    - **Create View**
-   - So the ERD we design like:  
+   - The ERD we designed is based on these requirements:  
 
       <img src="./assests/schema.JPG">
 
 5. **Tableau**
-   - From negative information about the tournament about match-fixing, I have an idea to build 
-The graph shows the change in score, as well as the number of players and ages.
+   - **Visualization**: In response to negative information about match-fixing in the tournament, we created graphs to show changes in scores, as well as player numbers and ages over time.
 6. **Rest API**
-  - **Training**: We utilized scikit learn to train my model.Dataset is consist of seasonid,team1id,team2id and day code.Because lack of time,but i think you can scarping more data about gold and champion to more accurate.The accurate of my model train by random foreset is 67%.The label of match when training is teamonescore-teamtwoscore it make the label is continious.
-  - **Flask**:We use Flask to create api , response the request from node js.
+  - **Training**: We utilized scikit learn to train my model.Dataset is consist of seasonid,team1id,team2id and day code. Due to time constraints,but i think you can scarping more data about gold and champion information to get more accurate.The accurate of my model train by random foreset is 67%.The label used during training is the difference between the scores of the two teams, making it a continuous variable.
+  - **Flask**: Flask was used to create APIs that respond to requests from the Node.js frontend.
 7. **Node JS**
-  - Don't have much about knowledge about frontend and backend, we use Node JS and bootstrap to build website follow MVC Model.
+  - Due to limited experience with frontend and backend development, we used Node.js and Bootstrap to build the website following the MVC model.
 
 ## Installation
 
