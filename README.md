@@ -15,7 +15,7 @@ Because we are current 2th student, the data scraping can be unaccurate in some 
 The project aim to practice the knowledge we have learned and implemented our ideas.
 
 <p align="center">
-  <img src="./assests/flowchart">
+  <img src="./assests/flowchart.PNG">
 </p>
 
 ### Components and Workflow
