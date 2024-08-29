@@ -34,7 +34,9 @@ The project aim to practice the knowledge we have learned and implemented our id
 4. **SQL Server**
    - **Relation Schema**: My idea is to build a website that, in addition to finding information, must also meet the expected interactive function and have many interesting parameters..
    - So the schema we design like:
+    
   <img src="./assests/schema">
+  
    - **Grant and hash password**
    - **Create trigger ,function ,procedure**
    - **Create View**
