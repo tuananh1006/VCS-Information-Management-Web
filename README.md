@@ -84,28 +84,28 @@ The graph shows the change in score, as well as the number of players and ages.
 
 ## **Features**
 **1. View scheduler**
-  <img src="./assests/scheduler1">
-  <img src="./assests/scheduler2">
+  <img src="./assests/scheduler1.JPG">
+  <img src="./assests/scheduler2.JPG">
 **2. View Ranking**
-  <img src="./assests/ranking">
-  <img src="./assests/ranking1">
-  <img src="./assests/ranking2">
+  <img src="./assests/ranking.JPG">
+  <img src="./assests/ranking1.JPG">
+  <img src="./assests/ranking2.JPG">
 **3. View Players**
-  <img src="./assests/player">
-  <img src="./assests/player1">
-  <img src="./assests/player2">
+  <img src="./assests/player.JPG">
+  <img src="./assests/player1.JPG">
+  <img src="./assests/player2.JPG">
 **4. View Team**
-  <img src="./assests/team">
-  <img src="./assests/team1">
+  <img src="./assests/team.JPG">
+  <img src="./assests/team1.JPG">
 **5. View Dashboard Analytics**
-  <img src="./assests/dashboard">
-  <img src="./assests/dashboard1">
-  <img src="./assests/dashboard2">
+  <img src="./assests/dashboard.JPG">
+  <img src="./assests/dashboard1.JPG">
+  <img src="./assests/dashboard2.JPG">
 **6. Machine Learning Predict and Recommend**
-  <img src="./assests/predict1">
-  <img src="./assests/answer1">
-  <img src="./assests/predict2">
-  <img src="./assests/answer2">
+  <img src="./assests/predict1.JPG">
+  <img src="./assests/answer1.JPG">
+  <img src="./assests/predict2.JPG">
+  <img src="./assests/answer2.JPG">
 ## **Contributing**
 Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
 
