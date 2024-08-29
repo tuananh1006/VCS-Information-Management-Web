@@ -84,7 +84,7 @@ The graph shows the change in score, as well as the number of players and ages.
 
 ## **Features**
 **1. View scheduler**
-  <img src="./assests/scheduler1.png">
+  <img width=600 src="./assests/scheduler1.png">
   <img src="./assests/scheduler2.png">
 **2. View Ranking**
   <img src="./assests/ranking.png">
