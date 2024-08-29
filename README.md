@@ -36,7 +36,7 @@ The project aim to practice the knowledge we have learned and implemented our id
    - **Grant and hash password**
    - **Create trigger ,function ,procedure**
    - **Create View**
-   - So the schema we design like:  
+   - So the ERD we design like:  
 
       <img src="./assests/schema.JPG">
 
