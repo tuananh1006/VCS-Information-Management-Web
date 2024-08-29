@@ -5,7 +5,6 @@
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [Credits](#credits)
 ## Overview
 
 This project is a web application designed to allow users to view information about Vietnam Championship Series tournament. The application is built using Node.js and includes an optional Machine Learning prediction feature.
@@ -15,7 +14,7 @@ Because we are current 2th student, the data scraping can be unaccurate in some 
 The project aim to practice the knowledge we have learned and implemented our ideas.
 
 <p align="center">
-  <img src="./assests/flowchart.PNG">
+  <img src="./assests/flowchart.png">
 </p>
 
 ### Components and Workflow
