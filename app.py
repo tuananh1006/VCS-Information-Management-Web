@@ -4,7 +4,7 @@ import joblib
 app = Flask(__name__)
 
 # Load mô hình đã lưu
-model = joblib.load('model.joblib')
+model = joblib.load('./model/model.joblib')
 
 @app.route('/predict', methods=['POST'])
 def predict():
