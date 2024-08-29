@@ -9,7 +9,7 @@
 
 This project is a web application designed to allow users to view information about Vietnam Championship Series tournament. The application is built using Node.js and includes an optional Machine Learning prediction feature.
 
-Because we are current 2th student, the data scraping can be unaccurate in some feature like at day join and end,role of player in one team,.. The nick name of player is renamed after many season is hard to detect when scarping in lolfandom,because it's normally showed in news and communication channels.  
+Because we are current 2th student, the data scraping can be unaccurate in some feature like at day join and end,role of player in one team,.. The nick name of player is renamed after many season is hard to detect when scraping from lolfandom,because it's normally showed in news and communication channels.  
 
 The project aim to practice the knowledge we have learned and implemented our ideas.
 
