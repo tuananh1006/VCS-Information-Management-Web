@@ -83,13 +83,13 @@ The graph shows the change in score, as well as the number of players and ages.
    This command starts a local web server and opens the web application with port 8080.
 
 ## **Features**
-**1. View scheduler**
+###**1. View scheduler**
 
   <img width=600 src="./assests/scheduler1.png">
   
   <img width=600 src="./assests/scheduler2.png">
   
-**2. View Ranking**
+###**2. View Ranking**
 
   <img width=600 src="./assests/ranking.png">
   
@@ -97,26 +97,29 @@ The graph shows the change in score, as well as the number of players and ages.
   
   <img width=600 src="./assests/ranking2.png">
   
-**3. View Players**
+###**3. View Players**
 
   <img width=600 src="./assests/player.png">
   
   <img width=600 src="./assests/player1.png">
   
   <img width=600 src="./assests/player2.png">
-**4. View Team**
+
+###**4. View Team**
 
   <img width=600 src="./assests/team.png">
   
   <img width=600 src="./assests/team1.png">
-**5. View Dashboard Analytics**
+
+###**5. View Dashboard Analytics**
 
   <img width=600 src="./assests/dashboard.png">
   
   <img width=600 src="./assests/dashboard1.png">
   
   <img width=600 src="./assests/dashboard2.png">
-**6. Machine Learning Predict and Recommend**
+
+###**6. Machine Learning Predict and Recommend**
 
   <img width=600 src="./assests/predict.png">
   
