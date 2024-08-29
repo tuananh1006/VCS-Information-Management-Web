@@ -53,8 +53,8 @@ The graph shows the change in score, as well as the number of players and ages.
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/tuananh1006/QLTT_APP.git
-   cd QLTT_APP
+   git clone https://github.com/tuananh1006/VCS-Information-Management-Web.git
+   cd VCS-Information-Management-Web
 
    ```
 
