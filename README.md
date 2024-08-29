@@ -83,7 +83,7 @@ The graph shows the change in score, as well as the number of players and ages.
    This command starts a local web server and opens the web application with port 8080.
 
 ## **Features**
-###**1. View scheduler**
+### **1. View scheduler**
 
   <img width=600 src="./assests/scheduler1.png">
   
