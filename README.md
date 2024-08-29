@@ -1,40 +1,118 @@
-## Hướng Dẫn Sử Dụng
+# VCS Information Management Web
+## Table of Contents
 
-**Tiêu đề:** VCS MANAGEMENT
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [Credits](#credits)
+## Overview
 
-**Giới thiệu:**
+This project is a web application designed to allow users to view information about Vietnam Championship Series tournament. The application is built using Node.js and includes an optional Machine Learning prediction feature.
 
-Đây là đồ án báo cáo môn học IE103,mục tiêu tạo ra web để người dùng có thể xem thông tin về giải đấu,người quản lý giải có thể quản lý thông tin tốt hơn.
-<div>
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Vietnam_Championship_Series.png" style="width:80%;height:auto"/>
-  
-</div>
+Because we are current 2th student, the data scraping can be unaccurate in some feature like at day join and end,role of player in one team,.. The nick name of player is renamed after many season is hard to detect when scarping in lolfandom,because it's normally showed in news and communication channels.  
 
+The project aim to practice the knowledge we have learned and implemented our ideas.
 
-**Cài đặt:**
+<p align="center">
+  <img src="./assests/flowchart">
+</p>
 
-**Yêu cầu hệ thống:**
+### Components and Workflow
 
-* Hệ điều hành: Windows, macOS
-* Node.js
-* npm 
+1. **Lolfandom.com**
+   - **Data Sources**: The system begins with data sources from `Lolfandom.com`.
+   - **Scraping**: Data is collected from these sources through scraping.I collect from VCS Spring 2018 to VCS Spring 2024.
 
-**Hướng dẫn cài đặt:**
+2. **Raw Data**
+   - **Raw Data**: After collection, data is stored in its raw form.Many table not structure and many duplicate as well as null value.Some team is renamed because sponsor like MGN Blue Esport to MGN Box Esports.
+   - 
+3. **Clean Data**
+   - **Preprocess Data**: I use pandas and excel to avoid duplicate in many table.Moreover,as a fan league of legend game, we utilized my knowledge about game and VCS to check that and fix the bug is not matching.
+   - **Excel**: Because import function in SQL sever is hard to debug. We decided to use excel and function template INSERT INTO to easily detect error.The ```createdata.sql``` is make from this step. 
 
-1. Cài đặt Node.js và npm/yarn nếu chưa có.
-2. Clone dự án: `git clone https://github.com/tuananh1006/QLTT_APP.git`
-3. Di chuyển vào thư mục dự án: `cd QLTT_app`
-4. Cài đặt các phụ thuộc: `npm install`
-5. Mở file `/07_22520055_22520125_22520126_22520979.SQL` trong sql_file và thực thi file (có thể ctrl a rồi execute),sau đó mở file `createdata.sql` ctrl a rồi execute để load data
-6. Ghi lại thông số về server,driver,database (user,password nếu có), sau đó điều chỉnh config.json trong folder config
-7. Khởi động ứng dụng: `npm start`
-8. Tạo terminal mới,`python app.py` để có thể thực hiện chức năng AI dự đoán(Optional)
+4. **SQL Server**
+   - **Relation Schema**: My idea is to build a website that, in addition to finding information, must also meet the expected interactive function and have many interesting parameters..
+   - So the schema we design like:
+  <img src="./assests/schema">
+   - **Grant and hash password**
+   - **Create trigger ,function ,procedure**
+   - **Create View**
+5. **Tableau**
+   - From negative information about the tournament about match-fixing, I have an idea to build 
+The graph shows the change in score, as well as the number of players and ages.
+6. **Rest API**
+  - **Training**: We utilized scikit learn to train my model.Dataset is consist of seasonid,team1id,team2id and day code.Because lack of time,but i think you can scarping more data about gold and champion to more accurate.The accurate of my model train by random foreset is 67%.The label of match when training is teamonescore-teamtwoscore it make the label is continious.
+  - **Flask**:We use Flask to create api , response the request from node js.
+7. **Node JS**
+  - Don't have much about knowledge about frontend and backend, we use Node JS and bootstrap to build website follow MVC Model.
 
-**Tính năng chính:**
+## Installation
 
-* Xem lịch thi đấu
-* Xem thông tin tuyển thủ
-* Xem thông tin phân tích
-...
+1. **Clone the repository:**
 
+   ```bash
+   git clone https://github.com/tuananh1006/QLTT_APP.git
+   cd QLTT_APP
 
+   ```
+
+2. **Install dependencies:**
+
+   `pip install -r requirements.txt`
+   `npm install`
+
+3. **Setup environment variables**
+
+   Configure ``` src/config/config.json```
+
+   `"server": "<Your server>",`
+
+   Replace <Your server> with your database server can found in SQL Server Management Studio
+   
+4. **Setup environment variables**
+
+  Open ```sql_file``` folder:
+    - Execute createdatabase.SQL
+    - After that,execute createdata.sql
+## **Usage**
+1. **Run the rest api:**
+   `python app.py`
+2. **Run the Web application:**
+   `npm start`
+   This command starts a local web server and opens the web application with port 8080.
+
+## **Features**
+**1. View scheduler**
+  <img src="./assests/scheduler1">
+  <img src="./assests/scheduler2">
+**2. View Ranking**
+  <img src="./assests/ranking">
+  <img src="./assests/ranking1">
+  <img src="./assests/ranking2">
+**3. View Players**
+  <img src="./assests/player">
+  <img src="./assests/player1">
+  <img src="./assests/player2">
+**4. View Team**
+  <img src="./assests/team">
+  <img src="./assests/team1">
+**5. View Dashboard Analytics**
+  <img src="./assests/dashboard">
+  <img src="./assests/dashboard1">
+  <img src="./assests/dashboard2">
+**6. Machine Learning Predict and Recommend**
+  <img src="./assests/predict1">
+  <img src="./assests/answer1">
+  <img src="./assests/predict2">
+  <img src="./assests/answer2">
+## **Contributing**
+Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
+
+1. Fork the repository.
+2. Create your feature branch **(git checkout -b feature/YourFeature)**.
+3. Commit your changes **(git commit -am 'Add some feature')**.
+4. Push to the branch **(git push origin feature/YourFeature)**.
+5. Open a pull request.
+
+Please ensure your pull request adheres to the code of conduct.
