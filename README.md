@@ -112,8 +112,6 @@ The graph shows the change in score, as well as the number of players and ages.
   <img width=600 src="./assests/team1.png">
 
 ### **5. View Dashboard Analytics**
-
-  <img width=600 src="./assests/dashboard.png">
   
   <img width=600 src="./assests/dashboard1.png">
   
