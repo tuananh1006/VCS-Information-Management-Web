@@ -319,7 +319,7 @@
       var tableRows = document.querySelectorAll('#bootstrap-data-table-export tbody tr');
 
       tableRows.forEach(function (row) {
-        var rowData = row.querySelector('td:nth-child(2)').innerText.split('-'); // Assuming the date is in the second column
+        var rowData = row.querySelector('td:nth-child(2)').innerText.split('/'); // Assuming the date is in the second column
         var rowDate = rowData[0];
         var rowMonth = rowData[1];
         var rowYear = rowData[2];
