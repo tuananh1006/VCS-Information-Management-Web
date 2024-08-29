@@ -102,8 +102,8 @@ The graph shows the change in score, as well as the number of players and ages.
   <img src="./assests/dashboard1.png">
   <img src="./assests/dashboard2.png">
 **6. Machine Learning Predict and Recommend**
-  <img src="./assests/predict1.png">
-  <img src="./assests/answer1.png">
+  <img src="./assests/predict.png">
+  <img src="./assests/answer.png">
   <img src="./assests/predict2.png">
   <img src="./assests/answer2.png">
 ## **Contributing**
